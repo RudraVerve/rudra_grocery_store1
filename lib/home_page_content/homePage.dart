@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../home_page_content/dress_for_boy.dart';
-import 'data.dart';
+import 'dress_for_boy.dart';
+import '../task8_helper/data.dart';
 
 class HomePage extends StatefulWidget {
   @override

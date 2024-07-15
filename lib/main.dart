@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'task8_helper/homePage.dart';
+import 'home_page_content/homePage.dart';
+import 'my_account/my_account_page.dart';
 import 'task8_helper/login_page.dart';
 import 'task8_helper/task8_db_helper.dart';
 
@@ -117,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
             : _selectedIndex == 3
             ? Text('Location')
             : widget.login
-            ? Text('Welcome ${widget.additionalString}')
+            ? MyAccount(additionalString: widget.additionalString)
             : Text(''),
       ),
     );
