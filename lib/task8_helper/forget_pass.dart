@@ -9,7 +9,7 @@ class forgetPass extends StatefulWidget {
 
 class _forget_pass extends State<forgetPass> {
   final _newkey = GlobalKey<FormState>();
-  TextEditingController userId = TextEditingController();
+  TextEditingController mobile = TextEditingController();
   TextEditingController questian1 = TextEditingController();
   TextEditingController questian2 = TextEditingController();
   TextEditingController newpass = TextEditingController();
@@ -37,7 +37,7 @@ class _forget_pass extends State<forgetPass> {
     if (user.length == 0) {
       _Dialog('User Is Not Exist');
     } else {
-      name = user[0]['UserId'];
+      name = user[0]['Mobile'];
       showUser = false;
       showQuestain = true;
     }
@@ -137,13 +137,13 @@ class _forget_pass extends State<forgetPass> {
                         Padding(
                           padding: EdgeInsets.all(8.0),
                           child: TextFormField(
-                            controller: userId,
+                            controller: mobile,
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
-                                hintText: 'Enter user Id',
+                                hintText: 'Enter Mobile number',
                                 suffixIcon: IconButton(
                                     onPressed: () {
-                                      _fachUser(userId.text);
+                                      _fachUser(mobile.text);
                                     },
                                     icon: Icon(
                                       Icons.search,
@@ -334,7 +334,7 @@ class _forget_pass extends State<forgetPass> {
                                   if (_newkey.currentState?.validate() ??
                                       false) {
                                     await dbhelper.updateSpacific(
-                                        userId.text, newpass.text);
+                                        mobile.text, newpass.text);
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                           content: Text(
@@ -343,7 +343,7 @@ class _forget_pass extends State<forgetPass> {
                                     setState(() {
                                       newpass.clear();
                                       renewpass.clear();
-                                      userId.clear();
+                                      mobile.clear();
                                       questian2.clear();
                                       questian1.clear();
                                       name = ' ? ';

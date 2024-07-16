@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'home_page_content/homePage.dart';
+import 'card/cardPage.dart';
+import 'homePage/homePage.dart';
 import 'my_account/my_account_page.dart';
 import 'task8_helper/login_page.dart';
-import 'task8_helper/task8_db_helper.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,17 +43,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final dbhelper = task8_db.instance;
-  List<Map<String, dynamic>> user = [];
-
-  void _fachUser(String User) async {
-    try {
-      user = await dbhelper.querySpacific(User);
-      setState(() {});
-    } catch (e) {
-      print('error to fatch');
-    }
-  }
 
   int _selectedIndex = 0; // Default to Home tab
 
@@ -108,11 +97,11 @@ class _MyHomePageState extends State<MyHomePage> {
         unselectedItemColor: Colors.green,
         onTap: _onItemTapped,
       ),
-      body: Center(
+      body: Container(
         child: _selectedIndex == 0
-            ? HomePage()
+            ? widget.login ? HomePage(additionalString: widget.additionalString) : HomePage(additionalString: widget.additionalString)
             : _selectedIndex == 1
-            ? Text('Card Screen')
+            ? widget.login ? card_page(additionalString: widget.additionalString) : Center(child: Text('You have to login'))
             : _selectedIndex == 2
             ? Text('Daily Use Screen')
             : _selectedIndex == 3

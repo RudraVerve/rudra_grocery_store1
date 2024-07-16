@@ -15,7 +15,7 @@ class _Login extends State<Login> {
   final _key = GlobalKey<FormState>();
   bool show = false;
   bool isChecked = false;
-  TextEditingController userId = TextEditingController();
+  TextEditingController mobile = TextEditingController();
   TextEditingController passWord = TextEditingController();
 
   @override
@@ -32,13 +32,13 @@ class _Login extends State<Login> {
 
   void _loadCredentials() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userId = prefs.getString('userId');
+    String? mobileNumber = prefs.getString('mobile');
     String? password = prefs.getString('password');
-    if (userId != null && password != null) {
+    if (mobileNumber != null && password != null) {
       setState(() {
-        this.userId.text = userId;
-        passWord.text = password;
-        isChecked = true;
+        this.mobile.text = mobileNumber;
+        this.passWord.text = password;
+        this.isChecked = true;
       });
     }
   }
@@ -46,10 +46,10 @@ class _Login extends State<Login> {
   void _saveCredentials() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (isChecked) {
-      await prefs.setString('userId', userId.text);
+      await prefs.setString('mobile', mobile.text);
       await prefs.setString('password', passWord.text);
     } else {
-      await prefs.remove('userId');
+      await prefs.remove('mobile');
       await prefs.remove('password');
     }
   }
@@ -63,7 +63,6 @@ class _Login extends State<Login> {
 
   final dbhelper = task8_db.instance;
   List<Map<String, dynamic>> user = [];
-
   void _fachUser(String User) async {
     try {
       user = await dbhelper.querySpacific(User);
@@ -79,17 +78,17 @@ class _Login extends State<Login> {
     if (user.length == 0) {
       _Dialog('User Is Not Exist');
     } else {
-      if (user[0]["Passwprd"] == passWord.text) {
+      if (user[0]["Password"] == passWord.text) {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => MyHomePage(
                 title: 'Home Page',
-                additionalString: user[0]["UserId"],
+                additionalString: user[0]["Mobile"],
                 login: true),
           ),
         );
-        userId.clear();
+        mobile.clear();
         passWord.clear();
       } else {
         if (_key.currentState?.validate() ?? false) {
@@ -190,10 +189,10 @@ class _Login extends State<Login> {
                                 Padding(
                                   padding: EdgeInsets.all(8.0),
                                   child: TextFormField(
-                                    controller: userId,
+                                    controller: mobile,
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
-                                        hintText: 'Enter user Id',
+                                        hintText: 'Enter Mobile Number',
                                         suffixIcon: Icon(Icons.account_circle),
                                         filled: true,
                                         fillColor: Colors.white.withOpacity(0.8),
@@ -293,12 +292,12 @@ class _Login extends State<Login> {
                             padding: EdgeInsets.all(8.0),
                             child: ElevatedButton(
                                 onPressed: () {
-                                  if (userId.text.isEmpty &&
+                                  if (mobile.text.isEmpty &&
                                       passWord.text.isEmpty) {
                                     _Dialog(
                                         'You Have To Enter Ueser Id And Password');
                                   } else {
-                                    _fachUser(userId.text);
+                                    _fachUser(mobile.text);
                                   }
                                 },
                                 child: Text('Login')),

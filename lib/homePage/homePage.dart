@@ -3,6 +3,10 @@ import 'category_items.dart';
 import '../task8_helper/data.dart';
 
 class HomePage extends StatefulWidget {
+  final String additionalString;
+
+  HomePage({super.key, this.additionalString = ''});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -184,37 +188,37 @@ class _HomePageState extends State<HomePage> {
                           if (index == 0) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => DressBoy(items: obj.dress,)),
+                              MaterialPageRoute(builder: (context) => Item_category(items: obj.dress,additionalString: widget.additionalString)),
                             );
                           } else if (index == 1) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => DressBoy(items: obj.dressGirl,)),
+                              MaterialPageRoute(builder: (context) => Item_category(items: obj.dressGirl,additionalString: widget.additionalString)),
                             );
                           } else if (index == 2) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => DressBoy(items: obj.dressMan,)),
+                              MaterialPageRoute(builder: (context) => Item_category(items: obj.dressMan,additionalString: widget.additionalString)),
                             );
                           } else if (index == 3) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => DressBoy(items: obj.dressWoman,)),
+                              MaterialPageRoute(builder: (context) => Item_category(items: obj.dressWoman,additionalString: widget.additionalString)),
                             );
                           } else if (index == 4) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => DressBoy(items: obj.dress,)),
+                              MaterialPageRoute(builder: (context) => Item_category(items: obj.dress,additionalString: widget.additionalString)),
                             );
                           } else if (index == 5) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => DressBoy(items: obj.fruits,)),
+                              MaterialPageRoute(builder: (context) => Item_category(items: obj.fruits,additionalString: widget.additionalString)),
                             );
                           } else if (index == 6) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => DressBoy(items: obj.dress,)),
+                              MaterialPageRoute(builder: (context) => Item_category(items: obj.dress,additionalString: widget.additionalString)),
                             );
                           }
                         },

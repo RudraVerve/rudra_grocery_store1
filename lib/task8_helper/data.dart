@@ -1,4 +1,5 @@
 class data{
+
   final List<Map<String, dynamic>> dress = [
     {
       'image': 'https://m.media-amazon.com/images/I/41qUs79d-qL._AC_UY1100_.jpg',
@@ -795,4 +796,6 @@ class data{
       '"I’m impressed with NextGen Online Shop. The site is easy to use, and the personalized recommendations make shopping so convenient. The product descriptions are detailed, and the images are high quality. It’s my favorite online store!"'
     },
   ];
+
+
 }
