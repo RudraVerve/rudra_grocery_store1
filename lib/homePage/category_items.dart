@@ -72,8 +72,6 @@ class _Item_categoryState extends State<Item_category> {
     setState(() {
       _cartItems.clear();
     });
-
-    print('Submitting cart items: $_cartItems');
   }
 
   List<Map<String, dynamic>> _mergeItems(List<Map<String, dynamic>> newItems, List<Map<String, dynamic>> existingItems) {
@@ -122,8 +120,9 @@ class _Item_categoryState extends State<Item_category> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.teal[100],
       appBar: AppBar(
-        title: Text('Dress'),
+        title: Text('Well Come ${widget.additionalString}'),
       ),
       body: ListView.builder(
         itemCount: widget.items.length,
@@ -135,7 +134,7 @@ class _Item_categoryState extends State<Item_category> {
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                  color: Colors.green,
+                  color: Colors.black,
                   width: 1.0,
                 ),
               ),
@@ -196,7 +195,7 @@ class _Item_categoryState extends State<Item_category> {
                           index < item['rating'].floor()
                               ? Icons.star
                               : Icons.star_border,
-                          color: Colors.amber,
+                          color: Colors.deepPurple,
                           size: 20,
                         ),
                       ),
@@ -215,7 +214,7 @@ class _Item_categoryState extends State<Item_category> {
                       onPressed: widget.additionalString.isEmpty
                           ? _showLoginDialog
                           : () => _toggleCartItem(item),
-                      child: Text(_cartItems.contains(item) ? 'Remove from Cart' : 'Add to Cart'),
+                      child: Text(_cartItems.contains(item) ? '   Remove   ' : 'Add to Cart'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: _cartItems.contains(item) ? Colors.green : Colors.blue,
                       ),

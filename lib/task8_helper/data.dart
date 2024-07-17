@@ -161,7 +161,7 @@ class data{
     {
       'image': 'https://rukminim2.flixcart.com/image/612/612/xif0q/kids-apparel-combo/l/s/k/10-11-years-na-blue-top-and-multicolour-palazzo-set-pack-of-1-original-imagz2ketw6gh7az.jpeg?q=70',
       'title': 'Summer Dress',
-      'rating': 4.6,
+      'rating': 1.6,
       'price': 50,
       'data': 'Lightweight Summer Dress for Girls',
     },
@@ -189,7 +189,7 @@ class data{
     {
       'image': 'https://rukminim2.flixcart.com/image/612/612/xif0q/kids-apparel-combo/4/l/n/2-3-years-baby-girls-full-sleeve-top-bottom-set-dear-to-dad-original-imagwegzsuntqh4t.jpeg?q=70',
       'title': 'Winter Dress',
-      'rating': 4.8,
+      'rating': 2.8,
       'price': 90,
       'data': 'Warm Winter Dress for Girls',
     },
@@ -307,7 +307,7 @@ class data{
     {
       'image': 'https://rukminim2.flixcart.com/image/612/612/kwtkxow0/lehenga-choli/4/n/f/s-half-sleeve-brocade-pink-kurti-and-skirt-saajdesigns-original-imag9ewpxgjrmgnr.jpeg?q=70',
       'title': 'Casual Summer Dress',
-      'rating': 4.5,
+      'rating': 2.5,
       'price': 70,
       'data': 'Lightweight and comfortable summer dress',
     },
@@ -485,7 +485,7 @@ class data{
     {
       'image': 'https://rukminim2.flixcart.com/image/612/612/xif0q/fruit/6/n/y/-original-imah2my3bz3rqah2.jpeg?q=70',
       'title': 'Watermelon',
-      'rating': 3.5,
+      'rating': 1.5,
       'price': 3.5,
       'data': 'Refreshing and hydrating watermelon',
     },
@@ -513,7 +513,7 @@ class data{
     {
       'image': 'https://rukminim2.flixcart.com/image/612/612/xif0q/fruit/8/c/d/-original-imah2m4db4hmvyhc.jpeg?q=70',
       'title': 'Cherry',
-      'rating': 5.0,
+      'rating': 2.0,
       'price': 4.5,
       'data': 'Sweet and tart cherry',
     },

@@ -103,9 +103,9 @@ class _MyHomePageState extends State<MyHomePage> {
             : _selectedIndex == 1
             ? widget.login ? card_page(additionalString: widget.additionalString) : Center(child: Text('You have to login'))
             : _selectedIndex == 2
-            ? Text('Daily Use Screen')
+            ? Center(child: Text('Daily Use Screen'))
             : _selectedIndex == 3
-            ? Text('Location')
+            ? Center(child: Text('Location'))
             : widget.login
             ? MyAccount(additionalString: widget.additionalString)
             : Text(''),
