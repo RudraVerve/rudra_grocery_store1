@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'app_open_page.dart';
 import 'card/cardPage.dart';
 import 'homePage/homePage.dart';
 import 'my_account/my_account_page.dart';
@@ -8,20 +9,26 @@ import 'task8_helper/login_page.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-  runApp(MyApp());
+  runApp(MaterialApp(
+    home: SplashScreen(),
+    debugShowCheckedModeBanner: false,
+  ));
 }
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //cupertinoapp
-      title: 'My app',
       debugShowCheckedModeBanner: false,
+      title: 'My app',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(
-          title: 'Flutter Demo Home Page', additionalString: '', login: false),
+        title: 'Flutter Demo Home Page',
+        additionalString: '',
+        login: false,
+      ),
     );
   }
 }
@@ -43,7 +50,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   int _selectedIndex = 0; // Default to Home tab
 
   void _onItemTapped(int index) {
@@ -51,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _selectedIndex = index;
     });
 
-    if (index == 4 && !widget.login) {
+    if (index == 4 && !widget.login ) {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -59,6 +65,39 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       );
     }
+
+    if (index == 1 && !widget.login ) {
+      _showLoginDialog();
+    }
+
+  }
+
+  void _showLoginDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Login Required'),
+          content: Text('Please login to add items to the cart.'),
+          actions: <Widget>[
+            TextButton(onPressed: (){
+              Navigator.of(context).pop();
+            }, child: Text('Cancel')),
+            ElevatedButton(
+              child: Text('Login'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Login(),
+                  ),
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -89,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
           )
               : BottomNavigationBarItem(
             icon: Icon(Icons.login),
-            label: 'login',
+            label: 'Login',
           ),
         ],
         currentIndex: _selectedIndex,
@@ -99,9 +138,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Container(
         child: _selectedIndex == 0
-            ? widget.login ? HomePage(additionalString: widget.additionalString) : HomePage(additionalString: widget.additionalString)
+            ? HomePage(additionalString: widget.additionalString)
             : _selectedIndex == 1
-            ? widget.login ? card_page(additionalString: widget.additionalString) : Center(child: Text('You have to login'))
+            ? widget.login
+            ? card_page(additionalString: widget.additionalString)
+            : Center(child: Text('First You Have To Log In To See The Card'))
             : _selectedIndex == 2
             ? Center(child: Text('Daily Use Screen'))
             : _selectedIndex == 3

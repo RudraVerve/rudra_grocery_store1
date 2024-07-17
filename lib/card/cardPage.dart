@@ -3,26 +3,26 @@ import 'package:flutter/material.dart';
 import '../task8_helper/task8_db_helper.dart';
 
 class card_page extends StatefulWidget {
+  final String additionalString;
+  card_page({Key? key, this.additionalString = ''}) : super(key: key);
+
   @override
   _card_page createState() => _card_page();
-
-  final String additionalString;
-  card_page({super.key, this.additionalString = ''});
 }
 
 class _card_page extends State<card_page> {
+  final dbhelper = task8_db.instance;
+  List<Map<String, dynamic>> items = []; // Fetched items as a string
+  List<Map<String, dynamic>> items2 = []; // Updated items as a list
+  List<Map<String, dynamic>> selectedItems = []; // Items selected for buying
+
   @override
   void initState() {
     super.initState();
     querySpecificUserItems(widget.additionalString);
   }
 
-  final dbhelper = task8_db.instance;
-  List<Map<String, dynamic>> items = []; //fetched Item as a String
-  List<Map<String, dynamic>> items2 = []; // updated item as a list
-  List<Map<String, dynamic>> selectedItems = []; // items selected for buying
-
-  _toggleCartItem(Map<String, dynamic> item) {
+  void _toggleCartItem(Map<String, dynamic> item) {
     setState(() {
       items2.remove(item);
     });
@@ -52,8 +52,8 @@ class _card_page extends State<card_page> {
     }
   }
 
-  void querySpecificUserItems(String User) async {
-    items = await dbhelper.querySpacific(User);
+  void querySpecificUserItems(String user) async {
+    items = await dbhelper.querySpacific(user);
     for (Map<String, dynamic> userItem in items) {
       var itemList = userItem['item_list'];
       if (itemList is String) {
@@ -70,16 +70,25 @@ class _card_page extends State<card_page> {
     return selectedItems.fold(0.0, (sum, item) => sum + item['price']);
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.teal[100],
       body: Stack(
         children: [
+          if (items2.isEmpty)
+            Center(
+              child: Text(
+                'No Selected Card Items',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
           ListView.builder(
-            itemCount: items2.length,
+            itemCount: items2.isNotEmpty ? items2.length : 1, // Show 1 item for the message if items2 is empty
             itemBuilder: (context, index) {
+              if (items2.isEmpty) {
+                return SizedBox(); // If items2 is empty, return an empty SizedBox
+              }
               final item = items2[index];
               return Container(
                 padding: EdgeInsets.all(8.0),
@@ -215,7 +224,7 @@ class _card_page extends State<card_page> {
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.green,
-                    borderRadius: BorderRadius.circular(20)
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
