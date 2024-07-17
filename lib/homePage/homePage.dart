@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                 child: ListView.builder(
                   controller: _scrollController,
                   scrollDirection: Axis.horizontal,
-                  itemCount: obj.containerData.length * 5,
+                  itemCount: obj.containerData.length,
                   itemBuilder: (context, index) {
                     final data = obj.containerData[index % obj.containerData.length];
                     return Container(
