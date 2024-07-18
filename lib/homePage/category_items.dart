@@ -40,6 +40,7 @@ class _Item_categoryState extends State<Item_category> {
   final dbhelper = task8_db.instance;
   List<Map<String, dynamic>> userItems = [];
   List<Map<String, dynamic>> items2 = [];
+
   Future<List<Map<String, dynamic>>> _fetchUserItems(String userId) async {
     try {
       userItems = await dbhelper.querySpacific(userId);
@@ -52,29 +53,31 @@ class _Item_categoryState extends State<Item_category> {
   }
 
   Future<void> _submitCart() async {
-      // Fetch the current user
-      await _fetchUserItems(widget.additionalString);
+    // Fetch the current user
+    await _fetchUserItems(widget.additionalString);
 
-      for (Map<String, dynamic> userItem in userItems) {
-        var itemList = userItem['item_list'];
-        items2 = List<Map<String, dynamic>>.from(json.decode(itemList));
-      }
+    for (Map<String, dynamic> userItem in userItems) {
+      var itemList = userItem['item_list'];
+      items2 = List<Map<String, dynamic>>.from(json.decode(itemList));
+    }
 
-      List<Map<String, dynamic>> mergedItems = _mergeItems(_cartItems, items2);
+    List<Map<String, dynamic>> mergedItems = _mergeItems(_cartItems, items2);
 
-      try {
-        await dbhelper.updateSpecificUserItems(widget.additionalString, mergedItems);
-        print('Updated existing items');
-      } catch (e) {
-        print('Error updating items data: $e');
-      }
+    try {
+      await dbhelper.updateSpecificUserItems(
+          widget.additionalString, mergedItems);
+      print('Updated existing items');
+    } catch (e) {
+      print('Error updating items data: $e');
+    }
 
     setState(() {
       _cartItems.clear();
     });
   }
 
-  List<Map<String, dynamic>> _mergeItems(List<Map<String, dynamic>> newItems, List<Map<String, dynamic>> existingItems) {
+  List<Map<String, dynamic>> _mergeItems(List<Map<String, dynamic>> newItems,
+      List<Map<String, dynamic>> existingItems) {
     Map<String, Map<String, dynamic>> mergedMap = {};
 
     for (var item in existingItems) {
@@ -97,9 +100,11 @@ class _Item_categoryState extends State<Item_category> {
           title: Text('Login Required'),
           content: Text('Please login to add items to the cart.'),
           actions: <Widget>[
-            TextButton(onPressed: (){
-              Navigator.of(context).pop();
-            }, child: Text('Cancel')),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Cancel')),
             ElevatedButton(
               child: Text('Login'),
               onPressed: () {
@@ -149,13 +154,13 @@ class _Item_categoryState extends State<Item_category> {
                     borderRadius: BorderRadius.circular(8.0),
                     image: item['image'].startsWith('http')
                         ? DecorationImage(
-                      image: NetworkImage(item['image']),
-                      fit: BoxFit.cover,
-                    )
+                            image: NetworkImage(item['image']),
+                            fit: BoxFit.cover,
+                          )
                         : DecorationImage(
-                      image: AssetImage(item['image']),
-                      fit: BoxFit.cover,
-                    ),
+                            image: AssetImage(item['image']),
+                            fit: BoxFit.cover,
+                          ),
                   ),
                 ),
                 Expanded(
@@ -191,7 +196,7 @@ class _Item_categoryState extends State<Item_category> {
                     Row(
                       children: List.generate(
                         5,
-                            (index) => Icon(
+                        (index) => Icon(
                           index < item['rating'].floor()
                               ? Icons.star
                               : Icons.star_border,
@@ -214,9 +219,13 @@ class _Item_categoryState extends State<Item_category> {
                       onPressed: widget.additionalString.isEmpty
                           ? _showLoginDialog
                           : () => _toggleCartItem(item),
-                      child: Text(_cartItems.contains(item) ? '   Remove   ' : 'Add to Cart'),
+                      child: Text(_cartItems.contains(item)
+                          ? '   Remove   '
+                          : 'Add to Cart'),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: _cartItems.contains(item) ? Colors.green : Colors.blue,
+                        backgroundColor: _cartItems.contains(item)
+                            ? Colors.green
+                            : Colors.blue,
                       ),
                     ),
                   ],
@@ -229,9 +238,9 @@ class _Item_categoryState extends State<Item_category> {
       // Show the FloatingActionButton only if the cart is not empty
       floatingActionButton: _cartItems.isNotEmpty
           ? FloatingActionButton(
-        onPressed: _submitCart,
-        child: Icon(Icons.check),
-      )
+              onPressed: _submitCart,
+              child: Icon(Icons.check),
+            )
           : null,
     );
   }

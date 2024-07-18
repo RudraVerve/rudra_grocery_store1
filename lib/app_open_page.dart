@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'main.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -6,7 +7,8 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _opacityAnimation;
 
@@ -25,7 +27,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   }
 
   _animateText() async {
-    await Future.delayed(Duration(milliseconds: 500)); // Delay before animation starts
+    await Future.delayed(
+        Duration(milliseconds: 500)); // Delay before animation starts
     _controller.forward(); // Start the opacity animation
   }
 
@@ -58,16 +61,14 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.local_grocery_store, size: 100, color: Colors.white),
+                    Icon(Icons.local_grocery_store,
+                        size: 100, color: Colors.white),
                     SizedBox(height: 20),
-                    Text(
-                      'Next Gen...',
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
+                    Container(
+                      height: 100,
+                      width: 300,
+                      child: Image.asset('assets/image/nextgen.png',fit: BoxFit.cover,),
+                    )
                   ],
                 ),
               ),

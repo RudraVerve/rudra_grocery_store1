@@ -1,10 +1,14 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:rudra_grocery_store09/card/proceed_buy_page.dart';
 import '../task8_helper/task8_db_helper.dart';
 
 class card_page extends StatefulWidget {
   final String additionalString;
-  card_page({Key? key, this.additionalString = ''}) : super(key: key);
+  bool showProceedMessage;
+
+  card_page({Key? key, this.additionalString = '', this.showProceedMessage = false}) : super(key: key);
 
   @override
   _card_page createState() => _card_page();
@@ -28,19 +32,16 @@ class _card_page extends State<card_page> {
     });
   }
 
-  void _toggleBy(Map<String, dynamic> item) {
-    // Check if the item is already in the cart
-    if (selectedItems.contains(item)) {
-      // Remove the item from the cart
-      setState(() {
-        selectedItems.remove(item);
-      });
-    } else {
-      // Add the item to the cart
-      setState(() {
-        selectedItems.add(item);
-      });
-    }
+  void _addBuyItem(Map<String, dynamic> item) {
+    setState(() {
+      selectedItems.add(item);
+    });
+  }
+
+  void _removeBuyItem(Map<String, dynamic> item) {
+    setState(() {
+      selectedItems.remove(item);
+    });
   }
 
   Future<void> update() async {
@@ -58,9 +59,12 @@ class _card_page extends State<card_page> {
       var itemList = userItem['item_list'];
       if (itemList is String) {
         List<dynamic> itemListDynamic = json.decode(itemList);
-        items2 = itemListDynamic.map((item) => Map<String, dynamic>.from(item)).toList();
+        items2 = itemListDynamic
+            .map((item) => Map<String, dynamic>.from(item))
+            .toList();
       } else if (itemList is List) {
-        items2 = itemList.map((item) => Map<String, dynamic>.from(item)).toList();
+        items2 =
+            itemList.map((item) => Map<String, dynamic>.from(item)).toList();
       }
     }
     setState(() {});
@@ -84,12 +88,19 @@ class _card_page extends State<card_page> {
               ),
             ),
           ListView.builder(
-            itemCount: items2.isNotEmpty ? items2.length : 1, // Show 1 item for the message if items2 is empty
+            itemCount: items2.isNotEmpty ? items2.length : 1,
+            // Show 1 item for the message if items2 is empty
             itemBuilder: (context, index) {
               if (items2.isEmpty) {
                 return SizedBox(); // If items2 is empty, return an empty SizedBox
               }
               final item = items2[index];
+              int count = 0;
+              for (var itemcount in selectedItems) {
+                if (item == itemcount) {
+                  count++;
+                }
+              }
               return Container(
                 padding: EdgeInsets.all(8.0),
                 width: MediaQuery.of(context).size.width,
@@ -114,13 +125,13 @@ class _card_page extends State<card_page> {
                             borderRadius: BorderRadius.circular(37.5),
                             image: item['image'].startsWith('http')
                                 ? DecorationImage(
-                              image: NetworkImage(item['image']),
-                              fit: BoxFit.cover,
-                            )
+                                    image: NetworkImage(item['image']),
+                                    fit: BoxFit.cover,
+                                  )
                                 : DecorationImage(
-                              image: AssetImage(item['image']),
-                              fit: BoxFit.cover,
-                            ),
+                                    image: AssetImage(item['image']),
+                                    fit: BoxFit.cover,
+                                  ),
                           ),
                         ),
                         Expanded(
@@ -164,7 +175,9 @@ class _card_page extends State<card_page> {
                             Container(
                               height: 20,
                               width: 30,
-                              color: item['rating'] > 3 ? Colors.green : Colors.red,
+                              color: item['rating'] > 3
+                                  ? Colors.green
+                                  : Colors.red,
                               child: Center(
                                 child: Icon(
                                   Icons.star,
@@ -200,13 +213,76 @@ class _card_page extends State<card_page> {
                           ),
                         ),
                         SizedBox(width: 10),
-                        ElevatedButton(
-                          onPressed: () => _toggleBy(item),
-                          child: Text(selectedItems.contains(item) ? 'Remove from Buy' : 'Add to Buy'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: selectedItems.contains(item) ? Colors.green : Colors.blue,
-                          ),
-                        ),
+                        selectedItems.contains(item)
+                            ? Container(
+                                height: 30,
+                                width: 120,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {
+                                        _removeBuyItem(item);
+
+                                        setState(() {
+                                          widget.showProceedMessage = true;
+                                        });
+                                        Timer(Duration(seconds: 5), () {
+                                          setState(() {
+                                            widget.showProceedMessage = false;
+                                          });
+                                        });
+                                      },
+                                      icon: Icon(
+                                        Icons.remove,
+                                        color: Colors.red,
+                                        size: 20,
+                                      ),
+                                    ),
+                                    Text(
+                                      '${count}',
+                                      textAlign: TextAlign.center,
+                                      // Ensure text is centered
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        _addBuyItem(item);
+
+                                        setState(() {
+                                          widget.showProceedMessage = true;
+                                        });
+                                        Timer(Duration(seconds: 5), () {
+                                          setState(() {
+                                            widget.showProceedMessage = false;
+                                          });
+                                        });
+                                      },
+                                      icon: Icon(
+                                        Icons.add,
+                                        color: Colors.deepPurpleAccent,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : ElevatedButton(
+                                onPressed: () {
+                                  _addBuyItem(item);
+
+                                  setState(() {
+                                    widget.showProceedMessage = true;
+                                  });
+                                  Timer(Duration(seconds: 5), () {
+                                    setState(() {
+                                      widget.showProceedMessage = false;
+                                    });
+                                  });
+                                },
+                                child: Text('Add TO Buy')),
                       ],
                     )
                   ],
@@ -214,7 +290,7 @@ class _card_page extends State<card_page> {
               );
             },
           ),
-          if (selectedItems.isNotEmpty)
+          if (selectedItems.isNotEmpty && widget.showProceedMessage)
             Positioned(
               bottom: 0,
               left: 0,
@@ -246,7 +322,15 @@ class _card_page extends State<card_page> {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            print(selectedItems);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BuyPage(items: selectedItems),
+                              ),
+                            );
+                          },
                           child: Text('Proceed'),
                         ),
                       ],

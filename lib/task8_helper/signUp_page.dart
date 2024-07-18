@@ -114,19 +114,17 @@ class _signup extends State<signUp> {
           await fetchAllRows(); // Ensure the latest rows are fetched
 
           bool userExists =
-          rows.any((user) => user['UserId'] == userIdSignup.text);
+              rows.any((user) => user['UserId'] == userIdSignup.text);
 
           if (userExists) {
             _Dialog('The User Already Exists. Try a unique User ID');
           } else {
             final id = await dbhelper.insert(
-              mailSignup.text,
-              userIdSignup.text,
-              PassWordSignup.text,
-              questainSignup.text,
-              questainSignup2.text,
-              []
-            );
+                mailSignup.text,
+                userIdSignup.text,
+                PassWordSignup.text,
+                questainSignup.text,
+                questainSignup2.text, []);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('Well Come to Next Gen Famaly...')),
             );
@@ -157,301 +155,301 @@ class _signup extends State<signUp> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.cyan.withOpacity(0.8),
-                    Colors.deepPurple.withOpacity(0.8),
-                    Colors.deepOrangeAccent.withOpacity(0.8),
-                  ],
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.cyan.withOpacity(0.8),
+                Colors.deepPurple.withOpacity(0.8),
+                Colors.deepOrangeAccent.withOpacity(0.8),
+              ],
+            ),
+          ),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Create Acount to next gen',
+                    style: TextStyle(
+                        fontSize: 28,
+                        fontFamily: 'PlaywriteMX',
+                        fontWeight: FontWeight.bold,
+                        color: Colors.yellow),
+                  ),
                 ),
-              ),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'Create Acount to next gen',
-                        style: TextStyle(
-                            fontSize: 28,
-                            fontFamily: 'PlaywriteMX',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.yellow),
-                      ),
-                    ),
-                    SizedBox(height: 30),
-                    Container(
-                      width: 350,
-                      child: Column(
-                        children: [
-                          Form(
-                            key: _key2,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: mailSignup,
-                                    validator: validateEmail,
-                                    keyboardType: TextInputType.emailAddress,
-                                    decoration: InputDecoration(
-                                      hintText: 'Enter Email Id',
-                                      suffixIcon: Icon(Icons.email),
-                                      hintStyle: TextStyle(
-                                        color: Colors
-                                            .lightGreenAccent, // Set the hint text color to green
-                                      ),
-                                      border: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.black,
-                                          width: 2,
-                                        ),
-                                      ),
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.black,
-                                          width: 2,
-                                        ),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.green, width: 2),
-                                      ),
+                SizedBox(height: 30),
+                Container(
+                  width: 350,
+                  child: Column(
+                    children: [
+                      Form(
+                        key: _key2,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                controller: mailSignup,
+                                validator: validateEmail,
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: InputDecoration(
+                                  hintText: 'Enter Email Id',
+                                  suffixIcon: Icon(Icons.email),
+                                  hintStyle: TextStyle(
+                                    color: Colors
+                                        .lightGreenAccent, // Set the hint text color to green
+                                  ),
+                                  border: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 2,
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: userIdSignup,
-                                    keyboardType: TextInputType.text,
-                                    decoration: InputDecoration(
-                                      hintText: 'Enter user Id',
-                                      suffixIcon: Icon(Icons.account_circle),
-                                      hintStyle: TextStyle(
-                                        color: Colors
-                                            .lightGreenAccent, // Set the hint text color to green
-                                      ),
-                                      border: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.black,
-                                          width: 2,
-                                        ),
-                                      ),
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.black,
-                                          width: 2,
-                                        ),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.green, width: 2),
-                                      ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 2,
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: PassWordSignup,
-                                    validator: validatePassword,
-                                    keyboardType: TextInputType.text,
-                                    obscureText: !show,
-                                    decoration: InputDecoration(
-                                      hintText: 'Enter user Password',
-                                      suffixIcon: IconButton(
-                                        icon: Icon(show
-                                            ? Icons.visibility
-                                            : Icons.visibility_off),
-                                        onPressed: () {
-                                          togleShow1();
-                                        },
-                                      ),
-                                      hintStyle: TextStyle(
-                                        color: Colors
-                                            .lightGreenAccent, // Set the hint text color to green
-                                      ),
-                                      border: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.black,
-                                          width: 2,
-                                        ),
-                                      ),
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.black,
-                                          width: 2,
-                                        ),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.green, width: 2),
-                                      ),
-                                    ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.green, width: 2),
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: RePassWordSignup,
-                                    keyboardType: TextInputType.text,
-                                    obscureText: !show2,
-                                    decoration: InputDecoration(
-                                      hintText: 'Conform Password',
-                                      suffixIcon: IconButton(
-                                        icon: Icon(show2
-                                            ? Icons.visibility
-                                            : Icons.visibility_off),
-                                        onPressed: () {
-                                          togleShow2();
-                                        },
-                                      ),
-                                      hintStyle: TextStyle(
-                                        color: Colors
-                                            .lightGreenAccent, // Set the hint text color to green
-                                      ),
-                                      border: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.black,
-                                          width: 2,
-                                        ),
-                                      ),
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.black,
-                                          width: 2,
-                                        ),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.green, width: 2),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: questainSignup,
-                                    keyboardType: TextInputType.text,
-                                    decoration: InputDecoration(
-                                      hintText: 'Your pet name',
-                                      suffixIcon: Icon(Icons.pets),
-                                      hintStyle: TextStyle(
-                                        color: Colors
-                                            .lightGreenAccent, // Set the hint text color to green
-                                      ),
-                                      border: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.black,
-                                          width: 2,
-                                        ),
-                                      ),
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.black,
-                                          width: 2,
-                                        ),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.green, width: 2),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: questainSignup2,
-                                    keyboardType: TextInputType.text,
-                                    decoration: InputDecoration(
-                                      hintText: 'Your favorite Subject',
-                                      suffixIcon: Icon(Icons.add_chart_outlined),
-                                      hintStyle: TextStyle(
-                                        color: Colors
-                                            .lightGreenAccent, // Set the hint text color to green
-                                      ),
-                                      border: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.black,
-                                          width: 2,
-                                        ),
-                                      ),
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.black,
-                                          width: 2,
-                                        ),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.green, width: 2),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(20),
-                            child: ElevatedButton(
-                                onPressed: () async {
-                                  handleSignUp();
-                                },
-                                child: Text('Create Acount')),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 30),
-                    Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: RichText(
-                        text: TextSpan(
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                          children: <TextSpan>[
-                            TextSpan(
-                                text: 'Alrady have an acount?  ',
-                                style: TextStyle(fontSize: 18)),
-                            TextSpan(
-                              text: 'Login',
-                              style: TextStyle(
-                                color: Colors.yellow,
-                                fontWeight: FontWeight.bold,
                               ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Login(),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                controller: userIdSignup,
+                                keyboardType: TextInputType.text,
+                                decoration: InputDecoration(
+                                  hintText: 'Enter user Id',
+                                  suffixIcon: Icon(Icons.account_circle),
+                                  hintStyle: TextStyle(
+                                    color: Colors
+                                        .lightGreenAccent, // Set the hint text color to green
+                                  ),
+                                  border: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 2,
                                     ),
-                                  );
-                                },
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.green, width: 2),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                controller: PassWordSignup,
+                                validator: validatePassword,
+                                keyboardType: TextInputType.text,
+                                obscureText: !show,
+                                decoration: InputDecoration(
+                                  hintText: 'Enter user Password',
+                                  suffixIcon: IconButton(
+                                    icon: Icon(show
+                                        ? Icons.visibility
+                                        : Icons.visibility_off),
+                                    onPressed: () {
+                                      togleShow1();
+                                    },
+                                  ),
+                                  hintStyle: TextStyle(
+                                    color: Colors
+                                        .lightGreenAccent, // Set the hint text color to green
+                                  ),
+                                  border: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.green, width: 2),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                controller: RePassWordSignup,
+                                keyboardType: TextInputType.text,
+                                obscureText: !show2,
+                                decoration: InputDecoration(
+                                  hintText: 'Conform Password',
+                                  suffixIcon: IconButton(
+                                    icon: Icon(show2
+                                        ? Icons.visibility
+                                        : Icons.visibility_off),
+                                    onPressed: () {
+                                      togleShow2();
+                                    },
+                                  ),
+                                  hintStyle: TextStyle(
+                                    color: Colors
+                                        .lightGreenAccent, // Set the hint text color to green
+                                  ),
+                                  border: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.green, width: 2),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                controller: questainSignup,
+                                keyboardType: TextInputType.text,
+                                decoration: InputDecoration(
+                                  hintText: 'Your pet name',
+                                  suffixIcon: Icon(Icons.pets),
+                                  hintStyle: TextStyle(
+                                    color: Colors
+                                        .lightGreenAccent, // Set the hint text color to green
+                                  ),
+                                  border: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.green, width: 2),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                controller: questainSignup2,
+                                keyboardType: TextInputType.text,
+                                decoration: InputDecoration(
+                                  hintText: 'Your favorite Subject',
+                                  suffixIcon: Icon(Icons.add_chart_outlined),
+                                  hintStyle: TextStyle(
+                                    color: Colors
+                                        .lightGreenAccent, // Set the hint text color to green
+                                  ),
+                                  border: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.green, width: 2),
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: EdgeInsets.all(20),
+                        child: ElevatedButton(
+                            onPressed: () async {
+                              handleSignUp();
+                            },
+                            child: Text('Create Acount')),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+                SizedBox(height: 30),
+                Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: 'Alrady have an acount?  ',
+                            style: TextStyle(fontSize: 18)),
+                        TextSpan(
+                          text: 'Login',
+                          style: TextStyle(
+                            color: Colors.yellow,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Login(),
+                                ),
+                              );
+                            },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ));
+          ),
+        ),
+      ],
+    ));
   }
 }

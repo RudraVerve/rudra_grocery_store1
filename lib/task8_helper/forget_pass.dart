@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
 import 'login_page.dart';
 import 'task8_db_helper.dart';
 
@@ -69,7 +70,7 @@ class _forget_pass extends State<forgetPass> {
         return AlertDialog(
           backgroundColor: Colors.amber,
           title:
-          const Text('Worning', style: TextStyle(color: Colors.redAccent)),
+              const Text('Worning', style: TextStyle(color: Colors.redAccent)),
           content: Text('${Worning}'),
           actions: [
             TextButton(
@@ -120,13 +121,13 @@ class _forget_pass extends State<forgetPass> {
                   padding: EdgeInsets.all(8.0),
                   child: Center(
                       child: Text(
-                        'Well Come \" ${name} \"',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 23,
-                          color: Colors.cyan,
-                        ),
-                      )),
+                    'Well Come \" ${name} \"',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 23,
+                      color: Colors.cyan,
+                    ),
+                  )),
                 ),
                 SizedBox(height: 100),
                 SizedBox(
@@ -179,7 +180,7 @@ class _forget_pass extends State<forgetPass> {
                         ),
                         Padding(
                           padding:
-                          EdgeInsets.only(left: 08, right: 8, bottom: 10),
+                              EdgeInsets.only(left: 08, right: 8, bottom: 10),
                           child: TextFormField(
                             keyboardType: TextInputType.text,
                             controller: questian1,
@@ -261,7 +262,7 @@ class _forget_pass extends State<forgetPass> {
                         ),
                         Padding(
                           padding:
-                          EdgeInsets.only(left: 08, right: 8, bottom: 10),
+                              EdgeInsets.only(left: 08, right: 8, bottom: 10),
                           child: Form(
                             key: _newkey,
                             child: TextFormField(

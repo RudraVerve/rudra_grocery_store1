@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'category_items.dart';
+
 import '../task8_helper/data.dart';
+import 'category_items.dart';
 
 class HomePage extends StatefulWidget {
   final String additionalString;
@@ -54,7 +55,8 @@ class _HomePageState extends State<HomePage> {
                   scrollDirection: Axis.horizontal,
                   itemCount: obj.containerData.length,
                   itemBuilder: (context, index) {
-                    final data = obj.containerData[index % obj.containerData.length];
+                    final data =
+                        obj.containerData[index % obj.containerData.length];
                     return Container(
                       width: MediaQuery.of(context).size.width,
                       margin: EdgeInsets.all(8.0),
@@ -86,7 +88,8 @@ class _HomePageState extends State<HomePage> {
                   crossAxisCount: 2, // Two columns
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
-                  childAspectRatio: 1, // Each item will have a square aspect ratio
+                  childAspectRatio:
+                      1, // Each item will have a square aspect ratio
                 ),
                 itemCount: obj.mostSelling.length,
                 itemBuilder: (context, index) {
@@ -188,37 +191,65 @@ class _HomePageState extends State<HomePage> {
                           if (index == 0) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Item_category(items: obj.dress,additionalString: widget.additionalString)),
+                              MaterialPageRoute(
+                                  builder: (context) => Item_category(
+                                      items: obj.dress,
+                                      additionalString:
+                                          widget.additionalString)),
                             );
                           } else if (index == 1) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Item_category(items: obj.dressGirl,additionalString: widget.additionalString)),
+                              MaterialPageRoute(
+                                  builder: (context) => Item_category(
+                                      items: obj.dressGirl,
+                                      additionalString:
+                                          widget.additionalString)),
                             );
                           } else if (index == 2) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Item_category(items: obj.dressMan,additionalString: widget.additionalString)),
+                              MaterialPageRoute(
+                                  builder: (context) => Item_category(
+                                      items: obj.dressMan,
+                                      additionalString:
+                                          widget.additionalString)),
                             );
                           } else if (index == 3) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Item_category(items: obj.dressWoman,additionalString: widget.additionalString)),
+                              MaterialPageRoute(
+                                  builder: (context) => Item_category(
+                                      items: obj.dressWoman,
+                                      additionalString:
+                                          widget.additionalString)),
                             );
                           } else if (index == 4) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Item_category(items: obj.dress,additionalString: widget.additionalString)),
+                              MaterialPageRoute(
+                                  builder: (context) => Item_category(
+                                      items: obj.dress,
+                                      additionalString:
+                                          widget.additionalString)),
                             );
                           } else if (index == 5) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Item_category(items: obj.fruits,additionalString: widget.additionalString)),
+                              MaterialPageRoute(
+                                  builder: (context) => Item_category(
+                                      items: obj.fruits,
+                                      additionalString:
+                                          widget.additionalString)),
                             );
                           } else if (index == 6) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Item_category(items: obj.dress,additionalString: widget.additionalString)),
+                              MaterialPageRoute(
+                                  builder: (context) => Item_category(
+                                      items: obj.dress,
+                                      additionalString:
+                                          widget.additionalString)),
                             );
                           }
                         },
@@ -263,7 +294,8 @@ class _HomePageState extends State<HomePage> {
                 scrollDirection: Axis.horizontal,
                 itemCount: obj.bestElectronics.length,
                 itemBuilder: (context, index) {
-                  final data = obj.bestElectronics[index % obj.bestElectronics.length];
+                  final data =
+                      obj.bestElectronics[index % obj.bestElectronics.length];
                   return Container(
                     width: 150,
                     margin: EdgeInsets.all(8.0),

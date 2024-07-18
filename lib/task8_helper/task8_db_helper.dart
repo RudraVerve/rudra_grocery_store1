@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -8,7 +9,6 @@ class task8_db {
   static final db_name = 'user_data.db';
   static final db_version = 1;
   static final t_name_user = 'User_info';
-
 
   // COLUMNS for user
   static final u_Id = 'id';
@@ -23,6 +23,7 @@ class task8_db {
   static String? _dbPath;
 
   task8_db._privateConstructor();
+
   static final task8_db instance = task8_db._privateConstructor();
 
   Future<Database> get database async {
@@ -36,7 +37,8 @@ class task8_db {
   Future<Database> _initDatabase() async {
     Directory documentDirectory = await getApplicationDocumentsDirectory();
     _dbPath = join(documentDirectory.path, db_name);
-    return await openDatabase(_dbPath!, version: db_version, onCreate: _onCreate);
+    return await openDatabase(_dbPath!,
+        version: db_version, onCreate: _onCreate);
   }
 
   Future _onCreate(Database db, int version) async {
@@ -62,7 +64,7 @@ class task8_db {
         u_pass: pass,
         u_resetPass1: reset1,
         u_resetPass2: reset2,
-        i_itemList : jsonEncode(card_items),
+        i_itemList: jsonEncode(card_items),
       };
       return await db.insert(t_name_user, row);
     } catch (e) {
@@ -98,11 +100,17 @@ class task8_db {
     }
   }
 
-  Future<int> updateSpecificUserItems(String userId, List<Map<String, dynamic>> items) async {
+  Future<int> updateSpecificUserItems(
+      String userId, List<Map<String, dynamic>> items) async {
     final db = await database;
     try {
-      return await db.update(t_name_user, {'item_list': jsonEncode(items),},
-        where: '$u_mobile = ?', whereArgs: [userId],
+      return await db.update(
+        t_name_user,
+        {
+          'item_list': jsonEncode(items),
+        },
+        where: '$u_mobile = ?',
+        whereArgs: [userId],
       );
     } catch (e) {
       print('Error updating items data: $e');
@@ -119,5 +127,4 @@ class task8_db {
       return [];
     }
   }
-
 }

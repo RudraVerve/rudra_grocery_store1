@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../task8_helper/login_page.dart';
 
 class MyAccount extends StatefulWidget {
@@ -42,14 +43,15 @@ class _MyAccountState extends State<MyAccount> {
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(
                               color: Colors.black, // Border color
-                              width: 1.0,         // Border width
+                              width: 1.0, // Border width
                             ),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.5),
                                 spreadRadius: 2,
                                 blurRadius: 5,
-                                offset: Offset(0, 3), // changes position of shadow
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
                               ),
                             ],
                           ),
@@ -57,7 +59,13 @@ class _MyAccountState extends State<MyAccount> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Icon(Icons.shopping_bag, color: Colors.blue),
-                              Text('Orders',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold,fontFamily: 'PlaywriteMX'),)
+                              Text(
+                                'Orders',
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'PlaywriteMX'),
+                              )
                             ],
                           ),
                         ),
@@ -71,14 +79,15 @@ class _MyAccountState extends State<MyAccount> {
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(
                               color: Colors.black, // Border color
-                              width: 1.0,         // Border width
+                              width: 1.0, // Border width
                             ),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.5),
                                 spreadRadius: 2,
                                 blurRadius: 5,
-                                offset: Offset(0, 3), // changes position of shadow
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
                               ),
                             ],
                           ),
@@ -86,7 +95,13 @@ class _MyAccountState extends State<MyAccount> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Icon(Icons.favorite, color: Colors.red),
-                              Text('WishList',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold,fontFamily: 'PlaywriteMX'),)
+                              Text(
+                                'WishList',
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'PlaywriteMX'),
+                              )
                             ],
                           ),
                         ),
@@ -105,22 +120,30 @@ class _MyAccountState extends State<MyAccount> {
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(
                               color: Colors.black, // Border color
-                              width: 1.0,         // Border width
+                              width: 1.0, // Border width
                             ),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.5),
                                 spreadRadius: 2,
                                 blurRadius: 5,
-                                offset: Offset(0, 3), // changes position of shadow
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
                               ),
                             ],
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Icon(Icons.card_giftcard, color: Colors.redAccent),
-                              Text('Coupons',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold,fontFamily: 'PlaywriteMX'),)
+                              Icon(Icons.card_giftcard,
+                                  color: Colors.redAccent),
+                              Text(
+                                'Coupons',
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'PlaywriteMX'),
+                              )
                             ],
                           ),
                         ),
@@ -134,14 +157,15 @@ class _MyAccountState extends State<MyAccount> {
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(
                               color: Colors.black, // Border color
-                              width: 1.0,         // Border width
+                              width: 1.0, // Border width
                             ),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.5),
                                 spreadRadius: 2,
                                 blurRadius: 5,
-                                offset: Offset(0, 3), // changes position of shadow
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
                               ),
                             ],
                           ),
@@ -149,7 +173,13 @@ class _MyAccountState extends State<MyAccount> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Icon(Icons.call, color: Colors.blue),
-                              Text('Help Center',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold,fontFamily: 'PlaywriteMX'),)
+                              Text(
+                                'Help Center',
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'PlaywriteMX'),
+                              )
                             ],
                           ),
                         ),
@@ -159,10 +189,20 @@ class _MyAccountState extends State<MyAccount> {
                 ],
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Padding(
               padding: const EdgeInsets.all(12),
-              child: Align(alignment: Alignment.topLeft,child: Text('Acount Setting',style: TextStyle(fontFamily: 'LibreBaskerville', fontWeight: FontWeight.bold,fontSize: 20),)),
+              child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    'Acount Setting',
+                    style: TextStyle(
+                        fontFamily: 'LibreBaskerville',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                  )),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -176,7 +216,13 @@ class _MyAccountState extends State<MyAccount> {
                       children: [
                         Icon(Icons.offline_bolt),
                         SizedBox(width: 15),
-                        Text('Next Gen Plus',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold,fontFamily: 'LibreBaskerville'),)
+                        Text(
+                          'Next Gen Plus',
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'LibreBaskerville'),
+                        )
                       ],
                     ),
                     Icon(Icons.keyboard_arrow_right)
@@ -196,7 +242,13 @@ class _MyAccountState extends State<MyAccount> {
                       children: [
                         Icon(Icons.person),
                         SizedBox(width: 15),
-                        Text('Edit Account',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold,fontFamily: 'LibreBaskerville'),)
+                        Text(
+                          'Edit Account',
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'LibreBaskerville'),
+                        )
                       ],
                     ),
                     Icon(Icons.keyboard_arrow_right)
@@ -216,7 +268,13 @@ class _MyAccountState extends State<MyAccount> {
                       children: [
                         Icon(Icons.account_balance_wallet),
                         SizedBox(width: 15),
-                        Text('Saved Card & Wallet',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold,fontFamily: 'LibreBaskerville'),)
+                        Text(
+                          'Saved Card & Wallet',
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'LibreBaskerville'),
+                        )
                       ],
                     ),
                     Icon(Icons.keyboard_arrow_right)
@@ -236,7 +294,13 @@ class _MyAccountState extends State<MyAccount> {
                       children: [
                         Icon(Icons.location_on),
                         SizedBox(width: 15),
-                        Text('Save Acount',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold,fontFamily: 'LibreBaskerville'),)
+                        Text(
+                          'Save Acount',
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'LibreBaskerville'),
+                        )
                       ],
                     ),
                     Icon(Icons.keyboard_arrow_right)
@@ -256,7 +320,13 @@ class _MyAccountState extends State<MyAccount> {
                       children: [
                         Icon(Icons.language),
                         SizedBox(width: 15),
-                        Text('Select Language',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold,fontFamily: 'LibreBaskerville'),)
+                        Text(
+                          'Select Language',
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'LibreBaskerville'),
+                        )
                       ],
                     ),
                     Icon(Icons.keyboard_arrow_right)
@@ -276,7 +346,13 @@ class _MyAccountState extends State<MyAccount> {
                       children: [
                         Icon(Icons.notifications_active),
                         SizedBox(width: 15),
-                        Text('Notification Setting',style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold,fontFamily: 'LibreBaskerville'),)
+                        Text(
+                          'Notification Setting',
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'LibreBaskerville'),
+                        )
                       ],
                     ),
                     Icon(Icons.keyboard_arrow_right)
@@ -295,7 +371,7 @@ class _MyAccountState extends State<MyAccount> {
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
                           color: Colors.black, // Border color
-                          width: 1.0,         // Border width
+                          width: 1.0, // Border width
                         ),
                         boxShadow: [
                           BoxShadow(
@@ -309,20 +385,24 @@ class _MyAccountState extends State<MyAccount> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Text('Refer & Earn',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
-                          IconButton(onPressed: (){}, icon: Icon(Icons.share))
+                          Text('Refer & Earn',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold)),
+                          IconButton(onPressed: () {}, icon: Icon(Icons.share))
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(width: 10,),
+                  SizedBox(
+                    width: 10,
+                  ),
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
                           color: Colors.black, // Border color
-                          width: 1.0,         // Border width
+                          width: 1.0, // Border width
                         ),
                         boxShadow: [
                           BoxShadow(
@@ -336,8 +416,14 @@ class _MyAccountState extends State<MyAccount> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Text('Earn Coins',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
-                          IconButton(onPressed: (){}, icon: Icon(Icons.currency_bitcoin_sharp))
+                          Text(
+                            'Earn Coins',
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.currency_bitcoin_sharp))
                         ],
                       ),
                     ),
@@ -348,7 +434,7 @@ class _MyAccountState extends State<MyAccount> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
-                onTap: (){
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -364,7 +450,7 @@ class _MyAccountState extends State<MyAccount> {
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
                       color: Colors.black, // Border color
-                      width: 1.0,         // Border width
+                      width: 1.0, // Border width
                     ),
                     boxShadow: [
                       BoxShadow(
@@ -376,13 +462,19 @@ class _MyAccountState extends State<MyAccount> {
                     ],
                   ),
                   child: Center(
-                    child: Text('Log Out',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,fontFamily: 'LibreBaskerville'),),
+                    child: Text(
+                      'Log Out',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'LibreBaskerville'),
+                    ),
                   ),
                 ),
               ),
             )
           ],
-        ),// Empty body
+        ), // Empty body
       ),
     );
   }
