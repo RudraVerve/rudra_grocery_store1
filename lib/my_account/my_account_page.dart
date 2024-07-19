@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../main.dart';
 import '../task8_helper/login_page.dart';
 
 class MyAccount extends StatefulWidget {
@@ -295,7 +296,7 @@ class _MyAccountState extends State<MyAccount> {
                         Icon(Icons.location_on),
                         SizedBox(width: 15),
                         Text(
-                          'Save Acount',
+                          'Save Address',
                           style: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
@@ -439,6 +440,48 @@ class _MyAccountState extends State<MyAccount> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => Login(),
+                    ),
+                  );
+                },
+                child: Container(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Colors.cyan,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: Colors.black, // Border color
+                      width: 1.0, // Border width
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Log In With Another Acount',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'LibreBaskerville'),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyHomePage(title: '',additionalString: '',login: false,),
                     ),
                   );
                 },

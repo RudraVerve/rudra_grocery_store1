@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'app_open_page.dart';
 import 'card/cardPage.dart';
 import 'homePage/homePage.dart';

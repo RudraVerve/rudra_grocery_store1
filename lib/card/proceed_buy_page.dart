@@ -21,7 +21,6 @@ class _BuyPageState extends State<BuyPage> {
 
   void processItems() {
     Map<String, Map<String, dynamic>> itemMap = {};
-
     for (var item in widget.items) {
       if (itemMap.containsKey(item['title'])) {
         itemMap[item['title']]!['quantity'] += 1;
@@ -51,17 +50,505 @@ class _BuyPageState extends State<BuyPage> {
     }
     return totalPrice;
   }
-  double TotalPriceToPay=0.0;
+  double overalPrice=0.0;
+  double TotalPrice=0.0;
   double calculateGst(double totalPrice) {
-    TotalPriceToPay = (totalPrice * gstRate) + totalPrice + 5.0 ;
+    overalPrice = (totalPrice * gstRate) + totalPrice + 5.0 ; //calculate overal price
+    if(overalPrice >= 100){
+      TotalPrice=overalPrice;
+    }
+    else{
+      TotalPrice= overalPrice+30;
+    }
     return totalPrice * gstRate;
+  }
+
+  void _notAvalable(){
+    showDialog(
+        context: context,
+        builder: (BuildContext contex){
+          return AlertDialog(
+            backgroundColor: Colors.deepOrange,
+            title:Text('\"ERROR\"'),
+            content:Text('This Payment Method Is Not Avalable Yat...'),
+            actions: [
+              TextButton(onPressed: (){
+                Navigator.of(context).pop();
+              }, child: Text('Cancel'))
+            ],
+          );
+    });
+  }
+
+  //dialog for payment method
+  void _showCustomDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        Map<int, bool> _selectedItems = {};
+        return StatefulBuilder(
+          builder: (context, setState) {
+            void _toggleSelection(int index) {
+              setState(() {
+                _selectedItems.forEach((key, value) {
+                  _selectedItems[key] = false; // Deselect all items
+                });
+                _selectedItems[index] = true; // Select the tapped item
+              });
+            }
+
+            bool _isAnyItemSelected() {
+              return _selectedItems.values.any((selected) => selected);
+            }
+
+            return AlertDialog(
+              title: Text('Select Payment Method'),
+              content: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 100,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => _toggleSelection(0),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  height: 100,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    border: _selectedItems[0] == true
+                                        ? Border.all(color: Colors.black, width: 2)
+                                        : null,
+                                  ),
+                                  child: Image.asset('assets/image/payPal.png'),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => _toggleSelection(1),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  height: 100,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    border: _selectedItems[1] == true
+                                        ? Border.all(color: Colors.black, width: 2)
+                                        : null,
+                                  ),
+                                  child: Image.asset('assets/image/visa.png'),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => _toggleSelection(2),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  height: 100,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    border: _selectedItems[2] == true
+                                        ? Border.all(color: Colors.black, width: 2)
+                                        : null,
+                                  ),
+                                  child: Image.asset('assets/image/amazonPay.png'),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Second Row
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 100,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => _toggleSelection(3),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  height: 100,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    border: _selectedItems[3] == true
+                                        ? Border.all(color: Colors.black, width: 2)
+                                        : null,
+                                  ),
+                                  child: Image.asset('assets/image/gpay.png'),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => _toggleSelection(4),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  height: 100,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    border: _selectedItems[4] == true
+                                        ? Border.all(color: Colors.black, width: 2)
+                                        : null,
+                                  ),
+                                  child: Image.asset('assets/image/ppay.png'),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => _toggleSelection(5),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  height: 100,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    border: _selectedItems[5] == true
+                                        ? Border.all(color: Colors.black, width: 2)
+                                        : null,
+                                  ),
+                                  child: Image.asset('assets/image/paytm.png'),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Third Row
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 100,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => _toggleSelection(6),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  height: 100,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    border: _selectedItems[6] == true
+                                        ? Border.all(color: Colors.black, width: 2)
+                                        : null,
+                                  ),
+                                  child: Image.asset('assets/image/creditCard.png', fit: BoxFit.cover),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => _toggleSelection(7),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  height: 100,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    border: _selectedItems[7] == true
+                                        ? Border.all(color: Colors.black, width: 2)
+                                        : null,
+                                  ),
+                                  child: Image.asset('assets/image/upi.png'),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => _toggleSelection(8),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  height: 100,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    border: _selectedItems[8] == true
+                                        ? Border.all(color: Colors.black, width: 2)
+                                        : null,
+                                  ),
+                                  child: Image.asset('assets/image/rupay.png'),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Next Gen Plus Coins Row
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () => _toggleSelection(9),
+                        child: Container(
+                          margin: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: _selectedItems[9] == true
+                                ? Border.all(color: Colors.black, width: 2)
+                                : null,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(Icons.offline_bolt),
+                                  SizedBox(width: 15),
+                                  Text(
+                                    'Next Gen Plus Coins',
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'LibreBaskerville',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Icon(Icons.keyboard_arrow_right),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    // Case On Delivery Row
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () => _toggleSelection(10),
+                        child: Container(
+                          margin: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: _selectedItems[10] == true
+                                ? Border.all(color: Colors.black, width: 2)
+                                : null,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(Icons.money),
+                                  SizedBox(width: 15),
+                                  Text(
+                                    'Case On Delivery',
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'LibreBaskerville',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Icon(Icons.keyboard_arrow_right),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    // Pay Through EMI Row
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () => _toggleSelection(11),
+                        child: Container(
+                          margin: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: _selectedItems[11] == true
+                                ? Border.all(color: Colors.black, width: 2)
+                                : null,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(Icons.comment_bank),
+                                  SizedBox(width: 15),
+                                  Text(
+                                    'Pay Through EMI',
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'LibreBaskerville',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Icon(Icons.keyboard_arrow_right),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Cancel'),
+                ),
+                if (_isAnyItemSelected())
+                  ElevatedButton(
+                    onPressed: () {
+                      if(_selectedItems[9] == true || _selectedItems[11] == true){
+                        _notAvalable();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Payment Methord Not Avalable Yat...')),
+                        );
+                      }
+                      else{
+                        showProcessingDialog(context);
+                      }
+                    },
+                    child: Text('Pay'),
+                  ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  //dialog for done payment
+  void showProcessingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Container(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Initial Circular Progress Indicator
+                CircularProgressIndicator(),
+                SizedBox(height: 20),
+                Text('Processing...'),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.of(context).pop(); // Close the processing dialog
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Container(
+              padding: EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Green Circle with Done Icon
+                  TweenAnimationBuilder<double>(
+                    tween: Tween<double>(begin: 0, end: 1),
+                    duration: Duration(seconds: 1),
+                    builder: (context, value, child) {
+                      return Opacity(
+                        opacity: value,
+                        child: Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.check,
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Done',
+                    style: TextStyle(
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  Text(
+                    '\$${TotalPrice}',
+                    style: TextStyle(
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Keep shopping....',
+                        style: TextStyle(
+                          color: Colors.deepOrange,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
+                      Icon(Icons.emoji_emotions,color: Colors.deepPurpleAccent,)
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(); // Close the dialog
+                      Navigator.of(context).pop(); // Close the dialog
+                    },
+                    child: Text('Done'),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     double totalPrice = calculateTotalPrice();
     double gstAmount = calculateGst(totalPrice);
-
     return Scaffold(
       backgroundColor: Colors.teal[100],
       appBar: AppBar(
@@ -108,7 +595,7 @@ class _BuyPageState extends State<BuyPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                height: 300,
+                height: 330,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -211,23 +698,31 @@ class _BuyPageState extends State<BuyPage> {
                               ),
                             ),
                           ),
-                          Text(
-                            '\$30',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15,
-                              fontFamily: 'LibreBaskerville',
-                              decoration: TextDecoration.lineThrough,
-                              decorationColor: Colors.black,
-                              decorationThickness: 2.0,
-                            ),
-                          ),
-                          SizedBox(width: 10,),
-                          Text('Free Delevery',style: TextStyle(color: Colors.green,fontFamily:'LibreBaskerville',fontWeight: FontWeight.bold),)
+                          overalPrice >= 100 ? Row(
+                            children: [
+                              Text(
+                                '\$30',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15,
+                                  fontFamily: 'LibreBaskerville',
+                                  decoration: TextDecoration.lineThrough,
+                                  decorationColor: Colors.black,
+                                  decorationThickness: 2.0,
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              Text('Free Delevery',style: TextStyle(color: Colors.green[700],fontFamily:'LibreBaskerville',fontWeight: FontWeight.bold),)
+                            ],
+                          )
+                              : Text('\$30',style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                            fontFamily: 'LibreBaskerville',),)
                         ],
                       ),
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(height: 10,),
                     Row(
                       children: [
                         Expanded(
@@ -240,7 +735,7 @@ class _BuyPageState extends State<BuyPage> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(height: 10,),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -254,7 +749,7 @@ class _BuyPageState extends State<BuyPage> {
                             ),
                           ),
                           Text(
-                            '\$${TotalPriceToPay}',
+                            '\$${TotalPrice}',
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 15,
@@ -264,210 +759,15 @@ class _BuyPageState extends State<BuyPage> {
                         ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 20,),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text('Payment Modes',style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'LibreBaskerville',
-                decoration: TextDecoration.underline,
-                decorationThickness: 2,
-                decorationColor: Colors.deepPurpleAccent
-              ),),
-            ),
-            SizedBox(height: 20,),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 100,
-              child:Row(
-                children: [
-                  Expanded(
-                      child: Padding(
+                    Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 100,
-                        width: 100,
-                        child: Image.asset('assets/image/payPal.png'),
-                        ),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: ElevatedButton(onPressed: (){
+                          _showCustomDialog(context);
+                        }, child: Text('Continue payment')),
                       ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 100,
-                        width: 100,
-                        child: Image.asset('assets/image/visa.png'),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 100,
-                        width: 100,
-                        child: Image.asset('assets/image/amazonPay.png'),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 100,
-              child:Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 100,
-                        width: 100,
-                        child: Image.asset('assets/image/gpay.png'),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 100,
-                        width: 100,
-                        child: Image.asset('assets/image/ppay.png'),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 100,
-                        width: 100,
-                        child: Image.asset('assets/image/paytm.png'),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 100,
-              child:Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 100,
-                        width: 100,
-                        child: Image.asset('assets/image/creditCard.png',fit: BoxFit.cover,),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 100,
-                        width: 100,
-                        child: Image.asset('assets/image/upi.png'),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 100,
-                        width: 100,
-                        child: Image.asset('assets/image/rupay.png'),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                margin: EdgeInsets.all(8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(Icons.offline_bolt),
-                        SizedBox(width: 15),
-                        Text(
-                          'Next Gen Plus Coins',
-                          style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'LibreBaskerville'),
-                        )
-                      ],
-                    ),
-                    Icon(Icons.keyboard_arrow_right)
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                margin: EdgeInsets.all(8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(Icons.money),
-                        SizedBox(width: 15),
-                        Text(
-                          'Case On Delevery',
-                          style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'LibreBaskerville'),
-                        )
-                      ],
-                    ),
-                    Icon(Icons.keyboard_arrow_right)
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                margin: EdgeInsets.all(8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(Icons.comment_bank),
-                        SizedBox(width: 15),
-                        Text(
-                          'Pay Through EMI',
-                          style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'LibreBaskerville'),
-                        )
-                      ],
-                    ),
-                    Icon(Icons.keyboard_arrow_right)
+                    )
                   ],
                 ),
               ),

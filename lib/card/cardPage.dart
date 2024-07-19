@@ -8,7 +8,7 @@ class card_page extends StatefulWidget {
   final String additionalString;
   bool showProceedMessage;
 
-  card_page({Key? key, this.additionalString = '', this.showProceedMessage = false}) : super(key: key);
+  card_page({Key? key, this.additionalString = '', this.showProceedMessage = true}) : super(key: key);
 
   @override
   _card_page createState() => _card_page();
