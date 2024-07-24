@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../Address/address_data.dart';
 import 'login_page.dart';
 import 'task8_db_helper.dart';
 
@@ -119,12 +120,18 @@ class _signup extends State<signUp> {
           if (userExists) {
             _Dialog('The User Already Exists. Try a unique User ID');
           } else {
+            var obj1 = AddressData.namedConstructor();
             final id = await dbhelper.insert(
                 mailSignup.text,
                 userIdSignup.text,
                 PassWordSignup.text,
                 questainSignup.text,
-                questainSignup2.text, []);
+                questainSignup2.text,
+                [],
+                obj1,
+                obj1,
+                obj1
+            );
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('Well Come to Next Gen Famaly...')),
             );

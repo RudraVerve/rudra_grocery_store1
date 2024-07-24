@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'Address/save_address_page.dart';
 import 'app_open_page.dart';
 import 'card/cardPage.dart';
 import 'homePage/homePage.dart';
@@ -57,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _selectedIndex = index;
     });
 
-    if (index == 4 && !widget.login) {
+    if (index == 3 && !widget.login) {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -66,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     }
 
-    if (index == 1 && !widget.login) {
+    if ((index == 1 && !widget.login) || (index == 2 && !widget.login)) {
       _showLoginDialog();
     }
   }
@@ -115,10 +116,6 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Card',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: 'Daily Use',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.location_on),
             label: 'Address',
           ),
@@ -138,21 +135,10 @@ class _MyHomePageState extends State<MyHomePage> {
         onTap: _onItemTapped,
       ),
       body: Container(
-        child: _selectedIndex == 0
-            ? HomePage(additionalString: widget.additionalString)
-            : _selectedIndex == 1
-                ? widget.login
-                    ? card_page(additionalString: widget.additionalString)
-                    : Center(
-                        child: Text('First You Have To Log In To See The Card'))
-                : _selectedIndex == 2
-                    ? Center(child: Text('Daily Use Screen'))
-                    : _selectedIndex == 3
-                        ? Center(child: Text('Location'))
-                        : widget.login
-                            ? MyAccount(
-                                additionalString: widget.additionalString)
-                            : Text(''),
+        child: _selectedIndex == 0 ? HomePage(additionalString: widget.additionalString)
+            : _selectedIndex == 1 ? widget.login ? card_page(additionalString: widget.additionalString) : Center(child: Text('First You Have To Log In To See The Card'))
+            : _selectedIndex == 2 ? widget.login ? Address(additionalString: widget.additionalString) : Text('')
+            : widget.login ? MyAccount(additionalString: widget.additionalString) : Text('')
       ),
     );
   }

@@ -175,9 +175,7 @@ class _card_page extends State<card_page> {
                             Container(
                               height: 20,
                               width: 30,
-                              color: item['rating'] > 3
-                                  ? Colors.green
-                                  : Colors.red,
+                              color: item['rating'] > 4 ? Colors.green : item['rating'] > 3 ? Colors.orange : Colors.red,
                               child: Center(
                                 child: Icon(
                                   Icons.star,

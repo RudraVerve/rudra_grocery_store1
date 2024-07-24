@@ -1,9 +1,11 @@
+// ignore_for_file: camel_case_types
+
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import '../Address/address_data.dart';
 
 class task8_db {
   static final db_name = 'user_data.db';
@@ -18,6 +20,9 @@ class task8_db {
   static final u_resetPass1 = 'resetPass1';
   static final u_resetPass2 = 'resetPass2';
   static final i_itemList = 'item_list';
+  static final u_adress1 = 'Adress1';
+  static final u_adress2 = 'Adress2';
+  static final u_adress3 = 'Adress3';
 
   static Database? _database;
   static String? _dbPath;
@@ -50,12 +55,15 @@ class task8_db {
         $u_pass TEXT NOT NULL,
         $u_resetPass1 TEXT NOT NULL,
         $u_resetPass2 TEXT NOT NULL,
-        $i_itemList TEXT NOT NULL
+        $i_itemList TEXT NOT NULL,
+        $u_adress1 TEXT NOT NULL,
+        $u_adress2 TEXT NOT NULL,
+        $u_adress3 TEXT NOT NULL
       )
     ''');
   }
 
-  Future<int> insert(mail, mobile, pass, reset1, reset2, card_items) async {
+  Future<int> insert(mail, mobile, pass, reset1, reset2, cardItems,address1,address2,address3) async {
     try {
       Database db = await instance.database;
       Map<String, dynamic> row = {
@@ -64,7 +72,10 @@ class task8_db {
         u_pass: pass,
         u_resetPass1: reset1,
         u_resetPass2: reset2,
-        i_itemList: jsonEncode(card_items),
+        i_itemList: jsonEncode(cardItems),
+        u_adress1: address1.toJsonString(),
+        u_adress2: address2.toJsonString(),
+        u_adress3: address3.toJsonString(),
       };
       return await db.insert(t_name_user, row);
     } catch (e) {
@@ -100,8 +111,7 @@ class task8_db {
     }
   }
 
-  Future<int> updateSpecificUserItems(
-      String userId, List<Map<String, dynamic>> items) async {
+  Future<int> updateSpecificUserItems(String userId, List<Map<String, dynamic>> items) async {
     final db = await database;
     try {
       return await db.update(
@@ -114,6 +124,18 @@ class task8_db {
       );
     } catch (e) {
       print('Error updating items data: $e');
+      return -1;
+    }
+  }
+
+  Future<int> updateSpecificUserAddress1(String userId, AddressData obj, int no) async {
+    Database db = await instance.database;
+    if(t_name_user.isNotEmpty){
+      var update = await db.update(t_name_user, {'Adress${no}':obj.toJsonString()}, where: "$u_mobile = ?",whereArgs: [userId] );
+      return update;
+    }
+    else{
+      print("table is not exist");
       return -1;
     }
   }

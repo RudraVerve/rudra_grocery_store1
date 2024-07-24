@@ -64,8 +64,7 @@ class _Item_categoryState extends State<Item_category> {
     List<Map<String, dynamic>> mergedItems = _mergeItems(_cartItems, items2);
 
     try {
-      await dbhelper.updateSpecificUserItems(
-          widget.additionalString, mergedItems);
+      await dbhelper.updateSpecificUserItems(widget.additionalString, mergedItems);
       print('Updated existing items');
     } catch (e) {
       print('Error updating items data: $e');
@@ -76,8 +75,7 @@ class _Item_categoryState extends State<Item_category> {
     });
   }
 
-  List<Map<String, dynamic>> _mergeItems(List<Map<String, dynamic>> newItems,
-      List<Map<String, dynamic>> existingItems) {
+  List<Map<String, dynamic>> _mergeItems(List<Map<String, dynamic>> newItems, List<Map<String, dynamic>> existingItems) {
     Map<String, Map<String, dynamic>> mergedMap = {};
 
     for (var item in existingItems) {
