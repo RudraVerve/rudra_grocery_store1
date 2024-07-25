@@ -134,13 +134,18 @@ class _signup extends State<signUp> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('Well Come to Next Gen Famaly...')),
             );
+            mailSignup.clear();
+            userIdSignup.clear();
+            PassWordSignup.clear();
+            RePassWordSignup.clear();
+            questainSignup.clear();
+            questainSignup2.clear();
             print('Inserted ID: $id');
             if (id > 0) {
               print('Sucess');
             } else {
               _Dialog('Error creating account. Please try again later.');
             }
-
             // Fetch rows after insertion to keep the list updated
             await fetchAllRows();
           }

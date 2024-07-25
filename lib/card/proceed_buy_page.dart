@@ -11,7 +11,7 @@ class BuyPage extends StatefulWidget {
 
 class _BuyPageState extends State<BuyPage> {
   List<Map<String, dynamic>> processedItems = [];
-  double gstRate = 0.12; //gst
+  double gstRate = 0.02; //gst
 
   @override
   void initState() {

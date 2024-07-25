@@ -106,6 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.teal[100],
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -142,12 +143,24 @@ class _MyHomePageState extends State<MyHomePage> {
                   ? widget.login
                       ? card_page(additionalString: widget.additionalString)
                       : Center(
-                          child:
-                              Text('First You Have To Log In To See The Card'))
+                          child: Text(
+                          'First You Have To Log In\n        To See The Card',
+                          style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'LibreBaskerville'),
+                        ))
                   : _selectedIndex == 2
                       ? widget.login
                           ? Address(additionalString: widget.additionalString)
-                          : Text('')
+                          : Center(
+                              child: Text(
+                              'First You Have To Log\nIn To See The Address',
+                              style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'LibreBaskerville'),
+                            ))
                       : widget.login
                           ? MyAccount(additionalString: widget.additionalString)
                           : Text('')),
