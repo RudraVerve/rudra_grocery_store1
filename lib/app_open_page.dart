@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   _navigateToMain() async {
-    await Future.delayed(Duration(seconds: 3)); // Simulate a delay
+    await Future.delayed(Duration(seconds: 4)); // Simulate a delay
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => MyApp()),
@@ -67,7 +67,10 @@ class _SplashScreenState extends State<SplashScreen>
                     Container(
                       height: 100,
                       width: 300,
-                      child: Image.asset('assets/image/nextgen.png',fit: BoxFit.cover,),
+                      child: Image.asset(
+                        'assets/image/nextgen.png',
+                        fit: BoxFit.cover,
+                      ),
                     )
                   ],
                 ),

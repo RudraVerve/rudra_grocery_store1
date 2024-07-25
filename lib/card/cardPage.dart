@@ -1,14 +1,18 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:rudra_grocery_store09/card/proceed_buy_page.dart';
+
 import '../task8_helper/task8_db_helper.dart';
 
 class card_page extends StatefulWidget {
   final String additionalString;
   bool showProceedMessage;
 
-  card_page({Key? key, this.additionalString = '', this.showProceedMessage = true}) : super(key: key);
+  card_page(
+      {Key? key, this.additionalString = '', this.showProceedMessage = true})
+      : super(key: key);
 
   @override
   _card_page createState() => _card_page();
@@ -175,7 +179,11 @@ class _card_page extends State<card_page> {
                             Container(
                               height: 20,
                               width: 30,
-                              color: item['rating'] > 4 ? Colors.green : item['rating'] > 3 ? Colors.orange : Colors.red,
+                              color: item['rating'] > 4
+                                  ? Colors.green
+                                  : item['rating'] > 3
+                                      ? Colors.orange
+                                      : Colors.red,
                               child: Center(
                                 child: Icon(
                                   Icons.star,
@@ -325,7 +333,8 @@ class _card_page extends State<card_page> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => BuyPage(items: selectedItems),
+                                builder: (context) =>
+                                    BuyPage(items: selectedItems),
                               ),
                             );
                           },

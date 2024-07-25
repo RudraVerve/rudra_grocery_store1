@@ -510,6 +510,186 @@ class data {
     },
   ];
 
+  final List<Map<String, dynamic>> electronicsList = [
+    {
+      'image': 'https://rukminim2.flixcart.com/image/312/312/xif0q/television/9/p/9/-original-imah2v29z86u7b79.jpeg?q=70',
+      'title': 'Samsung 4K Smart TV',
+      'rating': 4.7,
+      'price': 599.99,
+      'data': '65-inch 4K UHD Smart LED TV with HDR',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/312/312/kuyf8nk0/computer/c/8/u/mkgp3hn-a-thin-and-light-laptop-apple-original-imag7yznc5d2rsuh.jpeg?q=70',
+      'title': 'Apple MacBook Pro',
+      'rating': 4.8,
+      'price': 1799.00,
+      'data': '16-inch with M1 Pro chip, 16GB RAM, 512GB SSD',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/612/612/j9d3bm80/headphone/z/s/f/bose-quietcomfort-35-ii-original-imaeyzzctgygz4pf.jpeg?q=70',
+      'title': 'Bose QuietComfort 35 II',
+      'rating': 4.5,
+      'price': 299.00,
+      'data': 'Wireless Noise Cancelling Headphones',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/612/612/xif0q/headphone/2/j/l/-original-imah28h4mwkywgfu.jpeg?q=70',
+      'title': 'Sony WH-1000XM4',
+      'rating': 4.9,
+      'price': 348.00,
+      'data': 'Industry Leading Wireless Noise-Canceling Headphones',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/612/612/xif0q/multipurpose-controller/y/j/k/5-stc3028-digital-temperature-humidity-controller-greenhouse-original-imagx27gthh9zhg7.jpeg?q=70',
+      'title': 'Google Nest Learning Thermostat',
+      'rating': 4.6,
+      'price': 249.00,
+      'data': 'Programmable Smart Thermostat',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/312/312/l0igvww0/mobile/2/g/r/-original-imagca5kqvhuscnv.jpeg?q=70',
+      'title': 'iPhone 13 Pro Max',
+      'rating': 4.8,
+      'price': 1099.00,
+      'data': 'Super Retina XDR Display, A15 Bionic chip, 128GB',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/612/612/xif0q/screen-guard/screen-guard/v/v/h/mtgcl01djirc3-muchacho-original-imagzedv4vyg8zcs.jpeg?q=70',
+      'title': 'DJI Mavic Mini',
+      'rating': 4.5,
+      'price': 399.00,
+      'data': 'Foldable Drone Quadcopter with 2.7K Camera',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/312/312/juwzf680/dslr-camera/g/a/q/200d-ii-200d-ii-canon-original-imaffvrhzyqzayys.jpeg?q=70',
+      'title': 'Canon EOS Rebel T7',
+      'rating': 4.7,
+      'price': 449.99,
+      'data': 'DSLR Camera with 18-55mm Lens',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/312/312/xif0q/computer/m/i/w/-original-imah2pfgdgmk4z5u.jpeg?q=70',
+      'title': 'Microsoft Surface Pro 7',
+      'rating': 4.6,
+      'price': 749.00,
+      'data':
+          '12.3" Touch-Screen - 10th Gen Intel Core i5 - 8GB Memory - 128GB SSD',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/612/612/xif0q/gamingconsole/b/w/n/-original-imagzf6vtprhm3sz.jpeg?q=70',
+      'title': 'Sony PlayStation 5',
+      'rating': 4.9,
+      'price': 499.99,
+      'data': 'Console with Wireless Controller',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/612/612/xif0q/gamingconsole/l/w/f/1024-series-x-xbox-yes-original-imah2bybztsccm9v.jpeg?q=70',
+      'title': 'Xbox Series X',
+      'rating': 4.8,
+      'price': 499.99,
+      'data': '1TB Console with Wireless Controller',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/612/612/xif0q/gamingconsole/d/z/e/64-switch-oled-console-with-neon-blue-neon-red-joy-con-nintendo-original-imah2gswnb73hf8d.jpeg?q=70',
+      'title': 'Nintendo Switch',
+      'rating': 4.7,
+      'price': 299.99,
+      'data': 'Gaming Console with Neon Blue and Red Joy-Con',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/612/612/kapoo7k0/smartwatch/m/q/4/fb507rgpk-android-ios-fitbit-original-imafs7uvkggybbfu.jpeg?q=70',
+      'title': 'Fitbit Versa 3',
+      'rating': 4.5,
+      'price': 199.95,
+      'data': 'Health & Fitness Smartwatch with GPS',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/612/612/xif0q/smart-lighting/h/o/d/5-multicolor-smart-led-music-light-bulb-with-bluetooth-remote-original-imagw7vqyhjpehph.jpeg?q=70',
+      'title': 'Amazon Echo Dot (4th Gen)',
+      'rating': 4.6,
+      'price': 39.99,
+      'data': 'Smart Speaker with Alexa',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/b/p/s/-original-imaggsuemmztbghp.jpeg?q=70',
+      'title': 'Google Pixel 6 Pro',
+      'rating': 4.8,
+      'price': 899.00,
+      'data': '5G Android Phone with 120Hz Smooth Display',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/312/312/k3q76a80/camera/x/u/e/sony-apsc-ilce-6100y-b-in5-mirrorless-original-imafm6msr4fghzfw.jpeg?q=70',
+      'title': 'Sony Alpha a6000',
+      'rating': 4.7,
+      'price': 548.00,
+      'data': 'Mirrorless Camera with 16-50mm Power Zoom Lens',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/612/612/xif0q/electric-cooker/9/o/f/rice-cooker-portable-low-power-multi-function-mini-luddite-original-imah2tmkgvhtx5dq.jpeg?q=70',
+      'title': 'Instant Pot Duo 7-in-1',
+      'rating': 4.6,
+      'price': 99.95,
+      'data':
+          'Electric Pressure Cooker, Slow Cooker, Rice Cooker, Steamer, Sauté, Yogurt Maker, and Warmer',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/612/612/xif0q/power-bank/q/q/g/powercore-10000-mah-pd-10000-a1334h11-anker-original-imagskwwhphkajur.jpeg?q=70',
+      'title': 'Anker PowerCore 20100',
+      'rating': 4.5,
+      'price': 39.99,
+      'data': 'Portable Charger 20100mAh with High-Speed Charging',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/612/612/xif0q/home-security-camera/m/7/s/1-oxs-doorbell-camera-016-indoor-outdoor-security-camera-original-imahfhjsnmhrbgds.jpeg?q=70',
+      'title': 'Ring Video Doorbell',
+      'rating': 4.7,
+      'price': 99.99,
+      'data': '1080p HD video, two-way talk, and easy installation',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/612/612/l4zxn680/mouse/a/8/i/-original-imagfrkfgkk87x3x.jpeg?q=70',
+      'title': 'Logitech MX Master 3',
+      'rating': 4.8,
+      'price': 99.99,
+      'data': 'Advanced Wireless Mouse for Windows, Mac, and Linux',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/312/312/jnyxd3k0/point-shoot-camera/x/a/p/dsc-rx100m5a-rx-series-4548736086487-sony-original-imaf6rvfzrf45nzu.jpeg?q=70',
+      'title': 'Sony Cyber-shot DSC-HX99',
+      'rating': 4.6,
+      'price': 798.00,
+      'data': 'Digital Camera with 180° Tilting LCD and 30x Optical Zoom',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/612/612/xif0q/smart-lighting/o/z/v/40-915005587301-led-philips-original-imaghf5ccnazdskr.jpeg?q=70',
+      'title': 'Philips Hue White and Color Ambiance',
+      'rating': 4.7,
+      'price': 199.99,
+      'data': 'Smart Lighting Starter Kit with Bridge and A19 Bulbs',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/612/612/xif0q/headphone/e/a/f/-original-imagtc44nk4b3hfg.jpeg?q=70',
+      'title': 'Apple AirPods Pro',
+      'rating': 4.8,
+      'price': 249.00,
+      'data': 'Active Noise Cancelling Wireless Earbuds',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/312/312/kq5iykw0/tablet/t/r/0/sm-t735nzkeinu-samsung-original-imag48f76axd4ehu.jpeg?q=70',
+      'title': 'Samsung Galaxy Tab S7',
+      'rating': 4.7,
+      'price': 749.99,
+      'data': '11-inch 2560x1600 (2K) Android 10 Tablet with S Pen',
+    },
+    {
+      'image': 'https://rukminim2.flixcart.com/image/612/612/xif0q/camera-bag/case/j/q/v/accessories-kit-compatible-with-gopro-hero-10-hero-9-black-only-original-imah2w3bfxumkz7z.jpeg?q=70',
+      'title': 'GoPro HERO9 Black',
+      'rating': 4.6,
+      'price': 449.99,
+      'data': 'Waterproof Action Camera with Front LCD and Touch Rear Screens',
+    }
+  ];
+
   final List<Map<String, dynamic>> fruits = [
     {
       'image':

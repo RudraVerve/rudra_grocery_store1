@@ -481,7 +481,11 @@ class _MyAccountState extends State<MyAccount> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MyHomePage(title: '',additionalString: '',login: false,),
+                      builder: (context) => MyHomePage(
+                        title: '',
+                        additionalString: '',
+                        login: false,
+                      ),
                     ),
                   );
                 },

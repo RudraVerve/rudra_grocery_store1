@@ -2,9 +2,11 @@
 
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+
 import '../Address/address_data.dart';
 
 class task8_db {
@@ -63,7 +65,8 @@ class task8_db {
     ''');
   }
 
-  Future<int> insert(mail, mobile, pass, reset1, reset2, cardItems,address1,address2,address3) async {
+  Future<int> insert(mail, mobile, pass, reset1, reset2, cardItems, address1,
+      address2, address3) async {
     try {
       Database db = await instance.database;
       Map<String, dynamic> row = {
@@ -111,7 +114,8 @@ class task8_db {
     }
   }
 
-  Future<int> updateSpecificUserItems(String userId, List<Map<String, dynamic>> items) async {
+  Future<int> updateSpecificUserItems(
+      String userId, List<Map<String, dynamic>> items) async {
     final db = await database;
     try {
       return await db.update(
@@ -128,13 +132,15 @@ class task8_db {
     }
   }
 
-  Future<int> updateSpecificUserAddress1(String userId, AddressData obj, int no) async {
+  Future<int> updateSpecificUserAddress1(
+      String userId, AddressData obj, int no) async {
     Database db = await instance.database;
-    if(t_name_user.isNotEmpty){
-      var update = await db.update(t_name_user, {'Adress${no}':obj.toJsonString()}, where: "$u_mobile = ?",whereArgs: [userId] );
+    if (t_name_user.isNotEmpty) {
+      var update = await db.update(
+          t_name_user, {'Adress${no}': obj.toJsonString()},
+          where: "$u_mobile = ?", whereArgs: [userId]);
       return update;
-    }
-    else{
+    } else {
       print("table is not exist");
       return -1;
     }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'Address/save_address_page.dart';
 import 'app_open_page.dart';
 import 'card/cardPage.dart';
@@ -131,15 +132,25 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
-        unselectedItemColor: Colors.green,
+        unselectedItemColor: Colors.teal,
         onTap: _onItemTapped,
       ),
       body: Container(
-        child: _selectedIndex == 0 ? HomePage(additionalString: widget.additionalString)
-            : _selectedIndex == 1 ? widget.login ? card_page(additionalString: widget.additionalString) : Center(child: Text('First You Have To Log In To See The Card'))
-            : _selectedIndex == 2 ? widget.login ? Address(additionalString: widget.additionalString) : Text('')
-            : widget.login ? MyAccount(additionalString: widget.additionalString) : Text('')
-      ),
+          child: _selectedIndex == 0
+              ? HomePage(additionalString: widget.additionalString)
+              : _selectedIndex == 1
+                  ? widget.login
+                      ? card_page(additionalString: widget.additionalString)
+                      : Center(
+                          child:
+                              Text('First You Have To Log In To See The Card'))
+                  : _selectedIndex == 2
+                      ? widget.login
+                          ? Address(additionalString: widget.additionalString)
+                          : Text('')
+                      : widget.login
+                          ? MyAccount(additionalString: widget.additionalString)
+                          : Text('')),
     );
   }
 }

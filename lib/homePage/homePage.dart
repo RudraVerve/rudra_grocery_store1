@@ -229,7 +229,7 @@ class _HomePageState extends State<HomePage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Item_category(
-                                      items: obj.dress,
+                                      items: obj.electronicsList,
                                       additionalString:
                                           widget.additionalString)),
                             );

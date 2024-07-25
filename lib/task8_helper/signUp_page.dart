@@ -130,8 +130,7 @@ class _signup extends State<signUp> {
                 [],
                 obj1,
                 obj1,
-                obj1
-            );
+                obj1);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('Well Come to Next Gen Famaly...')),
             );
@@ -238,7 +237,7 @@ class _signup extends State<signUp> {
                                 controller: userIdSignup,
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
-                                  hintText: 'Enter user Id',
+                                  hintText: 'Enter Mobil number.',
                                   suffixIcon: Icon(Icons.account_circle),
                                   hintStyle: TextStyle(
                                     color: Colors

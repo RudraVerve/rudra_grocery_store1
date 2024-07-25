@@ -1,5 +1,7 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
+
 import '../task8_helper/login_page.dart';
 import '../task8_helper/task8_db_helper.dart';
 
@@ -64,7 +66,8 @@ class _Item_categoryState extends State<Item_category> {
     List<Map<String, dynamic>> mergedItems = _mergeItems(_cartItems, items2);
 
     try {
-      await dbhelper.updateSpecificUserItems(widget.additionalString, mergedItems);
+      await dbhelper.updateSpecificUserItems(
+          widget.additionalString, mergedItems);
       print('Updated existing items');
     } catch (e) {
       print('Error updating items data: $e');
@@ -75,7 +78,8 @@ class _Item_categoryState extends State<Item_category> {
     });
   }
 
-  List<Map<String, dynamic>> _mergeItems(List<Map<String, dynamic>> newItems, List<Map<String, dynamic>> existingItems) {
+  List<Map<String, dynamic>> _mergeItems(List<Map<String, dynamic>> newItems,
+      List<Map<String, dynamic>> existingItems) {
     Map<String, Map<String, dynamic>> mergedMap = {};
 
     for (var item in existingItems) {

@@ -50,34 +50,38 @@ class _BuyPageState extends State<BuyPage> {
     }
     return totalPrice;
   }
-  double overalPrice=0.0;
-  double TotalPrice=0.0;
+
+  double overalPrice = 0.0;
+  double TotalPrice = 0.0;
+
   double calculateGst(double totalPrice) {
-    overalPrice = (totalPrice * gstRate) + totalPrice + 5.0 ; //calculate overal price
-    if(overalPrice >= 100){
-      TotalPrice=overalPrice;
-    }
-    else{
-      TotalPrice= overalPrice+30;
+    overalPrice =
+        (totalPrice * gstRate) + totalPrice + 5.0; //calculate overal price
+    if (overalPrice >= 100) {
+      TotalPrice = overalPrice;
+    } else {
+      TotalPrice = overalPrice + 30;
     }
     return totalPrice * gstRate;
   }
 
-  void _notAvalable(){
+  void _notAvalable() {
     showDialog(
         context: context,
-        builder: (BuildContext contex){
+        builder: (BuildContext contex) {
           return AlertDialog(
             backgroundColor: Colors.deepOrange,
-            title:Text('\"ERROR\"'),
-            content:Text('This Payment Method Is Not Avalable Yat...'),
+            title: Text('\"ERROR\"'),
+            content: Text('This Payment Method Is Not Avalable Yat...'),
             actions: [
-              TextButton(onPressed: (){
-                Navigator.of(context).pop();
-              }, child: Text('Cancel'))
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Cancel'))
             ],
           );
-    });
+        });
   }
 
   //dialog for payment method
@@ -121,7 +125,8 @@ class _BuyPageState extends State<BuyPage> {
                                   width: 100,
                                   decoration: BoxDecoration(
                                     border: _selectedItems[0] == true
-                                        ? Border.all(color: Colors.black, width: 2)
+                                        ? Border.all(
+                                            color: Colors.black, width: 2)
                                         : null,
                                   ),
                                   child: Image.asset('assets/image/payPal.png'),
@@ -139,7 +144,8 @@ class _BuyPageState extends State<BuyPage> {
                                   width: 100,
                                   decoration: BoxDecoration(
                                     border: _selectedItems[1] == true
-                                        ? Border.all(color: Colors.black, width: 2)
+                                        ? Border.all(
+                                            color: Colors.black, width: 2)
                                         : null,
                                   ),
                                   child: Image.asset('assets/image/visa.png'),
@@ -157,10 +163,12 @@ class _BuyPageState extends State<BuyPage> {
                                   width: 100,
                                   decoration: BoxDecoration(
                                     border: _selectedItems[2] == true
-                                        ? Border.all(color: Colors.black, width: 2)
+                                        ? Border.all(
+                                            color: Colors.black, width: 2)
                                         : null,
                                   ),
-                                  child: Image.asset('assets/image/amazonPay.png'),
+                                  child:
+                                      Image.asset('assets/image/amazonPay.png'),
                                 ),
                               ),
                             ),
@@ -184,7 +192,8 @@ class _BuyPageState extends State<BuyPage> {
                                   width: 100,
                                   decoration: BoxDecoration(
                                     border: _selectedItems[3] == true
-                                        ? Border.all(color: Colors.black, width: 2)
+                                        ? Border.all(
+                                            color: Colors.black, width: 2)
                                         : null,
                                   ),
                                   child: Image.asset('assets/image/gpay.png'),
@@ -202,7 +211,8 @@ class _BuyPageState extends State<BuyPage> {
                                   width: 100,
                                   decoration: BoxDecoration(
                                     border: _selectedItems[4] == true
-                                        ? Border.all(color: Colors.black, width: 2)
+                                        ? Border.all(
+                                            color: Colors.black, width: 2)
                                         : null,
                                   ),
                                   child: Image.asset('assets/image/ppay.png'),
@@ -220,7 +230,8 @@ class _BuyPageState extends State<BuyPage> {
                                   width: 100,
                                   decoration: BoxDecoration(
                                     border: _selectedItems[5] == true
-                                        ? Border.all(color: Colors.black, width: 2)
+                                        ? Border.all(
+                                            color: Colors.black, width: 2)
                                         : null,
                                   ),
                                   child: Image.asset('assets/image/paytm.png'),
@@ -247,10 +258,13 @@ class _BuyPageState extends State<BuyPage> {
                                   width: 100,
                                   decoration: BoxDecoration(
                                     border: _selectedItems[6] == true
-                                        ? Border.all(color: Colors.black, width: 2)
+                                        ? Border.all(
+                                            color: Colors.black, width: 2)
                                         : null,
                                   ),
-                                  child: Image.asset('assets/image/creditCard.png', fit: BoxFit.cover),
+                                  child: Image.asset(
+                                      'assets/image/creditCard.png',
+                                      fit: BoxFit.cover),
                                 ),
                               ),
                             ),
@@ -265,7 +279,8 @@ class _BuyPageState extends State<BuyPage> {
                                   width: 100,
                                   decoration: BoxDecoration(
                                     border: _selectedItems[7] == true
-                                        ? Border.all(color: Colors.black, width: 2)
+                                        ? Border.all(
+                                            color: Colors.black, width: 2)
                                         : null,
                                   ),
                                   child: Image.asset('assets/image/upi.png'),
@@ -283,7 +298,8 @@ class _BuyPageState extends State<BuyPage> {
                                   width: 100,
                                   decoration: BoxDecoration(
                                     border: _selectedItems[8] == true
-                                        ? Border.all(color: Colors.black, width: 2)
+                                        ? Border.all(
+                                            color: Colors.black, width: 2)
                                         : null,
                                   ),
                                   child: Image.asset('assets/image/rupay.png'),
@@ -412,13 +428,15 @@ class _BuyPageState extends State<BuyPage> {
                 if (_isAnyItemSelected())
                   ElevatedButton(
                     onPressed: () {
-                      if(_selectedItems[9] == true || _selectedItems[11] == true){
+                      if (_selectedItems[9] == true ||
+                          _selectedItems[11] == true) {
                         _notAvalable();
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Payment Methord Not Avalable Yat...')),
+                          SnackBar(
+                              content:
+                                  Text('Payment Methord Not Avalable Yat...')),
                         );
-                      }
-                      else{
+                      } else {
                         showProcessingDialog(context);
                       }
                     },
@@ -525,7 +543,10 @@ class _BuyPageState extends State<BuyPage> {
                           fontSize: 15,
                         ),
                       ),
-                      Icon(Icons.emoji_emotions,color: Colors.deepPurpleAccent,)
+                      Icon(
+                        Icons.emoji_emotions,
+                        color: Colors.deepPurpleAccent,
+                      )
                     ],
                   ),
                   SizedBox(height: 20),
@@ -574,13 +595,13 @@ class _BuyPageState extends State<BuyPage> {
                           borderRadius: BorderRadius.circular(25),
                           image: item['image'].startsWith('http')
                               ? DecorationImage(
-                            image: NetworkImage(item['image']),
-                            fit: BoxFit.cover,
-                          )
+                                  image: NetworkImage(item['image']),
+                                  fit: BoxFit.cover,
+                                )
                               : DecorationImage(
-                            image: AssetImage(item['image']),
-                            fit: BoxFit.cover,
-                          ),
+                                  image: AssetImage(item['image']),
+                                  fit: BoxFit.cover,
+                                ),
                         ),
                       ),
                       title: Center(
@@ -698,31 +719,46 @@ class _BuyPageState extends State<BuyPage> {
                               ),
                             ),
                           ),
-                          overalPrice >= 100 ? Row(
-                            children: [
-                              Text(
-                                '\$30',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 15,
-                                  fontFamily: 'LibreBaskerville',
-                                  decoration: TextDecoration.lineThrough,
-                                  decorationColor: Colors.black,
-                                  decorationThickness: 2.0,
-                                ),
-                              ),
-                              SizedBox(width: 10,),
-                              Text('Free Delevery',style: TextStyle(color: Colors.green[700],fontFamily:'LibreBaskerville',fontWeight: FontWeight.bold),)
-                            ],
-                          )
-                              : Text('\$30',style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15,
-                            fontFamily: 'LibreBaskerville',),)
+                          overalPrice >= 100
+                              ? Row(
+                                  children: [
+                                    Text(
+                                      '\$30',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 15,
+                                        fontFamily: 'LibreBaskerville',
+                                        decoration: TextDecoration.lineThrough,
+                                        decorationColor: Colors.black,
+                                        decorationThickness: 2.0,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      'Free Delevery',
+                                      style: TextStyle(
+                                          color: Colors.green[700],
+                                          fontFamily: 'LibreBaskerville',
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  ],
+                                )
+                              : Text(
+                                  '\$30',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
+                                    fontFamily: 'LibreBaskerville',
+                                  ),
+                                )
                         ],
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Row(
                       children: [
                         Expanded(
@@ -730,12 +766,15 @@ class _BuyPageState extends State<BuyPage> {
                             color: Colors.black,
                             thickness: 2,
                             indent: 10,
-                            endIndent: 10, // Adjust to set spacing before the text
+                            endIndent:
+                                10, // Adjust to set spacing before the text
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -763,9 +802,11 @@ class _BuyPageState extends State<BuyPage> {
                       padding: const EdgeInsets.all(8.0),
                       child: Align(
                         alignment: Alignment.bottomCenter,
-                        child: ElevatedButton(onPressed: (){
-                          _showCustomDialog(context);
-                        }, child: Text('Continue payment')),
+                        child: ElevatedButton(
+                            onPressed: () {
+                              _showCustomDialog(context);
+                            },
+                            child: Text('Continue payment')),
                       ),
                     )
                   ],
