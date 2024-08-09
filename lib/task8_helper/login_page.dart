@@ -87,7 +87,8 @@ class _Login extends State<Login> {
             builder: (context) => MyHomePage(
                 title: 'Home Page',
                 additionalString: user[0]["Mobile"],
-                login: true),
+                login: true,
+            ),
           ),
         );
         mobile.clear();
@@ -296,8 +297,7 @@ class _Login extends State<Login> {
                             onPressed: () {
                               if (mobile.text.isEmpty &&
                                   passWord.text.isEmpty) {
-                                _Dialog(
-                                    'You Have To Enter Ueser Id And Password');
+                                _Dialog('You Have To Enter Ueser Id And Password');
                               } else {
                                 _fachUser(mobile.text);
                               }

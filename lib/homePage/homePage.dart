@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../task8_helper/data.dart';
 import 'category_items.dart';
 
@@ -13,30 +12,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final ScrollController _scrollController = ScrollController();
   var obj = data(); //object of data
 
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(_scrollListener);
-  }
-
-  void _scrollListener() {
-    if (_scrollController.position.atEdge) {
-      if (_scrollController.position.pixels == 0) {
-        _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
-      } else {
-        _scrollController.jumpTo(_scrollController.position.minScrollExtent);
-      }
-    }
-  }
-
-  @override
-  void dispose() {
-    _scrollController.removeListener(_scrollListener);
-    _scrollController.dispose();
-    super.dispose();
   }
 
   @override
@@ -47,11 +27,10 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.only(bottom: 8),
               child: SizedBox(
                 height: 200,
                 child: ListView.builder(
-                  controller: _scrollController,
                   scrollDirection: Axis.horizontal,
                   itemCount: obj.containerData.length,
                   itemBuilder: (context, index) {
@@ -59,7 +38,7 @@ class _HomePageState extends State<HomePage> {
                         obj.containerData[index % obj.containerData.length];
                     return Container(
                       width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.all(8.0),
+                      margin: const EdgeInsets.all(8.0),
                       child: Image.asset(
                         data['image'],
                         fit: BoxFit.cover,
@@ -69,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
                 'Most Selling Products',
@@ -84,7 +63,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 300,
               child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2, // Two columns
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
@@ -109,20 +88,20 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 data['title'],
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
                                 '\$${data['price']}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -135,10 +114,10 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Row(
                               children: [
-                                Icon(Icons.star, color: Colors.green),
+                                const Icon(Icons.star, color: Colors.green),
                                 Text(
                                   '${data['rating']}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -146,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                             IconButton(
-                              icon: Icon(Icons.add_shopping_cart_outlined),
+                              icon: const Icon(Icons.add_shopping_cart_outlined),
                               onPressed: () {},
                             ),
                           ],
@@ -157,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 10, bottom: 12),
               child: Text(
                 'Category',
@@ -172,9 +151,9 @@ class _HomePageState extends State<HomePage> {
             GridView.builder(
               shrinkWrap: true,
               // used for take space by it self and scrollable
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               // used for take space by it self and scrollable
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 150,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
@@ -247,7 +226,7 @@ class _HomePageState extends State<HomePage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Item_category(
-                                      items: obj.fruits,
+                                      items: obj.groceries,
                                       additionalString:
                                           widget.additionalString)),
                             );
@@ -260,11 +239,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 8, right: 8),
+                      padding: const EdgeInsets.only(left: 8, right: 8),
                       child: Center(
                         child: Text(
                           data['title'],
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),
@@ -275,7 +254,7 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
                 'Best Of Electronics',
@@ -298,7 +277,7 @@ class _HomePageState extends State<HomePage> {
                       obj.bestElectronics[index % obj.bestElectronics.length];
                   return Container(
                     width: 150,
-                    margin: EdgeInsets.all(8.0),
+                    margin: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
                         SizedBox(
@@ -312,7 +291,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Text(
                           data['title'],
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 17, fontWeight: FontWeight.w500),
                         )
                       ],
@@ -321,7 +300,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
                 'Best Of Fitness',
@@ -343,7 +322,7 @@ class _HomePageState extends State<HomePage> {
                   final data = obj.bestFitness[index % obj.bestFitness.length];
                   return Container(
                     width: 150,
-                    margin: EdgeInsets.all(8.0),
+                    margin: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
                         SizedBox(
@@ -357,7 +336,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Text(
                           data['title'],
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 17, fontWeight: FontWeight.w500),
                         )
                       ],
@@ -366,10 +345,10 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 70,
             ),
-            Text(
+            const Text(
               'What Our clients Say\'s',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -385,7 +364,7 @@ class _HomePageState extends State<HomePage> {
                 children: obj.clients.map((client) {
                   return Container(
                     width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
@@ -393,19 +372,19 @@ class _HomePageState extends State<HomePage> {
                           radius: 50.0,
                           backgroundImage: AssetImage(client['image']),
                         ),
-                        SizedBox(height: 10.0),
+                        const SizedBox(height: 10.0),
                         Text(
                           client['name'],
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 10.0),
+                        const SizedBox(height: 10.0),
                         Text(
                           client['msg'],
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16.0,
                             fontStyle: FontStyle.italic,
                           ),
@@ -416,13 +395,13 @@ class _HomePageState extends State<HomePage> {
                 }).toList(),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 70,
             ),
             Container(
               width: MediaQuery.of(context).size.width,
               height: 200,
-              decoration: BoxDecoration(color: Colors.grey),
+              decoration: const BoxDecoration(color: Colors.grey),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -432,7 +411,7 @@ class _HomePageState extends State<HomePage> {
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
+                          children: const [
                             Text('About',
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold)),
@@ -448,7 +427,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Expanded(
                         child: Column(
-                          children: [
+                          children: const [
                             Text('Contact Us',
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold)),
@@ -465,7 +444,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Column(
-                        children: [
+                        children: const [
                           Text('Social Med..',
                               style: TextStyle(
                                   fontSize: 15, fontWeight: FontWeight.bold)),
@@ -479,7 +458,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  Text(
+                  const Text(
                     '@nextGen.Copyright.2024',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   )

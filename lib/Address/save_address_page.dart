@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
 import '../task8_helper/task8_db_helper.dart';
 import 'address_data.dart';
 
@@ -27,7 +25,7 @@ class _AddressState extends State<Address> {
   Map<String, dynamic> address2 = {};
   Map<String, dynamic> address3 = {};
 
-  int selectedAddress = 1;
+  int? selectedAddress;
 
   void querySpecificUser(String id) async {
     user = await dbhelper.querySpacific(id);
@@ -35,12 +33,13 @@ class _AddressState extends State<Address> {
       address1 = jsonDecode(user[0]['Adress1']);
       address2 = jsonDecode(user[0]['Adress2']);
       address3 = jsonDecode(user[0]['Adress3']);
-      print(address1);
     }
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
-  void _Dialog(String Titel, String buttonName, int no) {
+  void _dialog(String tittle, String buttonName, int no) {
     showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
@@ -51,7 +50,7 @@ class _AddressState extends State<Address> {
         TextEditingController houseNameController = TextEditingController();
         TextEditingController landmarkController = TextEditingController();
         return AlertDialog(
-          title: Text(Titel),
+          title: Text(tittle),
           content: SingleChildScrollView(
             child: Form(
               child: Column(
@@ -60,7 +59,7 @@ class _AddressState extends State<Address> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       controller: nameController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         filled: true,
                         hintText: 'Enter your Name',
                         suffixIcon: Icon(
@@ -77,7 +76,7 @@ class _AddressState extends State<Address> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       controller: cityController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         filled: true,
                         hintText: 'Enter your city Name',
                         suffixIcon: Icon(
@@ -94,7 +93,7 @@ class _AddressState extends State<Address> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       controller: pinController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         filled: true,
                         hintText: 'Enter your pin-code',
                         suffixIcon: Icon(
@@ -111,7 +110,7 @@ class _AddressState extends State<Address> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       controller: postController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         filled: true,
                         hintText: 'Enter your Post Station',
                         suffixIcon: Icon(
@@ -128,7 +127,7 @@ class _AddressState extends State<Address> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       controller: houseNameController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         filled: true,
                         hintText: 'Enter your House name & Number',
                         suffixIcon: Icon(
@@ -145,7 +144,7 @@ class _AddressState extends State<Address> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       controller: landmarkController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         filled: true,
                         hintText: 'Enter your Near Landmark',
                         suffixIcon: Icon(
@@ -167,7 +166,7 @@ class _AddressState extends State<Address> {
               onPressed: () {
                 Navigator.of(dialogContext).pop();
               },
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () async {
@@ -179,19 +178,16 @@ class _AddressState extends State<Address> {
                   houseName: houseNameController.text.toLowerCase(),
                   landmark: landmarkController.text.toLowerCase(),
                 );
+                Navigator.of(dialogContext).pop();
                 if (nameController.text.isNotEmpty &&
                     cityController.text.isNotEmpty &&
                     pinController.text.isNotEmpty &&
                     postController.text.isNotEmpty &&
                     houseNameController.text.isNotEmpty &&
                     landmarkController.text.isNotEmpty) {
-                  await dbhelper.updateSpecificUserAddress1(
-                      widget.additionalString, obj, no);
+                        await dbhelper.updateSpecificUserAddress(widget.additionalString, obj, no);
                 }
-                Navigator.of(dialogContext).pop();
-                setState(() {
-                  querySpecificUser(widget.additionalString);
-                });
+                querySpecificUser(widget.additionalString);
               },
               child: Text(buttonName),
             ),
@@ -199,6 +195,29 @@ class _AddressState extends State<Address> {
         );
       },
     );
+  }
+
+  void _deleteDialog(int no){
+    showDialog(
+        context: context,
+        builder: (BuildContext dialogContext){
+          return AlertDialog(
+            backgroundColor: Colors.redAccent,
+            title: const Text('Warning'),
+            content: const Text('Did You Want To Delete The Address'),
+            actions: [
+              TextButton(onPressed: (){
+                Navigator.of(context).pop();
+              }, child: const Text('Cancel')),
+              TextButton(onPressed: ()async{
+                var obj1 = AddressData.namedConstructor();
+                Navigator.of(context).pop();
+                await dbhelper.updateSpecificUserAddress(widget.additionalString, obj1, no);
+                querySpecificUser(widget.additionalString);
+              }, child: const Text('Delete'))
+            ],
+          );
+        });
   }
 
   Widget _addressWidget(Map<String, dynamic> address, int no) {
@@ -216,7 +235,7 @@ class _AddressState extends State<Address> {
             Container(
               padding: const EdgeInsets.all(8.0),
               child: address['name'] == null
-                  ? Center(
+                  ? const Center(
                       child: Text(
                         'Address is not saved',
                         style: TextStyle(
@@ -230,7 +249,7 @@ class _AddressState extends State<Address> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Name: ${address['name']}\nCity: ${address['city']}\nPin: ${address['pin']}\nPost: ${address['post']}\nHouse Name: ${address['houseName']}\nLandmark: ${address['landmark']}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: 'LibreBaskerville',
                           fontWeight: FontWeight.bold,
                           fontSize: 17,
@@ -245,9 +264,9 @@ class _AddressState extends State<Address> {
                       alignment: Alignment.bottomRight,
                       child: ElevatedButton(
                         onPressed: () {
-                          _Dialog('Add Address', 'Add', no);
+                          _dialog('Add Address', 'Add', no);
                         },
-                        child: Text('Add'),
+                        child: const Text('Add'),
                       ),
                     ),
                   )
@@ -257,22 +276,19 @@ class _AddressState extends State<Address> {
                       Padding(
                         padding: const EdgeInsets.only(right: 8.0),
                         child: ElevatedButton(
-                          onPressed: () async {
-                            var obj1 = AddressData.namedConstructor();
-                            await dbhelper.updateSpecificUserAddress1(
-                                widget.additionalString, obj1, no);
-                            querySpecificUser(widget.additionalString);
+                          onPressed: (){
+                            _deleteDialog(no);
                           },
-                          child: Text('Delete'),
+                          child: const Text('Delete'),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 8.0),
                         child: ElevatedButton(
                           onPressed: () {
-                            _Dialog('Edit Address', 'Edit', no);
+                            _dialog('Edit Address', 'Edit', no);
                           },
-                          child: Text('Edit'),
+                          child: const Text('Edit'),
                         ),
                       ),
                     ],
@@ -281,11 +297,18 @@ class _AddressState extends State<Address> {
               value: no,
               groupValue: selectedAddress,
               onChanged: (int? value) {
-                setState(() {
-                  selectedAddress = value!;
-                });
+                if(address['name'] == null){
+                  setState(() {
+                    selectedAddress = null;
+                  });
+                }else{
+                  setState(() {
+                    selectedAddress = no;
+                  });
+                }
+
               },
-              title: Text('Select this address'),
+              title: const Text('Select this address'),
             ),
           ],
         ),
@@ -301,7 +324,7 @@ class _AddressState extends State<Address> {
         child: Column(
           children: [
             ExpansionTile(
-              title: Text(
+              title: const Text(
                 'Address 1',
                 style: TextStyle(
                   fontFamily: 'LibreBaskerville',
@@ -312,7 +335,7 @@ class _AddressState extends State<Address> {
               children: [_addressWidget(address1, 1)],
             ),
             ExpansionTile(
-              title: Text(
+              title: const Text(
                 'Address 2',
                 style: TextStyle(
                   fontFamily: 'LibreBaskerville',
@@ -323,7 +346,7 @@ class _AddressState extends State<Address> {
               children: [_addressWidget(address2, 2)],
             ),
             ExpansionTile(
-              title: Text(
+              title: const Text(
                 'Address 3',
                 style: TextStyle(
                   fontFamily: 'LibreBaskerville',

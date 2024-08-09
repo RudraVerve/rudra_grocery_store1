@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:rudra_grocery_store09/card/proceed_buy_page.dart';
-
 import '../task8_helper/task8_db_helper.dart';
 
 class card_page extends StatefulWidget {
@@ -225,8 +223,7 @@ class _card_page extends State<card_page> {
                                 width: 120,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     IconButton(
                                       onPressed: () {
@@ -334,7 +331,7 @@ class _card_page extends State<card_page> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    BuyPage(items: selectedItems),
+                                    BuyPage(items: selectedItems, additionalString: widget.additionalString),
                               ),
                             );
                           },

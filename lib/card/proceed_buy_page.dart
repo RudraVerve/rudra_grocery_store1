@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import '../Address/save_address_page.dart';
+import '../main.dart';
 
 class BuyPage extends StatefulWidget {
   final List<Map<String, dynamic>> items;
+  final additionalString;
 
-  const BuyPage({super.key, required this.items});
+  const BuyPage({super.key, required this.items, required this.additionalString});
 
   @override
   State<BuyPage> createState() => _BuyPageState();
@@ -60,7 +63,7 @@ class _BuyPageState extends State<BuyPage> {
     if (overalPrice >= 100) {
       TotalPrice = overalPrice;
     } else {
-      TotalPrice = overalPrice + 30;
+      TotalPrice = overalPrice + 5;
     }
     return totalPrice * gstRate;
   }
@@ -76,7 +79,7 @@ class _BuyPageState extends State<BuyPage> {
             actions: [
               TextButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.of(contex).pop();
                   },
                   child: Text('Cancel'))
             ],
@@ -110,6 +113,7 @@ class _BuyPageState extends State<BuyPage> {
               content: SingleChildScrollView(
                 child: Column(
                   children: [
+                    //first row
                     Container(
                       width: MediaQuery.of(context).size.width,
                       height: 100,
@@ -525,7 +529,7 @@ class _BuyPageState extends State<BuyPage> {
                     ),
                   ),
                   Text(
-                    '\$${TotalPrice}',
+                    '\$${TotalPrice.toStringAsFixed(2)}',
                     style: TextStyle(
                       color: Colors.green,
                       fontWeight: FontWeight.bold,
@@ -553,9 +557,18 @@ class _BuyPageState extends State<BuyPage> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pop(); // Close the dialog
-                      Navigator.of(context).pop(); // Close the dialog
+                      Navigator.of(context).pop(); // Close the next dialog
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyHomePage(
+                            title: 'Home Page',
+                            additionalString: widget.additionalString,
+                            login: true,
+                          ),
+                        ),
+                      );
                     },
-                    child: Text('Done'),
+                    child: const Text('Done'),
                   ),
                 ],
               ),
@@ -723,7 +736,7 @@ class _BuyPageState extends State<BuyPage> {
                               ? Row(
                                   children: [
                                     Text(
-                                      '\$30',
+                                      '\$5',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 15,
@@ -746,7 +759,7 @@ class _BuyPageState extends State<BuyPage> {
                                   ],
                                 )
                               : Text(
-                                  '\$30',
+                                  '\$5',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 15,
@@ -788,7 +801,7 @@ class _BuyPageState extends State<BuyPage> {
                             ),
                           ),
                           Text(
-                            '\$${TotalPrice}',
+                            '\$${TotalPrice.toStringAsFixed(2)}',
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 15,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'Address/save_address_page.dart';
 import 'app_open_page.dart';
 import 'card/cardPage.dart';
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(
-        title: 'Flutter Demo Home Page',
+        title: 'Home Page',
         additionalString: '',
         login: false,
       ),
@@ -43,6 +42,7 @@ class MyHomePage extends StatefulWidget {
     required this.login,
   });
 
+
   final String title;
   final String additionalString;
   final bool login;
@@ -52,11 +52,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0; // Default to Home tab
 
+  int selectedIndex = 0;// Default to Home tab
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      selectedIndex = index;
     });
 
     if (index == 3 && !widget.login) {
@@ -78,16 +78,16 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Login Required'),
-          content: Text('Please login to add items to the cart.'),
+          title: const Text('Login Required'),
+          content: const Text('Please login to add items to the cart.'),
           actions: <Widget>[
             TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text('Cancel')),
+                child: const Text('Cancel')),
             ElevatedButton(
-              child: Text('Login'),
+              child: const Text('Login'),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -109,40 +109,40 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: Colors.teal[100],
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
             label: 'Card',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.location_on),
             label: 'Address',
           ),
           widget.login
-              ? BottomNavigationBarItem(
+              ? const BottomNavigationBarItem(
                   icon: Icon(Icons.account_circle),
                   label: 'Account',
                 )
-              : BottomNavigationBarItem(
+              : const BottomNavigationBarItem(
                   icon: Icon(Icons.login),
                   label: 'Login',
                 ),
         ],
-        currentIndex: _selectedIndex,
+        currentIndex: selectedIndex,
         selectedItemColor: Colors.amber[800],
         unselectedItemColor: Colors.teal,
         onTap: _onItemTapped,
       ),
       body: Container(
-          child: _selectedIndex == 0
+          child: selectedIndex == 0
               ? HomePage(additionalString: widget.additionalString)
-              : _selectedIndex == 1
+              : selectedIndex == 1
                   ? widget.login
                       ? card_page(additionalString: widget.additionalString)
-                      : Center(
+                      : const Center(
                           child: Text(
                           'First You Have To Log In\n        To See The Card',
                           style: TextStyle(
@@ -150,10 +150,10 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontWeight: FontWeight.bold,
                               fontFamily: 'LibreBaskerville'),
                         ))
-                  : _selectedIndex == 2
+                  : selectedIndex == 2
                       ? widget.login
                           ? Address(additionalString: widget.additionalString)
-                          : Center(
+                          : const Center(
                               child: Text(
                               'First You Have To Log\nIn To See The Address',
                               style: TextStyle(
@@ -163,7 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             ))
                       : widget.login
                           ? MyAccount(additionalString: widget.additionalString)
-                          : Text('')),
+                          : const Text('')),
     );
   }
 }

@@ -132,7 +132,7 @@ class task8_db {
     }
   }
 
-  Future<int> updateSpecificUserAddress1(
+  Future<int> updateSpecificUserAddress(
       String userId, AddressData obj, int no) async {
     Database db = await instance.database;
     if (t_name_user.isNotEmpty) {

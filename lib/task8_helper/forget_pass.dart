@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
 import 'login_page.dart';
 import 'task8_db_helper.dart';
 
@@ -121,7 +120,7 @@ class _forget_pass extends State<forgetPass> {
                   padding: EdgeInsets.all(8.0),
                   child: Center(
                       child: Text(
-                    'Well Come \" ${name} \"',
+                    'Well Come $name',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 23,

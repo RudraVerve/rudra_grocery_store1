@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../main.dart';
 import '../task8_helper/login_page.dart';
 
@@ -198,13 +197,14 @@ class _MyAccountState extends State<MyAccount> {
               child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    'Acount Setting',
+                    'Acount Settings',
                     style: TextStyle(
                         fontFamily: 'LibreBaskerville',
                         fontWeight: FontWeight.bold,
                         fontSize: 20),
                   )),
             ),
+            //next gen plus
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -231,6 +231,7 @@ class _MyAccountState extends State<MyAccount> {
                 ),
               ),
             ),
+            //Edit Account
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -257,6 +258,7 @@ class _MyAccountState extends State<MyAccount> {
                 ),
               ),
             ),
+            //Saved Card & Wallet
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -283,32 +285,39 @@ class _MyAccountState extends State<MyAccount> {
                 ),
               ),
             ),
+            //Save Address
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 margin: EdgeInsets.all(8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(Icons.location_on),
-                        SizedBox(width: 15),
-                        Text(
-                          'Save Address',
-                          style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'LibreBaskerville'),
-                        )
-                      ],
-                    ),
-                    Icon(Icons.keyboard_arrow_right)
-                  ],
+                child: InkWell(
+                  onTap: (){
+                    //in process
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(Icons.location_on),
+                          SizedBox(width: 15),
+                          Text(
+                            'Save Address',
+                            style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'LibreBaskerville'),
+                          )
+                        ],
+                      ),
+                      Icon(Icons.keyboard_arrow_right)
+                    ],
+                  ),
                 ),
               ),
             ),
+            //Select Language
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -335,6 +344,7 @@ class _MyAccountState extends State<MyAccount> {
                 ),
               ),
             ),
+            //Notification Setting
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -361,11 +371,13 @@ class _MyAccountState extends State<MyAccount> {
                 ),
               ),
             ),
+            //REfer & earn >>>> Earn Coins
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  //Refer & Earn
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
@@ -397,6 +409,7 @@ class _MyAccountState extends State<MyAccount> {
                   SizedBox(
                     width: 10,
                   ),
+                  //Earn Coins
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
@@ -432,6 +445,7 @@ class _MyAccountState extends State<MyAccount> {
                 ],
               ),
             ),
+            //Log In With Another Acount
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
@@ -474,6 +488,7 @@ class _MyAccountState extends State<MyAccount> {
                 ),
               ),
             ),
+            //Log Out
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
@@ -482,7 +497,7 @@ class _MyAccountState extends State<MyAccount> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => MyHomePage(
-                        title: '',
+                        title: 'Home page',
                         additionalString: '',
                         login: false,
                       ),
