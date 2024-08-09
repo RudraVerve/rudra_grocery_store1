@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'Address/save_address_page.dart';
 import 'app_open_page.dart';
 import 'card/cardPage.dart';
 import 'homePage/homePage.dart';
@@ -59,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
       selectedIndex = index;
     });
 
-    if (index == 3 && !widget.login) {
+    if (index == 2 && !widget.login) {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -68,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     }
 
-    if ((index == 1 && !widget.login) || (index == 2 && !widget.login)) {
+    if (index == 1 && !widget.login){
       _showLoginDialog();
     }
   }
@@ -117,10 +116,6 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.shopping_cart),
             label: 'Card',
           ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.location_on),
-            label: 'Address',
-          ),
           widget.login
               ? const BottomNavigationBarItem(
                   icon: Icon(Icons.account_circle),
@@ -150,17 +145,6 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontWeight: FontWeight.bold,
                               fontFamily: 'LibreBaskerville'),
                         ))
-                  : selectedIndex == 2
-                      ? widget.login
-                          ? Address(additionalString: widget.additionalString)
-                          : const Center(
-                              child: Text(
-                              'First You Have To Log\nIn To See The Address',
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'LibreBaskerville'),
-                            ))
                       : widget.login
                           ? MyAccount(additionalString: widget.additionalString)
                           : const Text('')),
