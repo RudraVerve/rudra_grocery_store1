@@ -97,7 +97,6 @@ class _signup extends State<signUp> {
     try {
       rows = await dbhelper.queryall();
       setState(() {});
-      print("Fetched rows: $rows");
     } catch (e) {
       print("Error fetching rows: $e");
     }
@@ -115,7 +114,7 @@ class _signup extends State<signUp> {
           await fetchAllRows(); // Ensure the latest rows are fetched
 
           bool userExists =
-              rows.any((user) => user['UserId'] == userIdSignup.text);
+              rows.any((user) => user['Mobile'] == userIdSignup.text);
 
           if (userExists) {
             _Dialog('The User Already Exists. Try a unique User ID');
@@ -140,9 +139,7 @@ class _signup extends State<signUp> {
             RePassWordSignup.clear();
             questainSignup.clear();
             questainSignup2.clear();
-            print('Inserted ID: $id');
             if (id > 0) {
-              print('Sucess');
             } else {
               _Dialog('Error creating account. Please try again later.');
             }

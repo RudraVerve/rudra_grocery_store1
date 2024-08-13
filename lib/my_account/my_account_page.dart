@@ -1,5 +1,6 @@
 import 'dart:convert';
 import '../Address/address_data.dart';
+import '../myOrders/orders.dart';
 import '../task8_helper/task8_db_helper.dart';
 import 'package:flutter/material.dart';
 import '../main.dart';
@@ -346,37 +347,48 @@ class _MyAccountState extends State<MyAccount> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: 50,
-                          width: 150,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                              color: Colors.black, // Border color
-                              width: 1.0, // Border width
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
+                        child: InkWell(
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    OrdersPage(userId: user[0]['id']),
                               ),
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Icon(Icons.shopping_bag, color: Colors.blue),
-                              Text(
-                                'Orders',
-                                style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'PlaywriteMX'),
-                              )
-                            ],
+                            );
+                          },
+                          child: Container(
+                            height: 50,
+                            width: 150,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: Colors.black, // Border color
+                                width: 1.0, // Border width
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset:
+                                      Offset(0, 3), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Icon(Icons.shopping_bag, color: Colors.blue),
+                                Text(
+                                  'Orders',
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'PlaywriteMX'),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),

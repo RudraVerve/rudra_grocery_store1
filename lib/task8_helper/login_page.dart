@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import '../SellerAcount/SelerLogin.dart';
 import '../main.dart';
 import 'forget_pass.dart';
 import 'signUp_page.dart';
@@ -78,7 +78,7 @@ class _Login extends State<Login> {
 
   void _validUser() {
     if (user.length == 0) {
-      _Dialog('User Is Not Exist');
+      dialogWarning('User Is Not Exist');
     } else {
       if (user[0]["Password"] == passWord.text) {
         Navigator.push(
@@ -105,14 +105,14 @@ class _Login extends State<Login> {
     }
   }
 
-  void _Dialog(String worning) {
+  void dialogWarning(String warning) {
     showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
           backgroundColor: Colors.amber,
           title: Text('Worning', style: TextStyle(color: Colors.redAccent)),
-          content: Text('${worning}'),
+          content: Text('${warning}'),
           actions: [
             TextButton(
               onPressed: () {
@@ -120,6 +120,59 @@ class _Login extends State<Login> {
               },
               child: Text('OK'),
             ),
+          ],
+        );
+      },
+    );
+  }
+
+  String authenticationPassword = '6371'; //Authentication Password of Seller
+  TextEditingController sellerPasswordAuthentication =TextEditingController();
+  void dialogPasswordSeller() {
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          backgroundColor: Colors.amber,
+          title: Text('Enter Seller Password', style: TextStyle(color: Colors.redAccent)),
+          content: TextFormField(
+            controller: sellerPasswordAuthentication,
+            decoration: const InputDecoration(
+              filled: true,
+              hintText: 'Password',
+              suffixIcon: Icon(
+                Icons.password_outlined,
+                color: Colors.cyan,
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.green),
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(onPressed: (){
+              if(authenticationPassword == sellerPasswordAuthentication.text){
+                Navigator.of(dialogContext).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SellerLogin(),
+                  ),
+                );
+              }
+              else{
+                Navigator.of(dialogContext).pop();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Wrong password')),
+                );
+              }
+            }, child: Text('Login'))
           ],
         );
       },
@@ -297,7 +350,7 @@ class _Login extends State<Login> {
                             onPressed: () {
                               if (mobile.text.isEmpty &&
                                   passWord.text.isEmpty) {
-                                _Dialog('You Have To Enter Ueser Id And Password');
+                                dialogWarning('You Have To Enter Ueser Id And Password');
                               } else {
                                 _fachUser(mobile.text);
                               }
@@ -371,42 +424,63 @@ class _Login extends State<Login> {
                     ),
                   ),
                 ), //docial media files
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: RichText(
-                        text: TextSpan(
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                          children: <TextSpan>[
-                            TextSpan(text: 'Not A Member Yet? '),
-                            TextSpan(
-                              text: 'Create Account',
-                              style: TextStyle(
-                                color: Colors.yellow,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => signUp(),
-                                    ),
-                                  );
-                                },
-                            ),
-                          ],
-                        ),
+                Padding(
+                  padding: EdgeInsets.only(top: 16.0),
+                  child: RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
                       ),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Not A Member Yet? '),
+                        TextSpan(
+                          text: 'Create Account',
+                          style: TextStyle(
+                            color: Colors.yellow,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => signUp(),
+                                ),
+                              );
+                            },
+                        ),
+                      ],
                     ),
                   ),
                 ), //sign up
+                Padding(
+                  padding: EdgeInsets.only(bottom: 16.0,top: 5),
+                  child: RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Are You A Seller? '),
+                        TextSpan(
+                          text: 'Login To Seller',
+                          style: TextStyle(
+                            color: Colors.yellow,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              dialogPasswordSeller();
+                            },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

@@ -326,7 +326,6 @@ class _card_page extends State<card_page> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            print(selectedItems);
                             Navigator.push(
                               context,
                               MaterialPageRoute(

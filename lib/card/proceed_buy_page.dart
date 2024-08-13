@@ -433,7 +433,7 @@ class _BuyPageState extends State<BuyPage> {
                 ),
                 if (_isAnyItemSelected())
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async{
                       if (_selectedItems[9] == true || _selectedItems[11] == true) {
                         _notAvalable();
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -443,9 +443,11 @@ class _BuyPageState extends State<BuyPage> {
                         );
                       }
                       else if(_selectedItems[10] == true){
+                        await dbhelper.insertOrder(u_id!,processedItems,false, false,TotalPrice);
                         showProcessingDialogCaseOnDelevery(context);
                       }
                       else {
+                        await dbhelper.insertOrder(u_id!,processedItems,false, false,TotalPrice);
                         showProcessingDialog(context);
                       }
                     },
@@ -710,10 +712,11 @@ class _BuyPageState extends State<BuyPage> {
   Map<String, dynamic> address3 = {};
 
   int? selectedAddress;
-
+  int? u_id;
   void querySpecificUser(String id) async {
     user = await dbhelper.querySpacific(id);
     if (user.isNotEmpty) {
+      u_id = user[0]['id'];
       address1 = jsonDecode(user[0]['Adress1']);
       address2 = jsonDecode(user[0]['Adress2']);
       address3 = jsonDecode(user[0]['Adress3']);
