@@ -34,15 +34,37 @@ class _HomePageState extends State<HomePage> {
                   scrollDirection: Axis.horizontal,
                   itemCount: obj.containerData.length,
                   itemBuilder: (context, index) {
-                    final data =
-                        obj.containerData[index % obj.containerData.length];
-                    return Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: const EdgeInsets.all(8.0),
-                      child: Image.asset(
-                        data['image'],
-                        fit: BoxFit.cover,
+                    final data = obj.containerData[index % obj.containerData.length];
+                    return InkWell(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: const EdgeInsets.all(8.0),
+                        child: Image.asset(
+                          data['image'],
+                          fit: BoxFit.cover,
+                        ),
                       ),
+                      onDoubleTap: () {
+                        if (index == 0) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Item_category(
+                                    items: obj.groceries,
+                                    additionalString:
+                                    widget.additionalString)),
+                          );
+                        } else if (index == 1) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Item_category(
+                                    items: obj.fruits,
+                                    additionalString:
+                                    widget.additionalString)),
+                          );
+                        }
+                      }
                     );
                   },
                 ),
@@ -149,10 +171,10 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             GridView.builder(
+              // used for take space by it self and scrollable
               shrinkWrap: true,
               // used for take space by it self and scrollable
               physics: const NeverScrollableScrollPhysics(),
-              // used for take space by it self and scrollable
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 150,
                 crossAxisSpacing: 10,

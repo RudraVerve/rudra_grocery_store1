@@ -41,7 +41,6 @@ class MyHomePage extends StatefulWidget {
     required this.login,
   });
 
-
   final String title;
   final String additionalString;
   final bool login;

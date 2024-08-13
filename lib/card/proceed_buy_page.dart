@@ -106,7 +106,6 @@ class _BuyPageState extends State<BuyPage> {
                 _selectedItems[index] = true; // Select the tapped item
               });
             }
-
             bool _isAnyItemSelected() {
               return _selectedItems.values.any((selected) => selected);
             }
@@ -435,15 +434,18 @@ class _BuyPageState extends State<BuyPage> {
                 if (_isAnyItemSelected())
                   ElevatedButton(
                     onPressed: () {
-                      if (_selectedItems[9] == true ||
-                          _selectedItems[11] == true) {
+                      if (_selectedItems[9] == true || _selectedItems[11] == true) {
                         _notAvalable();
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                               content:
                                   Text('Payment Methord Not Avalable Yat...')),
                         );
-                      } else {
+                      }
+                      else if(_selectedItems[10] == true){
+                        showProcessingDialogCaseOnDelevery(context);
+                      }
+                      else {
                         showProcessingDialog(context);
                       }
                     },
@@ -522,9 +524,9 @@ class _BuyPageState extends State<BuyPage> {
                       );
                     },
                   ),
-                  SizedBox(height: 20),
-                  Text(
-                    'Done',
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Payment Successful',
                     style: TextStyle(
                       color: Colors.green,
                       fontWeight: FontWeight.bold,
@@ -582,9 +584,125 @@ class _BuyPageState extends State<BuyPage> {
     });
   }
 
+  //dialog for caseOnDelevery sucessfully
+  void showProcessingDialogCaseOnDelevery(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Container(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Initial Circular Progress Indicator
+                CircularProgressIndicator(),
+                SizedBox(height: 20),
+                Text('Processing...'),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.of(context).pop(); // Close the processing dialog
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Container(
+              padding: EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Green Circle with Done Icon
+                  TweenAnimationBuilder<double>(
+                    tween: Tween<double>(begin: 0, end: 1),
+                    duration: Duration(seconds: 1),
+                    builder: (context, value, child) {
+                      return Opacity(
+                        opacity: value,
+                        child: Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.check,
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Order Placed Successfully',
+                    style: TextStyle(
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Keep shopping....',
+                        style: TextStyle(
+                          color: Colors.deepOrange,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
+                      Icon(
+                        Icons.emoji_emotions,
+                        color: Colors.deepPurpleAccent,
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(); // Close the dialog
+                      Navigator.of(context).pop(); // Close the next dialog
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyHomePage(
+                          title: 'Home Page',
+                          additionalString: widget.additionalString,
+                          login: true,
+                        ),
+                        ),
+                      );
+                    },
+                    child: const Text('Done'),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    });
+  }
+
 
   //address
-
   final dbhelper = task8_db.instance;
   List<Map<String, dynamic>> user = [];
   Map<String, dynamic> address1 = {};
@@ -773,7 +891,7 @@ class _BuyPageState extends State<BuyPage> {
             content: const Text('Did You Want To Delete The Address'),
             actions: [
               TextButton(onPressed: (){
-                Navigator.of(context).pop();
+                Navigator.of(dialogContext).pop();
               }, child: const Text('Cancel')),
               TextButton(onPressed: ()async{
                 var obj1 = AddressData.namedConstructor();
@@ -889,7 +1007,7 @@ class _BuyPageState extends State<BuyPage> {
     return Scaffold(
       backgroundColor: Colors.teal[100],
       appBar: AppBar(
-        title: Text('Price Details'),
+        title: const Text('Price Details'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -897,36 +1015,35 @@ class _BuyPageState extends State<BuyPage> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 300,
-                child: ListView.builder(
-                  itemCount: processedItems.length,
-                  itemBuilder: (context, index) {
-                    final item = processedItems[index];
-                    return ListTile(
-                      leading: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          image: item['image'].startsWith('http')
-                              ? DecorationImage(
-                                  image: NetworkImage(item['image']),
-                                  fit: BoxFit.cover,
-                                )
-                              : DecorationImage(
-                                  image: AssetImage(item['image']),
-                                  fit: BoxFit.cover,
-                                ),
+              child: ListView.builder(
+                shrinkWrap: true, // This makes the ListView take only the space it needs
+                physics: NeverScrollableScrollPhysics(), // Disables ListView's own scrolling
+                itemCount: processedItems.length,
+                itemBuilder: (context, index) {
+                  final item = processedItems[index];
+                  return ListTile(
+                    leading: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        image: item['image'].startsWith('http')
+                            ? DecorationImage(
+                          image: NetworkImage(item['image']),
+                          fit: BoxFit.cover,
+                        )
+                            : DecorationImage(
+                          image: AssetImage(item['image']),
+                          fit: BoxFit.cover,
                         ),
                       ),
-                      title: Center(
-                        child: Text('Quantity: ${item['quantity']}'),
-                      ),
-                      trailing: Text('\$${item['totalPrice']}'),
-                    );
-                  },
-                ),
+                    ),
+                    title: Center(
+                      child: Text('Quantity: ${item['quantity']}'),
+                    ),
+                    trailing: Text('\$${item['totalPrice']}'),
+                  );
+                },
               ),
             ),
             Padding(

@@ -2,11 +2,9 @@
 
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-
 import '../Address/address_data.dart';
 
 class task8_db {
@@ -44,8 +42,7 @@ class task8_db {
   Future<Database> _initDatabase() async {
     Directory documentDirectory = await getApplicationDocumentsDirectory();
     _dbPath = join(documentDirectory.path, db_name);
-    return await openDatabase(_dbPath!,
-        version: db_version, onCreate: _onCreate);
+    return await openDatabase(_dbPath!, version: db_version, onCreate: _onCreate);
   }
 
   Future _onCreate(Database db, int version) async {
