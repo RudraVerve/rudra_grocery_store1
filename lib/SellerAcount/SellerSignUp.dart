@@ -76,14 +76,14 @@ class _SellerSignUp extends State<SellerSignUp> {
       builder: (BuildContext dialogContext) {
         return AlertDialog(
           backgroundColor: Colors.amber,
-          title: Text('Worning', style: TextStyle(color: Colors.redAccent)),
+          title: const Text('Worning', style: TextStyle(color: Colors.redAccent)),
           content: Text('${worning}'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(dialogContext).pop();
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );
@@ -133,7 +133,7 @@ class _SellerSignUp extends State<SellerSignUp> {
                 sellerQuestainSignup2.text,
                 obj1);
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Well Come to Next Gen Famaly...')),
+              const SnackBar(content: Text('Well Come to Next Gen Famaly...')),
             );
             sellerMailSignup.clear();
             sellerMobileSignup.clear();
@@ -160,7 +160,7 @@ class _SellerSignUp extends State<SellerSignUp> {
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please fix the errors')),
+        const SnackBar(content: Text('Please fix the errors')),
       );
     }
   }
@@ -187,10 +187,10 @@ class _SellerSignUp extends State<SellerSignUp> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        'Create Acount To NextGen Seller',
+                        'Create Account To NextGen Seller',
                         style: TextStyle(
                             fontSize: 20,
                             fontFamily: 'LibreBaskerville',
@@ -198,7 +198,7 @@ class _SellerSignUp extends State<SellerSignUp> {
                             color: Colors.yellow),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Container(
                       width: 350,
                       child: Column(
@@ -208,12 +208,12 @@ class _SellerSignUp extends State<SellerSignUp> {
                             child: Column(
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: TextFormField(
                                     controller: sellerMailSignup,
                                     validator: validateEmail,
                                     keyboardType: TextInputType.emailAddress,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       hintText: 'Enter Email Id',
                                       suffixIcon: Icon(Icons.email),
                                       hintStyle: TextStyle(
@@ -240,11 +240,11 @@ class _SellerSignUp extends State<SellerSignUp> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: TextFormField(
                                     controller: sellerNameSignup,
                                     keyboardType: TextInputType.name,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       hintText: 'Enter Your Name',
                                       suffixIcon: Icon(Icons.person),
                                       hintStyle: TextStyle(
@@ -271,11 +271,11 @@ class _SellerSignUp extends State<SellerSignUp> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: TextFormField(
                                     controller: sellerStoreNameSignup,
                                     keyboardType: TextInputType.name,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       hintText: 'Enter Store Name',
                                       suffixIcon: Icon(Icons.store),
                                       hintStyle: TextStyle(
@@ -302,11 +302,11 @@ class _SellerSignUp extends State<SellerSignUp> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: TextFormField(
                                     controller: sellerMobileSignup,
                                     keyboardType: TextInputType.text,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       hintText: 'Enter Mobil number.',
                                       suffixIcon: Icon(Icons.phone),
                                       hintStyle: TextStyle(
@@ -333,7 +333,7 @@ class _SellerSignUp extends State<SellerSignUp> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: TextFormField(
                                     controller: sellerPassWordSignup,
                                     validator: validatePassword,
@@ -349,23 +349,23 @@ class _SellerSignUp extends State<SellerSignUp> {
                                           togleShow1();
                                         },
                                       ),
-                                      hintStyle: TextStyle(
+                                      hintStyle: const TextStyle(
                                         color: Colors
                                             .black, // Set the hint text color to green
                                       ),
-                                      border: UnderlineInputBorder(
+                                      border: const UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Colors.black,
                                           width: 2,
                                         ),
                                       ),
-                                      enabledBorder: UnderlineInputBorder(
+                                      enabledBorder: const UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Colors.black,
                                           width: 2,
                                         ),
                                       ),
-                                      focusedBorder: UnderlineInputBorder(
+                                      focusedBorder: const UnderlineInputBorder(
                                         borderSide: BorderSide(
                                             color: Colors.green, width: 2),
                                       ),
@@ -373,7 +373,7 @@ class _SellerSignUp extends State<SellerSignUp> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: TextFormField(
                                     controller: sellerRePassWordSignup,
                                     keyboardType: TextInputType.text,
@@ -388,23 +388,23 @@ class _SellerSignUp extends State<SellerSignUp> {
                                           togleShow2();
                                         },
                                       ),
-                                      hintStyle: TextStyle(
+                                      hintStyle: const TextStyle(
                                         color: Colors
                                             .black, // Set the hint text color to green
                                       ),
-                                      border: UnderlineInputBorder(
+                                      border: const UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Colors.black,
                                           width: 2,
                                         ),
                                       ),
-                                      enabledBorder: UnderlineInputBorder(
+                                      enabledBorder: const UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Colors.black,
                                           width: 2,
                                         ),
                                       ),
-                                      focusedBorder: UnderlineInputBorder(
+                                      focusedBorder: const UnderlineInputBorder(
                                         borderSide: BorderSide(
                                             color: Colors.green, width: 2),
                                       ),
@@ -412,11 +412,11 @@ class _SellerSignUp extends State<SellerSignUp> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: TextFormField(
                                     controller: sellerQuestainSignup,
                                     keyboardType: TextInputType.text,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       hintText: 'Your pet name',
                                       suffixIcon: Icon(Icons.pets),
                                       hintStyle: TextStyle(
@@ -443,11 +443,11 @@ class _SellerSignUp extends State<SellerSignUp> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: TextFormField(
                                     controller: sellerQuestainSignup2,
                                     keyboardType: TextInputType.text,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       hintText: 'Your favorite Subject',
                                       suffixIcon: Icon(Icons.add_chart_outlined),
                                       hintStyle: TextStyle(
@@ -477,32 +477,32 @@ class _SellerSignUp extends State<SellerSignUp> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(20),
+                            padding: const EdgeInsets.all(20),
                             child: ElevatedButton(
                                 onPressed: () async {
                                   handleSignUp();
                                 },
-                                child: Text('Create Acount')),
+                                child: const Text('Create Acount')),
                           ),
                         ],
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(7.0),
+                      padding: const EdgeInsets.all(7.0),
                       child: RichText(
                         text: TextSpan(
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                           ),
                           children: <TextSpan>[
-                            TextSpan(
+                            const TextSpan(
                                 text: 'Alrady A Seller?  ',
                                 style: TextStyle(fontSize: 16)),
                             TextSpan(
                               text: 'Login',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.pinkAccent,
                                 fontWeight: FontWeight.bold,
                               ),

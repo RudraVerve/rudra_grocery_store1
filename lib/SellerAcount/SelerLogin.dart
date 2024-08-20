@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../task8_helper/login_page.dart';
 import '../task8_helper/task8_db_helper.dart';
-import 'SellerHomePage.dart';
+import 'SellerMainPage.dart';
 import 'SellerSignUp.dart';
 
 class SellerLogin extends StatefulWidget {
@@ -32,12 +32,12 @@ class _SellerLogin extends State<SellerLogin> {
 
   void _loadCredentials() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? mobileNumber = prefs.getString('mobile');
-    String? password = prefs.getString('password');
-    if (mobileNumber != null && password != null) {
+    String? mobileNumberSeller = prefs.getString('mobileSeller');
+    String? passwordSeller = prefs.getString('passwordSeller');
+    if (mobileNumberSeller != null && passwordSeller != null) {
       setState(() {
-        this.mobile.text = mobileNumber;
-        this.passWord.text = password;
+        this.mobile.text = mobileNumberSeller;
+        this.passWord.text = passwordSeller;
         this.isChecked = true;
       });
     }
@@ -46,11 +46,11 @@ class _SellerLogin extends State<SellerLogin> {
   void _saveCredentials() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (isChecked) {
-      await prefs.setString('mobile', mobile.text);
-      await prefs.setString('password', passWord.text);
+      await prefs.setString('mobileSeller', mobile.text);
+      await prefs.setString('passwordSeller', passWord.text);
     } else {
-      await prefs.remove('mobile');
-      await prefs.remove('password');
+      await prefs.remove('mobileSeller');
+      await prefs.remove('passwordSeller');
     }
   }
 
@@ -82,7 +82,7 @@ class _SellerLogin extends State<SellerLogin> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => SellerHome(),
+            builder: (context) => SellerMainPage(login: true),
           ),
         );
         mobile.clear();

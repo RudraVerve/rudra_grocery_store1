@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -34,7 +35,11 @@ class task8_db {
   static final OrderTotalPrice = 'total_price';
   static final OrderDate = 'date';
   static final Notify_Seller = 'Notify_Seller';
-  static final IsOrderCancel = 'IsOrder_Cancel';
+  static final IsOrderCancelSeller = 'IsOrder_Cancel';
+  static final IsOrderCancelUser = 'IsOrder_Cancel_User';
+  static final OrderAddressNo = 'Order_AddressNo';
+  static final ReceivedByUser = 'Received_ByUser';
+  static final OrderPayment = 'Order_Payment';
 
   //Seller
   static final TableSeller = 'Seller';
@@ -95,7 +100,11 @@ class task8_db {
         $OrderTotalPrice REAL, 
         $OrderDate TEXT,
         $Notify_Seller BOOLEAN,
-        $IsOrderCancel BOOLEAN,
+        $IsOrderCancelSeller BOOLEAN,
+        $IsOrderCancelUser BOOLEAN,
+        $ReceivedByUser BOOLEAN,
+        $OrderPayment BOOLEAN,
+        $OrderAddressNo INTEGER NOT NULL,
         FOREIGN KEY ($OrderUserId) REFERENCES $t_name_user ($u_Id)
       )
     ''');
@@ -156,10 +165,11 @@ class task8_db {
     }
   }
 
-  Future<void> insertOrder(int userId, List<Map<String, dynamic>> orderDetails, bool isCompleted, bool isApproved, double totalPrice) async {
+  Future<void> insertOrder(int userId, List<Map<String, dynamic>> orderDetails, bool isCompleted, bool isApproved, double totalPrice, int orderAdderessNo, bool payment) async {
     Database db = await instance.database;
     String orderDetailsJson = jsonEncode(orderDetails);
     String currentDate = DateTime.now().toIso8601String();
+    String formattedDate = DateFormat('yy-MM-dd').format(DateTime.parse(currentDate));
     await db.insert(
       tableOrders,
       {
@@ -168,9 +178,13 @@ class task8_db {
         OrderIsCompleted: isCompleted ? 1 : 0,
         OrderIsApproved: isApproved ? 1 : 0,
         OrderTotalPrice: totalPrice,
-        OrderDate: currentDate,
-        Notify_Seller : 0,
-        IsOrderCancel : 0
+        OrderDate: formattedDate,
+        Notify_Seller: 0,
+        IsOrderCancelSeller: 0,
+        OrderAddressNo: orderAdderessNo,
+        IsOrderCancelUser: 0,
+        ReceivedByUser: 0,
+        OrderPayment: payment ? 1 : 0
       },
       conflictAlgorithm: ConflictAlgorithm.replace, // Handle conflicts by replacing existing rows
     );
@@ -182,6 +196,21 @@ class task8_db {
       List<Map<String, dynamic>> results = await db.query(
         t_name_user,
         where: "$u_mobile = ?",
+        whereArgs: [Id],
+      );
+      return results;
+    } catch (e) {
+      print("Error querying data: $e");
+      return [];
+    }
+  }
+
+  Future<List<Map<String, dynamic>>> querySpacificUserUsingUserId(int Id) async {
+    try {
+      Database db = await instance.database;
+      List<Map<String, dynamic>> results = await db.query(
+        t_name_user,
+        where: "$u_Id = ?",
         whereArgs: [Id],
       );
       return results;
@@ -258,6 +287,79 @@ class task8_db {
     }
   }
 
+  Future<List<Map<String, dynamic>>> queryallOrders() async {
+    try {
+      Database db = await instance.database;
+      return await db.query(tableOrders);
+    } catch (e) {
+      print("Error querying data: $e");
+      return [];
+    }
+  }
+
+  Future<List<Map<String, dynamic>>> getApprovedOrders() async {
+    final db = await task8_db.instance.database;
+    return await db.query(
+      'Orders',
+      where: '$OrderIsApproved = ?',
+      whereArgs: [1],
+    );
+  }
+
+  Future<List<Map<String, dynamic>>> getPendingOrders() async {
+    final db = await task8_db.instance.database;
+    return await db.query(
+      'Orders',
+      where: '$OrderIsApproved = ? AND $OrderIsCompleted = ? AND $IsOrderCancelSeller = ? AND $IsOrderCancelUser = ?',
+      whereArgs: [0, 0, 0,0],
+    );
+  }
+
+  Future<List<Map<String, dynamic>>> getCompletedOrder() async {
+    final db = await task8_db.instance.database;
+    return await db.query(
+      'Orders',
+      where: '$ReceivedByUser = ? AND $OrderIsCompleted = ? ',
+      whereArgs: [1, 1],
+    );
+  }
+
+  Future<List<Map<String, dynamic>>> getDeliveredOrders() async {
+    final db = await task8_db.instance.database;
+    return await db.query(
+      'Orders',
+      where: '$OrderIsCompleted = ? AND $ReceivedByUser = ?',
+      whereArgs: [1, 0],
+    );
+  }
+
+  Future<List<Map<String, dynamic>>> getCanceledOrdersBySeller() async {
+    final db = await task8_db.instance.database;
+    return await db.query(
+      'Orders',
+      where: '$IsOrderCancelSeller = ?',
+      whereArgs: [1],
+    );
+  }
+
+  Future<List<Map<String, dynamic>>> getCanceledOrdersByUser() async {
+    final db = await task8_db.instance.database;
+    return await db.query(
+      'Orders',
+      where: '$IsOrderCancelUser = ?',
+      whereArgs: [1],
+    );
+  }
+
+  Future<List<Map<String, dynamic>>> getMostUrgentOrders() async {
+    final db = await task8_db.instance.database;
+    return await db.query(
+      'Orders',
+      where: '$Notify_Seller = ?',
+      whereArgs: [1],
+    );
+  }
+
   Future<List<Map<String, dynamic>>> queryallSeller() async {
     try {
       Database db = await instance.database;
@@ -277,7 +379,27 @@ class task8_db {
     );
     return maps;
   }
-  //not used
+
+  Future<List<Map<String, dynamic>>> getOrdersByDate(String date) async {
+    Database db = await instance.database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      tableOrders,
+      where: '$OrderDate = ?',
+      whereArgs: [date],
+    );
+    return maps;
+  }
+
+  Future<List<Map<String, dynamic>>> getOrdersByOrderId(int orderId) async {
+    Database db = await instance.database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      tableOrders,
+      where: '$OrderId = ?',
+      whereArgs: [orderId],
+    );
+    return maps;
+  }
+
   Future<int> updateOrderApproval(int orderId, bool isApproved) async {
     Database db = await instance.database;
     try {
@@ -294,7 +416,7 @@ class task8_db {
       return -1;
     }
   }
-  //not used
+
   Future<int> deleteSpecificOrder(int orderId) async {
     Database db = await instance.database;
     try {
@@ -309,13 +431,47 @@ class task8_db {
     }
   }
 
-  Future<int> updateNotify_Seller(int orderId) async {
+  Future<int> updateNotifySeller(int orderId, bool notify) async {
+    final db = await instance.database;
+    try {
+      return await db.update(
+        tableOrders,
+        {
+          'Notify_Seller': notify ? 1 : 0,  // Correct field reference
+        },
+        where: '$OrderId = ?',  // Make sure $OrderId is properly defined
+        whereArgs: [orderId],
+      );
+    } catch (e) {
+      print('Error updating Notify_Seller: $e');
+      return -1;
+    }
+  }
+
+  Future<int> updateReceived(int orderId, bool received) async {
+    final db = await instance.database;
+    try {
+      return await db.update(
+        tableOrders,
+        {
+          'Received_ByUser': received ? 1 : 0,
+        },
+        where: '$OrderId = ?',
+        whereArgs: [orderId],
+      );
+    } catch (e) {
+      print('Error updating Notify_Seller: $e');
+      return -1;
+    }
+  }
+
+  Future<int> updateOrderCancelUser(int orderId, bool update) async {
     Database db = await instance.database;
     try {
       return await db.update(
         tableOrders,
         {
-          Notify_Seller: 1,
+          IsOrderCancelUser: update ? 1 : 0,
         },
         where: '$OrderId = ?',
         whereArgs: [orderId],
@@ -326,13 +482,30 @@ class task8_db {
     }
   }
 
-  Future<int> updateOrderStatus(int orderId) async {
+  Future<int> updateOrderCancelSeller(int orderId, bool update) async {
     Database db = await instance.database;
     try {
       return await db.update(
         tableOrders,
         {
-          IsOrderCancel: 1,
+          IsOrderCancelSeller: update ? 1 : 0,
+        },
+        where: '$OrderId = ?',
+        whereArgs: [orderId],
+      );
+    } catch (e) {
+      print('Error updating order approval: $e');
+      return -1;
+    }
+  }
+
+  Future<int> updateCompleted(int orderId, bool isCompleted) async {
+    Database db = await instance.database;
+    try {
+      return await db.update(
+        tableOrders,
+        {
+          OrderIsCompleted: isCompleted ? 1 : 0,
         },
         where: '$OrderId = ?',
         whereArgs: [orderId],

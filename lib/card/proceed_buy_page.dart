@@ -443,12 +443,12 @@ class _BuyPageState extends State<BuyPage> {
                         );
                       }
                       else if(_selectedItems[10] == true){
-                        await dbhelper.insertOrder(u_id!,processedItems,false, false,TotalPrice);
                         showProcessingDialogCaseOnDelevery(context);
+                        await dbhelper.insertOrder(u_id!,processedItems,false, false,TotalPrice,selectedAddress!,false);
                       }
                       else {
-                        await dbhelper.insertOrder(u_id!,processedItems,false, false,TotalPrice);
                         showProcessingDialog(context);
+                        await dbhelper.insertOrder(u_id!,processedItems,false, false,TotalPrice,selectedAddress!,true);
                       }
                     },
                     child: Text('Pay'),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import '../task8_helper/task8_db_helper.dart';
-import 'package:intl/intl.dart';
+import 'package:rudra_grocery_store09/task8_helper/task8_db_helper.dart';
 
 class OrdersPage extends StatefulWidget {
   final int userId;
@@ -54,8 +53,6 @@ class _OrdersPageState extends State<OrdersPage> {
 
                 // Ensure date parsing
                 final dateString = order['date'] as String;
-                final date = DateTime.parse(dateString);
-                final formattedDate = DateFormat('yyyy-MM-dd').format(date);
 
                 return Container(
                   margin: EdgeInsets.all(8.0),
@@ -83,17 +80,35 @@ class _OrdersPageState extends State<OrdersPage> {
                               height: 30,
                               width: 100,
                               decoration: BoxDecoration(
-                                color: order['IsOrder_Cancel'] == 1 ? Colors.red : order['OrderIsApproved'] == 1 ? Colors.greenAccent : Colors.orange,
+                                color: order['IsOrder_Cancel'] == 1 || order['IsOrder_Cancel_User'] == 1
+                                    ? Colors.red
+                                    : order['Received_ByUser'] == 1 && order['is_completed'] == 1
+                                    ? Colors.black
+                                    :order['is_completed'] == 1
+                                    ? Colors.green
+                                    :order['is_approved'] == 1
+                                    ? Colors.green
+                                    : Colors.orange,
                                 borderRadius: BorderRadius.circular(20)
                               ),
                               child: Center(
                                 child: Text(
-                                  order['IsOrder_Cancel'] == 1 ? 'Canceled' : order['OrderIsApproved'] == 1 ? 'Approved' : 'Pending...',
+                                  order['IsOrder_Cancel'] == 1
+                                  ? 'SellerCanceled'
+                                  : order['IsOrder_Cancel_User'] == 1
+                                  ? 'UserCanceled'
+                                  : order['Received_ByUser'] == 1 && order['is_completed'] == 1
+                                  ? 'Completed'
+                                  :order['is_completed'] == 1
+                                  ? 'Delivered'
+                                  : order['is_approved'] == 1
+                                  ? 'Approved'
+                                  : 'Pending...',
                                   style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ),
-                            Text('Date: $formattedDate'),
+                            Text('Date: $dateString'),
                           ],
                         ),
 
@@ -119,21 +134,20 @@ class _OrdersPageState extends State<OrdersPage> {
                               trailing: Text('Price: ${detail['price'] ?? 'No price'}'),
                             );
                           }).toList(),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Container(
                             width: MediaQuery.of(context).size.width,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                if (order['is_approved'] == 0 && order['IsOrder_Cancel'] == 0) ...[
+                                if (order['is_approved'] == 0 && order['IsOrder_Cancel'] == 0 && order['IsOrder_Cancel_User'] == 0 && (order['is_completed'] == 0 && order['Received_ByUser'] == 0)) ...[
                                   ElevatedButton(
                                       onPressed: ()async {
                                         if(order['Notify_Seller']==0){
-                                          await task8_db.instance.updateNotify_Seller(order['order_id']);
+                                          await task8_db.instance.updateNotifySeller(order['order_id'],true);
                                           _refreshOrders();
                                         }
                                       },
-                                      child: Text('Notify Seller'),
                                       style: ButtonStyle(
                                         backgroundColor: MaterialStateProperty.resolveWith<Color?>(
                                               (states) {
@@ -141,12 +155,31 @@ class _OrdersPageState extends State<OrdersPage> {
                                           },
                                         ),
                                       ),
+                                      child: const Text('Notify Seller'),
                                   ),
                                   ElevatedButton(onPressed: () async {
-                                    await task8_db.instance.updateOrderStatus(order['order_id']);
+                                    await task8_db.instance.updateOrderCancelUser(order['order_id'],true);
                                     _refreshOrders();
-                                  }, child: Text('Cancel Order')),
-                                ],
+                                  }, child: const Text('Cancel Order')),
+                                ]
+                                else if(order['is_completed'] == 1 && order['Received_ByUser'] == 0) ...[
+                                  ElevatedButton(
+                                    onPressed: ()async {
+                                      if(order['Received_ByUser']==0){
+                                        await task8_db.instance.updateReceived(order['order_id'],true);
+                                        _refreshOrders();
+                                      }
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                                            (states) {
+                                          return order['Received_ByUser'] == 1 ? Colors.green : null;
+                                        },
+                                      ),
+                                    ),
+                                    child: const Text('Received'),
+                                  ),
+                                ]
                               ],
                             ),
                           ),
