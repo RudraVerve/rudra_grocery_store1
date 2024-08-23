@@ -1080,13 +1080,13 @@ class data {
   final List<Map<String, dynamic>> mostSelling = [
     {
       'image': 'assets/image/smartwatch.jpg',
-      'title': 'smartwa..',
+      'title': 'smartWatch',
       'rating': 4.5,
       'price': 80
     },
     {
       'image': 'assets/image/botEarbood.webp',
-      'title': 'Earbod',
+      'title': 'Earbud',
       'rating': 4.5,
       'price': 50
     },
@@ -1104,7 +1104,7 @@ class data {
     },
     {
       'image': 'assets/image/musicplayer.jpg',
-      'title': 'MusicPl..',
+      'title': 'MusicPlayer',
       'rating': 4.0,
       'price': 70
     },

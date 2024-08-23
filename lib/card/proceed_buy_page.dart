@@ -334,11 +334,11 @@ class _BuyPageState extends State<BuyPage> {
                               Row(
                                 children: [
                                   Icon(Icons.offline_bolt),
-                                  SizedBox(width: 15),
+                                  SizedBox(width: 10),
                                   Text(
-                                    'Next Gen Plus Coins',
+                                    'NextGen Coins',
                                     style: TextStyle(
-                                      fontSize: 17,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'LibreBaskerville',
                                     ),
@@ -369,11 +369,11 @@ class _BuyPageState extends State<BuyPage> {
                               Row(
                                 children: [
                                   Icon(Icons.money),
-                                  SizedBox(width: 15),
+                                  SizedBox(width: 10),
                                   Text(
-                                    'Case On Delivery',
+                                    'CaseOn Delivery',
                                     style: TextStyle(
-                                      fontSize: 17,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'LibreBaskerville',
                                     ),
@@ -404,11 +404,11 @@ class _BuyPageState extends State<BuyPage> {
                               Row(
                                 children: [
                                   Icon(Icons.comment_bank),
-                                  SizedBox(width: 15),
+                                  SizedBox(width: 10),
                                   Text(
-                                    'Pay Through EMI',
+                                    'Pay Using EMI',
                                     style: TextStyle(
-                                      fontSize: 17,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'LibreBaskerville',
                                     ),
