@@ -6,6 +6,7 @@ import '../task8_helper/task8_db_helper.dart';
 import 'package:flutter/material.dart';
 import '../main.dart';
 import '../task8_helper/login_page.dart';
+import 'Help_center.dart';
 
 class MyAccount extends StatefulWidget {
   final String additionalString;
@@ -499,37 +500,47 @@ class _MyAccountState extends State<MyAccount> {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: 50,
-                          width: 150,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                              color: Colors.black, // Border color
-                              width: 1.0, // Border width
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset:
-                                    const Offset(0, 3), // changes position of shadow
+                        child: InkWell(
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HelpCenterpage(),
                               ),
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              const Icon(Icons.call, color: Colors.blue),
-                              const Text(
-                                'Help Center',
-                                style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'PlaywriteMX'),
-                              )
-                            ],
+                            );
+                          },
+                          child: Container(
+                            height: 50,
+                            width: 150,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: Colors.black, // Border color
+                                width: 1.0, // Border width
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset:
+                                      const Offset(0, 3), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                const Icon(Icons.call, color: Colors.blue),
+                                const Text(
+                                  'Help Center',
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'PlaywriteMX'),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
