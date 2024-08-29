@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'WishList/wishListPage.dart';
 import 'app_open_page.dart';
-import 'card/cardPage.dart';
 import 'homePage/homePage.dart';
 import 'my_account/my_account_page.dart';
 import 'task8_helper/login_page.dart';
@@ -9,10 +9,7 @@ import 'task8_helper/login_page.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-  runApp(MaterialApp(
-    home: SplashScreen(),
-    debugShowCheckedModeBanner: false,
-  ));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -24,11 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(
-        title: 'Home Page',
-        additionalString: '',
-        login: false,
-      ),
+      home: SplashScreen(),
     );
   }
 }
@@ -58,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     if (index == 2 && !widget.login) {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => Login(),
@@ -87,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               child: const Text('Login'),
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (context) => Login(),
@@ -113,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           const BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
-            label: 'Card',
+            label: 'WishList',
           ),
           widget.login
               ? const BottomNavigationBarItem(
@@ -135,10 +128,10 @@ class _MyHomePageState extends State<MyHomePage> {
               ? HomePage(additionalString: widget.additionalString)
               : selectedIndex == 1
                   ? widget.login
-                      ? card_page(additionalString: widget.additionalString)
+                      ? wishListPage(additionalString: widget.additionalString)
                       : const Center(
                           child: Text(
-                          'First You Have To Log In\n        To See The Card',
+                          'First You Have To Log In\n        To See The WishList',
                           style: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,

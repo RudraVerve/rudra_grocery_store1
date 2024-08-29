@@ -102,7 +102,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                   :order['is_completed'] == 1
                                   ? 'Delivered'
                                   : order['is_approved'] == 1
-                                  ? 'Approved'
+                                  ? 'In process...'
                                   : 'Pending...',
                                   style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
                                 ),

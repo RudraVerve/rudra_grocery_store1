@@ -15,7 +15,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
   final List<Map<String, dynamic>> orderCategory = [
     {'color': Colors.purple, 'text': 'All Ordered'},
     {'color': Colors.orange, 'text': 'Pending'},
-    {'color': Colors.green, 'text': 'Approved'},
+    {'color': Colors.green, 'text': 'In process...'},
     {'color': Colors.blue, 'text': 'Delivered'},
     {'color': Colors.red, 'text': 'Canceled\nBy Seller'},
     {'color': Colors.brown, 'text': 'Most Urgent'},
@@ -334,7 +334,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
                                               :order['is_completed'] == 1
                                               ? 'Delivered'
                                               : order['is_approved'] == 1
-                                              ? 'Approved'
+                                              ? 'In process...'
                                               : 'Pending...',
                                           style: const TextStyle(
                                               color: Colors.white,

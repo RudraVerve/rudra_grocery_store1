@@ -17,26 +17,26 @@ class Item_category extends StatefulWidget {
 }
 
 class _Item_categoryState extends State<Item_category> {
-  // Maintain a list of items in the cart
-  List<Map<String, dynamic>> _cartItems = [];
+  // Maintain a list of items in the Wishlist
+  List<Map<String, dynamic>> _wishListItems = [];
 
-  // Function to add/remove an item to/from the cart
-  void _toggleCartItem(Map<String, dynamic> item) {
-    // Check if the item is already in the cart
-    if (_cartItems.contains(item)) {
-      // Remove the item from the cart
+  // Function to add/remove an item to/from the wishlist
+  void _toggleWishListItem(Map<String, dynamic> item) {
+    // Check if the item is already in the wishlist
+    if (_wishListItems.contains(item)) {
+      // Remove the item from the wishlist
       setState(() {
-        _cartItems.remove(item);
+        _wishListItems.remove(item);
       });
     } else {
-      // Add the item to the cart
+      // Add the item to the wishlist
       setState(() {
-        _cartItems.add(item);
+        _wishListItems.add(item);
       });
     }
   }
 
-  // Function to submit the cart items
+  // Function to submit the wishlist items
   final dbhelper = task8_db.instance;
   List<Map<String, dynamic>> userItems = [];
   List<Map<String, dynamic>> items2 = [];
@@ -52,7 +52,7 @@ class _Item_categoryState extends State<Item_category> {
     }
   }
 
-  Future<void> _submitCart() async {
+  Future<void> _submitWishList() async {
     // Fetch the current user
     await _fetchUserItems(widget.additionalString);
 
@@ -61,7 +61,7 @@ class _Item_categoryState extends State<Item_category> {
       items2 = List<Map<String, dynamic>>.from(json.decode(itemList));
     }
 
-    List<Map<String, dynamic>> mergedItems = _mergeItems(_cartItems, items2);
+    List<Map<String, dynamic>> mergedItems = _mergeItems(_wishListItems, items2);
 
     try {
       await dbhelper.updateSpecificUserItems(
@@ -72,7 +72,7 @@ class _Item_categoryState extends State<Item_category> {
     }
 
     setState(() {
-      _cartItems.clear();
+      _wishListItems.clear();
     });
   }
 
@@ -97,16 +97,16 @@ class _Item_categoryState extends State<Item_category> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Login Required'),
-          content: Text('Please login to add items to the cart.'),
+          title: const Text('Login Required'),
+          content: const Text('Please login to add items to the WishList.'),
           actions: <Widget>[
             TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text('Cancel')),
+                child: const Text('Cancel')),
             ElevatedButton(
-              child: Text('Login'),
+              child: const Text('Login'),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -134,9 +134,9 @@ class _Item_categoryState extends State<Item_category> {
         itemBuilder: (context, index) {
           final item = widget.items[index];
           return Container(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               border: Border(
                 bottom: BorderSide(
                   color: Colors.black,
@@ -171,7 +171,7 @@ class _Item_categoryState extends State<Item_category> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           item['title'],
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -205,28 +205,28 @@ class _Item_categoryState extends State<Item_category> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 4.0),
+                    const SizedBox(height: 4.0),
                     Text(
                       '\$${item['price'].toStringAsFixed(2)}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
                       ),
                     ),
-                    SizedBox(height: 8.0),
+                    const SizedBox(height: 8.0),
                     ElevatedButton(
                       onPressed: widget.additionalString.isEmpty
                           ? _showLoginDialog
-                          : () => _toggleCartItem(item),
-                      child: Text(_cartItems.contains(item)
-                          ? '   Remove   '
-                          : 'Add to Cart'),
+                          : () => _toggleWishListItem(item),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: _cartItems.contains(item)
+                        backgroundColor: _wishListItems.contains(item)
                             ? Colors.green
                             : Colors.blue,
                       ),
+                      child: Text(_wishListItems.contains(item)
+                          ? '   Remove   '
+                          : 'Add to WishList'),
                     ),
                   ],
                 ),
@@ -235,11 +235,11 @@ class _Item_categoryState extends State<Item_category> {
           );
         },
       ),
-      // Show the FloatingActionButton only if the cart is not empty
-      floatingActionButton: _cartItems.isNotEmpty
+      // Show the FloatingActionButton only if the wishlist is not empty
+      floatingActionButton: _wishListItems.isNotEmpty
           ? FloatingActionButton(
-              onPressed: _submitCart,
-              child: Icon(Icons.check),
+              onPressed: _submitWishList,
+              child: const Icon(Icons.check),
             )
           : null,
     );

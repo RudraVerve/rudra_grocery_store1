@@ -81,7 +81,7 @@ class _Login extends State<Login> {
       dialogWarning('User Is Not Exist');
     } else {
       if (user[0]["Password"] == passWord.text) {
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => MyHomePage(

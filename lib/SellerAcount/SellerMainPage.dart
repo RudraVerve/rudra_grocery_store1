@@ -24,25 +24,25 @@ class _SellerMainPageState extends State<SellerMainPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          const BottomNavigationBarItem(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
             label: 'Seller Account',
           )
         ],
         currentIndex: selectedIndex,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.purple,
+        selectedItemColor: Colors.redAccent,
+        unselectedItemColor: Colors.black,
         onTap: _onItemTapped,
         backgroundColor: Colors.lightGreenAccent,
       ),
       body: Container(
           child: selectedIndex == 0
-              ? SellerHomePage()
+              ? const SellerHomePage()
               : Padding(
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
@@ -69,13 +69,13 @@ class _SellerMainPageState extends State<SellerMainPage> {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 5,
-                      offset: Offset(0, 3), // changes position of shadow
+                      offset: const Offset(0, 3), // changes position of shadow
                     ),
                   ],
                 ),
-                child: Center(
+                child: const Center(
                   child: Text(
-                    'Log In With Another Acount',
+                    'Log In With Another Account',
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

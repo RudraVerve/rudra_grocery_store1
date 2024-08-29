@@ -35,7 +35,11 @@ class _SplashScreenState extends State<SplashScreen>
     await Future.delayed(Duration(seconds: 4)); // Simulate a delay
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => MyApp()),
+      MaterialPageRoute(builder: (context) => MyHomePage(
+        title: 'Home Page',
+        additionalString: '',
+        login: false,
+      )),
     );
   }
 

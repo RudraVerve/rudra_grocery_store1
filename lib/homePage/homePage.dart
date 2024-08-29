@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      onDoubleTap: () {
+                      onTap: () {
                         if (index == 0) {
                           Navigator.push(
                             context,

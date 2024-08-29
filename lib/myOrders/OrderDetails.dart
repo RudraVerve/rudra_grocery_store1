@@ -116,7 +116,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                     :order['is_completed'] == 1
                                     ? 'Delivered'
                                     : order['is_approved'] == 1
-                                    ? 'Approved'
+                                    ? 'In process...'
                                     : 'Pending...',
                                 style: const TextStyle(
                                     color: Colors.white,
@@ -159,7 +159,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         title: Text(
                             'Quantity: ${detail['quantity'] ?? 'No quantity'}'),
                         trailing: Text(
-                            'Price: ${detail['price'] ?? 'No price'}'),
+                            'Price per unit: ${detail['price'] ?? 'No price'}'),
                         subtitle: Text(detail['data']),
                       );
                     }).toList()
@@ -204,7 +204,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     ElevatedButton(
                       onPressed: ()async{
                         await task8_db.instance.updateOrderApproval(order['order_id'],true);
-                        await task8_db.instance.updateNotifySeller(order['order_id'],false);
+                        // await task8_db.instance.updateNotifySeller(order['order_id'],false);
                         await task8_db.instance.updateOrderCancelSeller(order['order_id'],false);
                         await task8_db.instance.updateCompleted(order['order_id'],false);
                         _refreshOrders();
@@ -212,7 +212,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
                       ),
-                      child: const Text('Approve'),
+                      child: const Text('In process'),
                     ),
                     ElevatedButton(
                       onPressed: () async {
@@ -231,7 +231,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         await task8_db.instance.updateCompleted(order['order_id'],true);
                         await task8_db.instance.updateOrderCancelSeller(order['order_id'],false);
                         await task8_db.instance.updateOrderApproval(order['order_id'],false);
-                        await task8_db.instance.updateNotifySeller(order['order_id'],false);
+                        // await task8_db.instance.updateNotifySeller(order['order_id'],false);
                         _refreshOrders();
                       },
                       child: Text('Delivered'),

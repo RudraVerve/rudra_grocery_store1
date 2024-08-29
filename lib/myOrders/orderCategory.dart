@@ -120,7 +120,7 @@ class _OrderCategoryState extends State<OrderCategory> {
                                           :order['is_completed'] == 1
                                           ? 'Delivered'
                                           : order['is_approved'] == 1
-                                          ? 'Approved'
+                                          ? 'In process...'
                                           : 'Pending...',
                                       style: const TextStyle(
                                           color: Colors.white,

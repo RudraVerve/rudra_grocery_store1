@@ -1,22 +1,21 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:rudra_grocery_store09/card/proceed_buy_page.dart';
+import 'package:rudra_grocery_store09/WishList/proceed_buy_page.dart';
 import '../task8_helper/task8_db_helper.dart';
 
-class card_page extends StatefulWidget {
+class wishListPage extends StatefulWidget {
   final String additionalString;
   bool showProceedMessage;
 
-  card_page(
-      {Key? key, this.additionalString = '', this.showProceedMessage = true})
+  wishListPage({Key? key, this.additionalString = '', this.showProceedMessage = true})
       : super(key: key);
 
   @override
-  _card_page createState() => _card_page();
+  _wishListPage createState() => _wishListPage();
 }
 
-class _card_page extends State<card_page> {
+class _wishListPage extends State<wishListPage> {
   final dbhelper = task8_db.instance;
   List<Map<String, dynamic>> items = []; // Fetched items as a string
   List<Map<String, dynamic>> items2 = []; // Updated items as a list
@@ -49,7 +48,6 @@ class _card_page extends State<card_page> {
   Future<void> update() async {
     try {
       await dbhelper.updateSpecificUserItems(widget.additionalString, items2);
-      print('Updated existing items');
     } catch (e) {
       print('Error updating items data: $e');
     }
@@ -76,6 +74,27 @@ class _card_page extends State<card_page> {
     return selectedItems.fold(0.0, (sum, item) => sum + item['price']);
   }
 
+  void deleteAlortDialog(item){
+    showDialog(context: context, builder: (BuildContext dialogContext){
+      return AlertDialog(
+        backgroundColor: Colors.lime,
+        title: Text('Alert'),
+        content: Text('Did you want to remove the item from the Wishlist'),
+        actions: [
+          TextButton(onPressed: (){
+            Navigator.of(dialogContext).pop();
+          }, child: Text('Cancel',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
+          TextButton(onPressed: (){
+            _toggleCartItem(item);
+            update();
+            querySpecificUserItems(widget.additionalString);
+            Navigator.of(dialogContext).pop();
+          }, child: Text('Remove',style: TextStyle(color: Colors.redAccent,fontWeight: FontWeight.bold),))
+        ],
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,9 +102,9 @@ class _card_page extends State<card_page> {
       body: Stack(
         children: [
           if (items2.isEmpty)
-            Center(
+            const Center(
               child: Text(
-                'No Selected Card Items',
+                'No Selected WishList Items',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
@@ -94,7 +113,7 @@ class _card_page extends State<card_page> {
             // Show 1 item for the message if items2 is empty
             itemBuilder: (context, index) {
               if (items2.isEmpty) {
-                return SizedBox(); // If items2 is empty, return an empty SizedBox
+                return const SizedBox(); // If items2 is empty, return an empty SizedBox
               }
               final item = items2[index];
               int count = 0;
@@ -104,9 +123,9 @@ class _card_page extends State<card_page> {
                 }
               }
               return Container(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(
                       color: Colors.black,
@@ -144,7 +163,7 @@ class _card_page extends State<card_page> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
                                   item['title'],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -169,7 +188,7 @@ class _card_page extends State<card_page> {
                           children: [
                             Text(
                               item['rating'].toString(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -182,7 +201,7 @@ class _card_page extends State<card_page> {
                                   : item['rating'] > 3
                                       ? Colors.orange
                                       : Colors.red,
-                              child: Center(
+                              child: const Center(
                                 child: Icon(
                                   Icons.star,
                                   color: Colors.white,
@@ -190,10 +209,10 @@ class _card_page extends State<card_page> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             Text(
                               '\$${item['price'].toStringAsFixed(2)}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.blue,
@@ -209,16 +228,14 @@ class _card_page extends State<card_page> {
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {
-                              _toggleCartItem(item);
-                              update();
-                              querySpecificUserItems(widget.additionalString);
+                              deleteAlortDialog(item);
                             },
-                            child: Text('Remove From Cart'),
+                            child: const Text('Remove From WishList'),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         selectedItems.contains(item)
-                            ? Container(
+                            ? SizedBox(
                                 height: 30,
                                 width: 120,
                                 child: Row(
@@ -232,23 +249,23 @@ class _card_page extends State<card_page> {
                                         setState(() {
                                           widget.showProceedMessage = true;
                                         });
-                                        Timer(Duration(seconds: 5), () {
+                                        Timer(const Duration(seconds: 5), () {
                                           setState(() {
                                             widget.showProceedMessage = false;
                                           });
                                         });
                                       },
-                                      icon: Icon(
+                                      icon: const Icon(
                                         Icons.remove,
                                         color: Colors.red,
                                         size: 20,
                                       ),
                                     ),
                                     Text(
-                                      '${count}',
+                                      '$count',
                                       textAlign: TextAlign.center,
                                       // Ensure text is centered
-                                      style: TextStyle(fontSize: 16),
+                                      style: const TextStyle(fontSize: 16),
                                     ),
                                     IconButton(
                                       onPressed: () {
@@ -257,13 +274,13 @@ class _card_page extends State<card_page> {
                                         setState(() {
                                           widget.showProceedMessage = true;
                                         });
-                                        Timer(Duration(seconds: 5), () {
+                                        Timer(const Duration(seconds: 5), () {
                                           setState(() {
                                             widget.showProceedMessage = false;
                                           });
                                         });
                                       },
-                                      icon: Icon(
+                                      icon: const Icon(
                                         Icons.add,
                                         color: Colors.deepPurpleAccent,
                                         size: 20,
@@ -279,13 +296,13 @@ class _card_page extends State<card_page> {
                                   setState(() {
                                     widget.showProceedMessage = true;
                                   });
-                                  Timer(Duration(seconds: 5), () {
+                                  Timer(const Duration(seconds: 5), () {
                                     setState(() {
                                       widget.showProceedMessage = false;
                                     });
                                   });
                                 },
-                                child: Text('Add TO Buy')),
+                                child: const Text('Add TO Cart')),
                       ],
                     )
                   ],
@@ -312,14 +329,14 @@ class _card_page extends State<card_page> {
                       children: [
                         Text(
                           'Total: \$${getTotalPrice().toStringAsFixed(2)}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
                           'Items: ${selectedItems.length}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
@@ -334,7 +351,7 @@ class _card_page extends State<card_page> {
                               ),
                             );
                           },
-                          child: Text('Proceed'),
+                          child: const Text('Go to Cart'),
                         ),
                       ],
                     ),
