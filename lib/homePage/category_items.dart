@@ -1,5 +1,7 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
+
 import '../task8_helper/login_page.dart';
 import '../task8_helper/task8_db_helper.dart';
 
@@ -61,7 +63,8 @@ class _Item_categoryState extends State<Item_category> {
       items2 = List<Map<String, dynamic>>.from(json.decode(itemList));
     }
 
-    List<Map<String, dynamic>> mergedItems = _mergeItems(_wishListItems, items2);
+    List<Map<String, dynamic>> mergedItems =
+        _mergeItems(_wishListItems, items2);
 
     try {
       await dbhelper.updateSpecificUserItems(
@@ -128,6 +131,7 @@ class _Item_categoryState extends State<Item_category> {
       backgroundColor: Colors.teal[100],
       appBar: AppBar(
         title: Text('Well Come ${widget.additionalString}'),
+        backgroundColor: Colors.teal,
       ),
       body: ListView.builder(
         itemCount: widget.items.length,
