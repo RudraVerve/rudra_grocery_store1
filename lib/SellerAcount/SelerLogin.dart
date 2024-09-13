@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../task8_helper/login_page.dart';
 import '../task8_helper/task8_db_helper.dart';
 import 'SellerMainPage.dart';
@@ -128,317 +129,319 @@ class _SellerLogin extends State<SellerLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Colors.greenAccent.withOpacity(0.8),
-                    Colors.cyan.withOpacity(0.8),
-                    Colors.orange.withOpacity(0.8),
-                  ],
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.greenAccent.withOpacity(0.8),
+                Colors.cyan.withOpacity(0.8),
+                Colors.orange.withOpacity(0.8),
+              ],
+            ),
+          ),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 35),
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage(
+                      show
+                          ? 'assets/image/openEye.jpg'
+                          : 'assets/image/closeEye.jpg',
+                    ),
+                    radius: 40,
+                  ),
                 ),
-              ),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(height: 35),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10),
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage(
-                          show
-                              ? 'assets/image/openEye.jpg'
-                              : 'assets/image/closeEye.jpg',
+                SizedBox(height: 5),
+                Text(
+                  'Login To NextGen',
+                  style: TextStyle(
+                      fontSize: 35,
+                      fontFamily: 'LibreBaskerville',
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  'Seller',
+                  style: TextStyle(
+                      fontSize: 35,
+                      fontFamily: 'PlaywriteMX',
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+                Container(
+                  width: 350,
+                  child: Column(
+                    children: [
+                      Form(
+                        key: _key,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                controller: mobile,
+                                keyboardType: TextInputType.text,
+                                decoration: InputDecoration(
+                                    hintText: 'Enter Mobile Number',
+                                    suffixIcon: Icon(Icons.account_circle),
+                                    filled: true,
+                                    fillColor: Colors.white.withOpacity(0.8),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        borderSide: BorderSide(
+                                            color: Colors.black, width: 2)),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        borderSide: BorderSide(
+                                          color: Colors.green,
+                                        ))),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: TextFormField(
+                                controller: passWord,
+                                validator: validationPass,
+                                keyboardType: TextInputType.text,
+                                obscureText: !show,
+                                decoration: InputDecoration(
+                                    hintText: 'Enter user Password',
+                                    suffixIcon: IconButton(
+                                      icon: Icon(show
+                                          ? Icons.visibility
+                                          : Icons.visibility_off),
+                                      onPressed: () {
+                                        togleShow();
+                                      },
+                                    ),
+                                    filled: true,
+                                    fillColor: Colors.white.withOpacity(0.8),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        borderSide: BorderSide(
+                                            color: Colors.black, width: 2)),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        borderSide: BorderSide(
+                                          color: Colors.green,
+                                        ))),
+                              ),
+                            ),
+                          ],
                         ),
-                        radius: 40,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: isChecked,
+                                onChanged: _toggleCheckbox,
+                                fillColor: MaterialStateProperty.resolveWith(
+                                    (Set<MaterialState> states) {
+                                  if (states.contains(MaterialState.selected)) {
+                                    return Colors.blue;
+                                  }
+                                  return Colors.white;
+                                }),
+                                checkColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4.0),
+                                  side: BorderSide(
+                                      color: Colors.white, width: 2.0),
+                                ),
+                              ),
+                              Text(
+                                'Remind me',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          ),
+                          TextButton(
+                            child: Text(
+                              'Forget Password',
+                              style: TextStyle(
+                                  fontSize: 17, fontWeight: FontWeight.w600),
+                            ),
+                            onPressed: () {
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => forgetPass(),
+                              //   ),
+                              // );
+                            },
+                          )
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                            onPressed: () {
+                              if (mobile.text.isEmpty &&
+                                  passWord.text.isEmpty) {
+                                _Dialog(
+                                    'You Have To Enter Ueser Id And Password');
+                              } else {
+                                _fachUser(mobile.text);
+                              }
+                            },
+                            child: Text('Login To Seller')),
+                      ),
+                    ],
+                  ),
+                ), //form container
+                SizedBox(height: 40),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Divider(
+                        color: Colors.black,
+                        thickness: 2,
+                        indent: 20,
+                        endIndent: 10, // Adjust to set spacing before the text
                       ),
                     ),
-                    SizedBox(height: 5),
-                    Text(
-                      'Login To NextGen',
-                      style: TextStyle(
-                          fontSize: 35,
-                          fontFamily: 'LibreBaskerville',
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      // Adjust spacing around text
+                      child: Text('or'),
                     ),
-                    SizedBox(height: 5),
-                    Text(
-                      'Seller',
-                      style: TextStyle(
-                          fontSize: 35,
-                          fontFamily: 'PlaywriteMX',
-                          color: Colors.black,fontWeight: FontWeight.bold),
+                    Expanded(
+                      child: Divider(
+                        color: Colors.black,
+                        thickness: 2,
+                        indent: 10, // Adjust to set spacing after the text
+                        endIndent: 20,
+                      ),
                     ),
-                    Container(
-                      width: 350,
-                      child: Column(
+                  ],
+                ), //divider row
+                Expanded(
+                  child: Container(
+                    color: Colors.transparent,
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Form(
-                            key: _key,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: mobile,
-                                    keyboardType: TextInputType.text,
-                                    decoration: InputDecoration(
-                                        hintText: 'Enter Mobile Number',
-                                        suffixIcon: Icon(Icons.account_circle),
-                                        filled: true,
-                                        fillColor: Colors.white.withOpacity(0.8),
-                                        border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(20),
-                                            borderSide: BorderSide(
-                                                color: Colors.black, width: 2)),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(20),
-                                            borderSide: BorderSide(
-                                              color: Colors.green,
-                                            ))),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: passWord,
-                                    validator: validationPass,
-                                    keyboardType: TextInputType.text,
-                                    obscureText: !show,
-                                    decoration: InputDecoration(
-                                        hintText: 'Enter user Password',
-                                        suffixIcon: IconButton(
-                                          icon: Icon(show
-                                              ? Icons.visibility
-                                              : Icons.visibility_off),
-                                          onPressed: () {
-                                            togleShow();
-                                          },
-                                        ),
-                                        filled: true,
-                                        fillColor: Colors.white.withOpacity(0.8),
-                                        border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(20),
-                                            borderSide: BorderSide(
-                                                color: Colors.black, width: 2)),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(20),
-                                            borderSide: BorderSide(
-                                              color: Colors.green,
-                                            ))),
-                                  ),
-                                ),
-                              ],
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CircleAvatar(
+                              backgroundImage:
+                                  AssetImage('assets/image/facebook.png'),
+                              radius: 20,
                             ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Checkbox(
-                                    value: isChecked,
-                                    onChanged: _toggleCheckbox,
-                                    fillColor: MaterialStateProperty.resolveWith(
-                                            (Set<MaterialState> states) {
-                                          if (states.contains(MaterialState.selected)) {
-                                            return Colors.blue;
-                                          }
-                                          return Colors.white;
-                                        }),
-                                    checkColor: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4.0),
-                                      side: BorderSide(
-                                          color: Colors.white, width: 2.0),
-                                    ),
-                                  ),
-                                  Text(
-                                    'Remind me',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ],
-                              ),
-                              TextButton(
-                                child: Text(
-                                  'Forget Password',
-                                  style: TextStyle(
-                                      fontSize: 17, fontWeight: FontWeight.w600),
-                                ),
-                                onPressed: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) => forgetPass(),
-                                  //   ),
-                                  // );
-                                },
-                              )
-                            ],
                           ),
                           Padding(
                             padding: EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  if (mobile.text.isEmpty &&
-                                      passWord.text.isEmpty) {
-                                    _Dialog('You Have To Enter Ueser Id And Password');
-                                  } else {
-                                    _fachUser(mobile.text);
-                                  }
-                                },
-                                child: Text('Login To Seller')),
+                            child: CircleAvatar(
+                              backgroundImage:
+                                  AssetImage('assets/image/google.jpeg'),
+                              radius: 20,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CircleAvatar(
+                              backgroundImage:
+                                  AssetImage('assets/image/tut.png'),
+                              radius: 20,
+                            ),
                           ),
                         ],
                       ),
-                    ), //form container
-                    SizedBox(height: 40),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Divider(
-                            color: Colors.black,
-                            thickness: 2,
-                            indent: 20,
-                            endIndent: 10, // Adjust to set spacing before the text
-                          ),
+                    ),
+                  ),
+                ), //docial media files
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 16.0),
+                    child: RichText(
+                      text: TextSpan(
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.0),
-                          // Adjust spacing around text
-                          child: Text('or'),
-                        ),
-                        Expanded(
-                          child: Divider(
-                            color: Colors.black,
-                            thickness: 2,
-                            indent: 10, // Adjust to set spacing after the text
-                            endIndent: 20,
-                          ),
-                        ),
-                      ],
-                    ), //divider row
-                    Expanded(
-                      child: Container(
-                        color: Colors.transparent,
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: CircleAvatar(
-                                  backgroundImage:
-                                  AssetImage('assets/image/facebook.png'),
-                                  radius: 20,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: CircleAvatar(
-                                  backgroundImage:
-                                  AssetImage('assets/image/google.jpeg'),
-                                  radius: 20,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: CircleAvatar(
-                                  backgroundImage:
-                                  AssetImage('assets/image/tuit.png'),
-                                  radius: 20,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ), //docial media files
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 16.0),
-                        child: RichText(
-                          text: TextSpan(
+                        children: <TextSpan>[
+                          TextSpan(text: 'Not A Seller Yet? '),
+                          TextSpan(
+                            text: 'Create Seller Account',
                             style: TextStyle(
-                              fontSize: 15,
+                              color: Colors.purple,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
                             ),
-                            children: <TextSpan>[
-                              TextSpan(text: 'Not A Seller Yet? '),
-                              TextSpan(
-                                text: 'Create Seller Account',
-                                style: TextStyle(
-                                  color: Colors.purple,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => SellerSignUp(),
-                                      ),
-                                    );
-                                  },
-                              ),
-                            ],
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SellerSignUp(),
+                                  ),
+                                );
+                              },
                           ),
-                        ),
-                      ),
-                    ), //sign up
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                        padding: EdgeInsets.all(7.0),
-                        child: RichText(
-                          text: TextSpan(
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                            children: <TextSpan>[
-                              TextSpan(text: 'User Login? '),
-                              TextSpan(
-                                text: 'Login',
-                                style: TextStyle(
-                                  color: Colors.purple,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Login(),
-                                      ),
-                                    );
-                                  },
-                              ),
-                            ],
-                          ),
-                        ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
+                ), //sign up
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: EdgeInsets.all(7.0),
+                    child: RichText(
+                      text: TextSpan(
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(text: 'User Login? '),
+                          TextSpan(
+                            text: 'Login',
+                            style: TextStyle(
+                              color: Colors.purple,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Login(),
+                                  ),
+                                );
+                              },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ));
+          ),
+        ),
+      ],
+    ));
   }
 }

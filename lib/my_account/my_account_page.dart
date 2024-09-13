@@ -1,11 +1,14 @@
 import 'dart:convert';
+
+import 'package:flutter/material.dart';
+
 import '../Address/address_data.dart';
 import '../WishList/wishListPage.dart';
-import '../myOrders/orders.dart';
-import '../task8_helper/task8_db_helper.dart';
-import 'package:flutter/material.dart';
 import '../main.dart';
+import '../myOrders/orders.dart';
 import '../task8_helper/login_page.dart';
+import '../task8_helper/task8_db_helper.dart';
+import 'About_us_page.dart';
 import 'Help_center.dart';
 
 class MyAccount extends StatefulWidget {
@@ -18,7 +21,6 @@ class MyAccount extends StatefulWidget {
 }
 
 class _MyAccountState extends State<MyAccount> {
-
   @override
   void initState() {
     super.initState();
@@ -30,7 +32,6 @@ class _MyAccountState extends State<MyAccount> {
   Map<String, dynamic> address1 = {};
   Map<String, dynamic> address2 = {};
   Map<String, dynamic> address3 = {};
-
 
   void querySpecificUser(String id) async {
     user = await dbhelper.querySpacific(id);
@@ -189,7 +190,8 @@ class _MyAccountState extends State<MyAccount> {
                     postController.text.isNotEmpty &&
                     houseNameController.text.isNotEmpty &&
                     landmarkController.text.isNotEmpty) {
-                  await dbhelper.updateSpecificUserAddress(widget.additionalString, obj, no);
+                  await dbhelper.updateSpecificUserAddress(
+                      widget.additionalString, obj, no);
                 }
                 querySpecificUser(widget.additionalString);
               },
@@ -201,25 +203,30 @@ class _MyAccountState extends State<MyAccount> {
     );
   }
 
-  void _deleteDialog(int no){
+  void _deleteDialog(int no) {
     showDialog(
         context: context,
-        builder: (BuildContext dialogContext){
+        builder: (BuildContext dialogContext) {
           return AlertDialog(
             backgroundColor: Colors.redAccent,
             title: const Text('Warning'),
             content: const Text('Did You Want To Delete The Address'),
             actions: [
-              TextButton(onPressed: (){
-                Navigator.of(dialogContext).pop();
-              }, child: const Text('Cancel')),
-              TextButton(onPressed: ()async{
-                var obj1 = AddressData.namedConstructor();
-                Navigator.of(dialogContext).pop();
-                Navigator.of(dialogContext).pop();
-                await dbhelper.updateSpecificUserAddress(widget.additionalString, obj1, no);
-                querySpecificUser(widget.additionalString);
-              }, child: const Text('Delete'))
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(dialogContext).pop();
+                  },
+                  child: const Text('Cancel')),
+              TextButton(
+                  onPressed: () async {
+                    var obj1 = AddressData.namedConstructor();
+                    Navigator.of(dialogContext).pop();
+                    Navigator.of(dialogContext).pop();
+                    await dbhelper.updateSpecificUserAddress(
+                        widget.additionalString, obj1, no);
+                    querySpecificUser(widget.additionalString);
+                  },
+                  child: const Text('Delete'))
             ],
           );
         });
@@ -241,109 +248,148 @@ class _MyAccountState extends State<MyAccount> {
               padding: const EdgeInsets.all(8.0),
               child: address['name'] == null
                   ? Center(
-                child: Text(
-                  '${addNo} is not saved',
-                  style: const TextStyle(
-                    fontFamily: 'LibreBaskerville',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  ),
-                ),
-              )
+                      child: Text(
+                        '${addNo} is not saved',
+                        style: const TextStyle(
+                          fontFamily: 'LibreBaskerville',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                    )
                   : Center(
-                    child: Text(
-                      'Name: ${address['name']}',
-                      style: const TextStyle(
-                        fontFamily: 'LibreBaskerville',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17,
+                      child: Text(
+                        'Name: ${address['name']}',
+                        style: const TextStyle(
+                          fontFamily: 'LibreBaskerville',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
                       ),
                     ),
-                  ),
             ),
             address['name'] == null
                 ? Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: ElevatedButton(
-                  onPressed: () {
-                    _dialog('Add Address', 'Add', no);
-                  },
-                  child: const Text('Add'),
-                ),
-              ),
-            )
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          _dialog('Add Address', 'Add', no);
+                        },
+                        child: const Text('Add'),
+                      ),
+                    ),
+                  )
                 : Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: ElevatedButton(
-                    onPressed: (){
-                      _deleteDialog(no);
-                    },
-                    child: const Text('Delete'),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _deleteDialog(no);
+                          },
+                          child: const Text('Delete'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _dialog('Edit Address', 'Edit', no);
+                          },
+                          child: const Text('Edit'),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      _dialog('Edit Address', 'Edit', no);
-                    },
-                    child: const Text('Edit'),
-                  ),
-                ),
-              ],
-            ),
           ],
         ),
       ),
     );
   }
 
-  void addressDialog(){
-    showDialog(context: context, builder: (BuildContext dialogContext){
-      return AlertDialog(
-        title: const Text('Addresses'),
-        content: SingleChildScrollView(
-          child: Column(
-            children: [
-              addressWidget(address1, 1, 'Address 1'),
-              addressWidget(address2, 2,'Address 2'),
-              addressWidget(address3, 3,'Address 3'),
+  void addressDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext dialogContext) {
+          return AlertDialog(
+            title: const Text('Addresses'),
+            content: SingleChildScrollView(
+              child: Column(
+                children: [
+                  addressWidget(address1, 1, 'Address 1'),
+                  addressWidget(address2, 2, 'Address 2'),
+                  addressWidget(address3, 3, 'Address 3'),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(dialogContext).pop();
+                  },
+                  child: const Text('Cancel'))
             ],
-          ),
-        ),
-        actions: [
-          TextButton(onPressed: (){
-            Navigator.of(dialogContext).pop();
-          }, child: const Text('Cancel'))
-        ],
-      );
-    });
+          );
+        });
   }
 
-  void notAvailableDialog(){
-    showDialog(context: context, builder:(BuildContext buildCondtext){
-      return AlertDialog(
-        backgroundColor: Colors.greenAccent,
-        title: const Text('Alert'),
-        content: const Text('This Content is not available yet plz use other functionality'),
-        actions: [
-          TextButton(onPressed: (){
-            Navigator.of(buildCondtext).pop();
-          }, child: const Text('Cancel'))
-        ],
-      );
-    });
+  void notAvailableDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext buildCondtext) {
+          return AlertDialog(
+            backgroundColor: Colors.greenAccent,
+            title: const Text('Alert'),
+            content: const Text(
+                'This Content is not available yet plz use other functionality'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(buildCondtext).pop();
+                  },
+                  child: const Text('Cancel'))
+            ],
+          );
+        });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 9.0, top: 4),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NextGenDescriptionPage(),
+                  ),
+                );
+              },
+              child: Column(
+                children: [
+                  ClipOval(
+                    child: SizedBox(
+                      width: 45,
+                      height: 35,
+                      child: Image.asset(
+                        'assets/image/about_us.png',
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                  Text('About Us')
+                ],
+              ),
+            ),
+          )
+        ],
         title: Text(widget.additionalString),
         backgroundColor: Colors.teal[100],
         foregroundColor: Colors.black,
@@ -365,7 +411,7 @@ class _MyAccountState extends State<MyAccount> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: InkWell(
-                          onTap: (){
+                          onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -388,15 +434,16 @@ class _MyAccountState extends State<MyAccount> {
                                   color: Colors.grey.withOpacity(0.5),
                                   spreadRadius: 2,
                                   blurRadius: 5,
-                                  offset:
-                                      const Offset(0, 3), // changes position of shadow
+                                  offset: const Offset(
+                                      0, 3), // changes position of shadow
                                 ),
                               ],
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                const Icon(Icons.shopping_bag, color: Colors.blue),
+                                const Icon(Icons.shopping_bag,
+                                    color: Colors.blue),
                                 const Text(
                                   'Orders',
                                   style: TextStyle(
@@ -412,12 +459,12 @@ class _MyAccountState extends State<MyAccount> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: InkWell(
-                          onTap: (){
+                          onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    wishListPage(additionalString: widget.additionalString),
+                                builder: (context) => wishListPage(
+                                    additionalString: widget.additionalString),
                               ),
                             );
                           },
@@ -435,8 +482,8 @@ class _MyAccountState extends State<MyAccount> {
                                   color: Colors.grey.withOpacity(0.5),
                                   spreadRadius: 2,
                                   blurRadius: 5,
-                                  offset:
-                                      const Offset(0, 3), // changes position of shadow
+                                  offset: const Offset(
+                                      0, 3), // changes position of shadow
                                 ),
                               ],
                             ),
@@ -477,8 +524,8 @@ class _MyAccountState extends State<MyAccount> {
                                 color: Colors.grey.withOpacity(0.5),
                                 spreadRadius: 2,
                                 blurRadius: 5,
-                                offset:
-                                    const Offset(0, 3), // changes position of shadow
+                                offset: const Offset(
+                                    0, 3), // changes position of shadow
                               ),
                             ],
                           ),
@@ -501,7 +548,7 @@ class _MyAccountState extends State<MyAccount> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: InkWell(
-                          onTap: (){
+                          onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -523,15 +570,16 @@ class _MyAccountState extends State<MyAccount> {
                                   color: Colors.grey.withOpacity(0.5),
                                   spreadRadius: 2,
                                   blurRadius: 5,
-                                  offset:
-                                      const Offset(0, 3), // changes position of shadow
+                                  offset: const Offset(
+                                      0, 3), // changes position of shadow
                                 ),
                               ],
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                const Icon(Icons.call, color: Colors.blue),
+                                const Icon(Icons.headset_mic_outlined,
+                                    color: Colors.blue),
                                 const Text(
                                   'Help Center',
                                   style: TextStyle(
@@ -660,7 +708,7 @@ class _MyAccountState extends State<MyAccount> {
               child: Container(
                 margin: const EdgeInsets.all(8),
                 child: InkWell(
-                  onTap: (){
+                  onTap: () {
                     //in process
                     addressDialog();
                   },
@@ -767,7 +815,8 @@ class _MyAccountState extends State<MyAccount> {
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 2,
                             blurRadius: 5,
-                            offset: const Offset(0, 3), // changes position of shadow
+                            offset: const Offset(
+                                0, 3), // changes position of shadow
                           ),
                         ],
                       ),
@@ -777,7 +826,8 @@ class _MyAccountState extends State<MyAccount> {
                           const Text('Refer & Earn',
                               style: TextStyle(
                                   fontSize: 15, fontWeight: FontWeight.bold)),
-                          IconButton(onPressed: () {}, icon: const Icon(Icons.share))
+                          IconButton(
+                              onPressed: () {}, icon: const Icon(Icons.share))
                         ],
                       ),
                     ),
@@ -799,7 +849,8 @@ class _MyAccountState extends State<MyAccount> {
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 2,
                             blurRadius: 5,
-                            offset: const Offset(0, 3), // changes position of shadow
+                            offset: const Offset(
+                                0, 3), // changes position of shadow
                           ),
                         ],
                       ),
@@ -848,7 +899,8 @@ class _MyAccountState extends State<MyAccount> {
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 2,
                         blurRadius: 5,
-                        offset: const Offset(0, 3), // changes position of shadow
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
@@ -895,7 +947,8 @@ class _MyAccountState extends State<MyAccount> {
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 2,
                         blurRadius: 5,
-                        offset: const Offset(0, 3), // changes position of shadow
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),

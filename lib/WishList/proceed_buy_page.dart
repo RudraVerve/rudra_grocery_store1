@@ -1,14 +1,17 @@
 import 'dart:convert';
-import '../Address/address_data.dart';
-import '../task8_helper/task8_db_helper.dart';
+
 import 'package:flutter/material.dart';
+
+import '../Address/address_data.dart';
 import '../main.dart';
+import '../task8_helper/task8_db_helper.dart';
 
 class BuyPage extends StatefulWidget {
   final List<Map<String, dynamic>> items;
   final String additionalString;
 
-  const BuyPage({super.key, required this.items, required this.additionalString});
+  const BuyPage(
+      {super.key, required this.items, required this.additionalString});
 
   @override
   State<BuyPage> createState() => _BuyPageState();
@@ -106,6 +109,7 @@ class _BuyPageState extends State<BuyPage> {
                 _selectedItems[index] = true; // Select the tapped item
               });
             }
+
             bool _isAnyItemSelected() {
               return _selectedItems.values.any((selected) => selected);
             }
@@ -433,22 +437,23 @@ class _BuyPageState extends State<BuyPage> {
                 ),
                 if (_isAnyItemSelected())
                   ElevatedButton(
-                    onPressed: () async{
-                      if (_selectedItems[9] == true || _selectedItems[11] == true) {
+                    onPressed: () async {
+                      if (_selectedItems[9] == true ||
+                          _selectedItems[11] == true) {
                         _notAvalable();
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                               content:
                                   Text('Payment Methord Not Avalable Yat...')),
                         );
-                      }
-                      else if(_selectedItems[10] == true){
+                      } else if (_selectedItems[10] == true) {
                         showProcessingDialogCaseOnDelevery(context);
-                        await dbhelper.insertOrder(u_id!,processedItems,false, false,TotalPrice,selectedAddress!,false);
-                      }
-                      else {
+                        await dbhelper.insertOrder(u_id!, processedItems, false,
+                            false, TotalPrice, selectedAddress!, false);
+                      } else {
                         showProcessingDialog(context);
-                        await dbhelper.insertOrder(u_id!,processedItems,false, false,TotalPrice,selectedAddress!,true);
+                        await dbhelper.insertOrder(u_id!, processedItems, false,
+                            false, TotalPrice, selectedAddress!, true);
                       }
                     },
                     child: Text('Pay'),
@@ -567,7 +572,8 @@ class _BuyPageState extends State<BuyPage> {
                       Navigator.of(context).pop(); // Close the next dialog
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MyHomePage(
+                        MaterialPageRoute(
+                          builder: (context) => MyHomePage(
                             title: 'Home Page',
                             additionalString: widget.additionalString,
                             login: true,
@@ -684,11 +690,12 @@ class _BuyPageState extends State<BuyPage> {
                       Navigator.of(context).pop(); // Close the next dialog
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MyHomePage(
-                          title: 'Home Page',
-                          additionalString: widget.additionalString,
-                          login: true,
-                        ),
+                        MaterialPageRoute(
+                          builder: (context) => MyHomePage(
+                            title: 'Home Page',
+                            additionalString: widget.additionalString,
+                            login: true,
+                          ),
                         ),
                       );
                     },
@@ -703,7 +710,6 @@ class _BuyPageState extends State<BuyPage> {
     });
   }
 
-
   //address
   final dbhelper = task8_db.instance;
   List<Map<String, dynamic>> user = [];
@@ -713,6 +719,7 @@ class _BuyPageState extends State<BuyPage> {
 
   int? selectedAddress;
   int? u_id;
+
   void querySpecificUser(String id) async {
     user = await dbhelper.querySpacific(id);
     if (user.isNotEmpty) {
@@ -872,7 +879,8 @@ class _BuyPageState extends State<BuyPage> {
                     postController.text.isNotEmpty &&
                     houseNameController.text.isNotEmpty &&
                     landmarkController.text.isNotEmpty) {
-                  await dbhelper.updateSpecificUserAddress(widget.additionalString, obj, no);
+                  await dbhelper.updateSpecificUserAddress(
+                      widget.additionalString, obj, no);
                 }
                 querySpecificUser(widget.additionalString);
               },
@@ -884,24 +892,29 @@ class _BuyPageState extends State<BuyPage> {
     );
   }
 
-  void _deleteDialog(int no){
+  void _deleteDialog(int no) {
     showDialog(
         context: context,
-        builder: (BuildContext dialogContext){
+        builder: (BuildContext dialogContext) {
           return AlertDialog(
             backgroundColor: Colors.redAccent,
             title: const Text('Warning'),
             content: const Text('Did You Want To Delete The Address'),
             actions: [
-              TextButton(onPressed: (){
-                Navigator.of(dialogContext).pop();
-              }, child: const Text('Cancel')),
-              TextButton(onPressed: ()async{
-                var obj1 = AddressData.namedConstructor();
-                Navigator.of(context).pop();
-                await dbhelper.updateSpecificUserAddress(widget.additionalString, obj1, no);
-                querySpecificUser(widget.additionalString);
-              }, child: const Text('Delete'))
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(dialogContext).pop();
+                  },
+                  child: const Text('Cancel')),
+              TextButton(
+                  onPressed: () async {
+                    var obj1 = AddressData.namedConstructor();
+                    Navigator.of(context).pop();
+                    await dbhelper.updateSpecificUserAddress(
+                        widget.additionalString, obj1, no);
+                    querySpecificUser(widget.additionalString);
+                  },
+                  child: const Text('Delete'))
             ],
           );
         });
@@ -923,77 +936,76 @@ class _BuyPageState extends State<BuyPage> {
               padding: const EdgeInsets.all(8.0),
               child: address['name'] == null
                   ? const Center(
-                child: Text(
-                  'Address is not saved',
-                  style: TextStyle(
-                    fontFamily: 'LibreBaskerville',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  ),
-                ),
-              )
+                      child: Text(
+                        'Address is not saved',
+                        style: TextStyle(
+                          fontFamily: 'LibreBaskerville',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                    )
                   : Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Name: ${address['name']}\nCity: ${address['city']}\nPin: ${address['pin']}\nPost: ${address['post']}\nHouse Name: ${address['houseName']}\nLandmark: ${address['landmark']}',
-                  style: const TextStyle(
-                    fontFamily: 'LibreBaskerville',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  ),
-                ),
-              ),
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Name: ${address['name']}\nCity: ${address['city']}\nPin: ${address['pin']}\nPost: ${address['post']}\nHouse Name: ${address['houseName']}\nLandmark: ${address['landmark']}',
+                        style: const TextStyle(
+                          fontFamily: 'LibreBaskerville',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
             ),
             address['name'] == null
                 ? Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: ElevatedButton(
-                  onPressed: () {
-                    _dialog('Add Address', 'Add', no);
-                  },
-                  child: const Text('Add'),
-                ),
-              ),
-            )
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          _dialog('Add Address', 'Add', no);
+                        },
+                        child: const Text('Add'),
+                      ),
+                    ),
+                  )
                 : Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: ElevatedButton(
-                    onPressed: (){
-                      _deleteDialog(no);
-                    },
-                    child: const Text('Delete'),
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _deleteDialog(no);
+                          },
+                          child: const Text('Delete'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _dialog('Edit Address', 'Edit', no);
+                          },
+                          child: const Text('Edit'),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      _dialog('Edit Address', 'Edit', no);
-                    },
-                    child: const Text('Edit'),
-                  ),
-                ),
-              ],
-            ),
             RadioListTile(
               value: no,
               groupValue: selectedAddress,
               onChanged: (int? value) {
-                if(address['name'] == null){
+                if (address['name'] == null) {
                   setState(() {
                     selectedAddress = null;
                   });
-                }else{
+                } else {
                   setState(() {
                     selectedAddress = no;
                   });
                 }
-
               },
               title: const Text('Select this address'),
             ),
@@ -1011,6 +1023,7 @@ class _BuyPageState extends State<BuyPage> {
       backgroundColor: Colors.teal[100],
       appBar: AppBar(
         title: const Text('Price Details'),
+        backgroundColor: Colors.teal,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -1019,8 +1032,10 @@ class _BuyPageState extends State<BuyPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListView.builder(
-                shrinkWrap: true, // This makes the ListView take only the space it needs
-                physics: NeverScrollableScrollPhysics(), // Disables ListView's own scrolling
+                shrinkWrap: true,
+                // This makes the ListView take only the space it needs
+                physics: NeverScrollableScrollPhysics(),
+                // Disables ListView's own scrolling
                 itemCount: processedItems.length,
                 itemBuilder: (context, index) {
                   final item = processedItems[index];
@@ -1032,13 +1047,13 @@ class _BuyPageState extends State<BuyPage> {
                         borderRadius: BorderRadius.circular(25),
                         image: item['image'].startsWith('http')
                             ? DecorationImage(
-                          image: NetworkImage(item['image']),
-                          fit: BoxFit.cover,
-                        )
+                                image: NetworkImage(item['image']),
+                                fit: BoxFit.cover,
+                              )
                             : DecorationImage(
-                          image: AssetImage(item['image']),
-                          fit: BoxFit.cover,
-                        ),
+                                image: AssetImage(item['image']),
+                                fit: BoxFit.cover,
+                              ),
                       ),
                     ),
                     title: Center(
@@ -1240,11 +1255,13 @@ class _BuyPageState extends State<BuyPage> {
                         alignment: Alignment.bottomCenter,
                         child: ElevatedButton(
                             onPressed: () {
-                              if(selectedAddress==null){
+                              if (selectedAddress == null) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('Address Is Not Selected Scroll Down And Select The Address')),
+                                  SnackBar(
+                                      content: Text(
+                                          'Address Is Not Selected Scroll Down And Select The Address')),
                                 );
-                              }else{
+                              } else {
                                 _showCustomDialog(context);
                               }
                             },

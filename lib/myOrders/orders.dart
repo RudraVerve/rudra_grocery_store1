@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:rudra_grocery_store09/task8_helper/task8_db_helper.dart';
 
 class OrdersPage extends StatefulWidget {
@@ -29,8 +29,10 @@ class _OrdersPageState extends State<OrdersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.teal[100],
       appBar: AppBar(
         title: Text('User Orders'),
+        backgroundColor: Colors.teal,
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: orders,
@@ -58,7 +60,7 @@ class _OrdersPageState extends State<OrdersPage> {
                   margin: EdgeInsets.all(8.0),
                   padding: EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Colors.tealAccent,
                     borderRadius: BorderRadius.circular(8.0),
                     boxShadow: [
                       BoxShadow(
@@ -72,46 +74,51 @@ class _OrdersPageState extends State<OrdersPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ExpansionTile(
-                        title: Text('Order ID: ${order['order_id']}', style: TextStyle(fontWeight: FontWeight.bold)),
-                        subtitle: Text('Total Price: \$${order['total_price']}'),
+                        title: Text('Order ID: ${order['order_id']}',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        subtitle:
+                            Text('Total Price: \$${order['total_price']}'),
                         trailing: Column(
                           children: [
                             Container(
                               height: 30,
                               width: 100,
                               decoration: BoxDecoration(
-                                color: order['IsOrder_Cancel'] == 1 || order['IsOrder_Cancel_User'] == 1
-                                    ? Colors.red
-                                    : order['Received_ByUser'] == 1 && order['is_completed'] == 1
-                                    ? Colors.black
-                                    :order['is_completed'] == 1
-                                    ? Colors.green
-                                    :order['is_approved'] == 1
-                                    ? Colors.green
-                                    : Colors.orange,
-                                borderRadius: BorderRadius.circular(20)
-                              ),
+                                  color: order['IsOrder_Cancel'] == 1 ||
+                                          order['IsOrder_Cancel_User'] == 1
+                                      ? Colors.red
+                                      : order['Received_ByUser'] == 1 &&
+                                              order['is_completed'] == 1
+                                          ? Colors.black
+                                          : order['is_completed'] == 1
+                                              ? Colors.green
+                                              : order['is_approved'] == 1
+                                                  ? Colors.green
+                                                  : Colors.orange,
+                                  borderRadius: BorderRadius.circular(20)),
                               child: Center(
                                 child: Text(
                                   order['IsOrder_Cancel'] == 1
-                                  ? 'SellerCanceled'
-                                  : order['IsOrder_Cancel_User'] == 1
-                                  ? 'UserCanceled'
-                                  : order['Received_ByUser'] == 1 && order['is_completed'] == 1
-                                  ? 'Completed'
-                                  :order['is_completed'] == 1
-                                  ? 'Delivered'
-                                  : order['is_approved'] == 1
-                                  ? 'In process...'
-                                  : 'Pending...',
-                                  style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
+                                      ? 'SellerCanceled'
+                                      : order['IsOrder_Cancel_User'] == 1
+                                          ? 'UserCanceled'
+                                          : order['Received_ByUser'] == 1 &&
+                                                  order['is_completed'] == 1
+                                              ? 'Completed'
+                                              : order['is_completed'] == 1
+                                                  ? 'Delivered'
+                                                  : order['is_approved'] == 1
+                                                      ? 'In process...'
+                                                      : 'Pending...',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ),
                             Text('Date: $dateString'),
                           ],
                         ),
-
                         children: [
                           ...orderDetails.map((detail) {
                             return ListTile(
@@ -122,16 +129,20 @@ class _OrdersPageState extends State<OrdersPage> {
                                   borderRadius: BorderRadius.circular(25),
                                   image: detail['image'] != null
                                       ? DecorationImage(
-                                    image: detail['image'].startsWith('http')
-                                        ? NetworkImage(detail['image'])
-                                        : AssetImage(detail['image']) as ImageProvider,
-                                    fit: BoxFit.cover,
-                                  )
+                                          image: detail['image']
+                                                  .startsWith('http')
+                                              ? NetworkImage(detail['image'])
+                                              : AssetImage(detail['image'])
+                                                  as ImageProvider,
+                                          fit: BoxFit.cover,
+                                        )
                                       : null,
                                 ),
                               ),
-                              title: Text('Quantity: ${detail['quantity'] ?? 'No quantity'}'),
-                              trailing: Text('Price: ${detail['price'] ?? 'No price'}'),
+                              title: Text(
+                                  'Quantity: ${detail['quantity'] ?? 'No quantity'}'),
+                              trailing: Text(
+                                  'Price: ${detail['price'] ?? 'No price'}'),
                             );
                           }).toList(),
                           const SizedBox(height: 20),
@@ -140,40 +151,57 @@ class _OrdersPageState extends State<OrdersPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                if (order['is_approved'] == 0 && order['IsOrder_Cancel'] == 0 && order['IsOrder_Cancel_User'] == 0 && (order['is_completed'] == 0 && order['Received_ByUser'] == 0)) ...[
+                                if (order['is_approved'] == 0 &&
+                                    order['IsOrder_Cancel'] == 0 &&
+                                    order['IsOrder_Cancel_User'] == 0 &&
+                                    (order['is_completed'] == 0 &&
+                                        order['Received_ByUser'] == 0)) ...[
                                   ElevatedButton(
-                                      onPressed: ()async {
-                                        if(order['Notify_Seller']==0){
-                                          await task8_db.instance.updateNotifySeller(order['order_id'],true);
-                                          _refreshOrders();
-                                        }
-                                      },
-                                      style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-                                              (states) {
-                                            return order['Notify_Seller'] == 1 ? Colors.green : null;
-                                          },
-                                        ),
-                                      ),
-                                      child: const Text('Notify Seller'),
-                                  ),
-                                  ElevatedButton(onPressed: () async {
-                                    await task8_db.instance.updateOrderCancelUser(order['order_id'],true);
-                                    _refreshOrders();
-                                  }, child: const Text('Cancel Order')),
-                                ]
-                                else if(order['is_completed'] == 1 && order['Received_ByUser'] == 0) ...[
-                                  ElevatedButton(
-                                    onPressed: ()async {
-                                      if(order['Received_ByUser']==0){
-                                        await task8_db.instance.updateReceived(order['order_id'],true);
+                                    onPressed: () async {
+                                      if (order['Notify_Seller'] == 0) {
+                                        await task8_db.instance
+                                            .updateNotifySeller(
+                                                order['order_id'], true);
                                         _refreshOrders();
                                       }
                                     },
                                     style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-                                            (states) {
-                                          return order['Received_ByUser'] == 1 ? Colors.green : null;
+                                      backgroundColor: MaterialStateProperty
+                                          .resolveWith<Color?>(
+                                        (states) {
+                                          return order['Notify_Seller'] == 1
+                                              ? Colors.green
+                                              : null;
+                                        },
+                                      ),
+                                    ),
+                                    child: const Text('Notify Seller'),
+                                  ),
+                                  ElevatedButton(
+                                      onPressed: () async {
+                                        await task8_db.instance
+                                            .updateOrderCancelUser(
+                                                order['order_id'], true);
+                                        _refreshOrders();
+                                      },
+                                      child: const Text('Cancel Order')),
+                                ] else if (order['is_completed'] == 1 &&
+                                    order['Received_ByUser'] == 0) ...[
+                                  ElevatedButton(
+                                    onPressed: () async {
+                                      if (order['Received_ByUser'] == 0) {
+                                        await task8_db.instance.updateReceived(
+                                            order['order_id'], true);
+                                        _refreshOrders();
+                                      }
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty
+                                          .resolveWith<Color?>(
+                                        (states) {
+                                          return order['Received_ByUser'] == 1
+                                              ? Colors.green
+                                              : null;
                                         },
                                       ),
                                     ),

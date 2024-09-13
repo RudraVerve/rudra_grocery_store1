@@ -43,8 +43,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-  int selectedIndex = 0;// Default to Home tab
+  int selectedIndex = 0; // Default to Home tab
   void _onItemTapped(int index) {
     setState(() {
       selectedIndex = index;
@@ -59,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     }
 
-    if (index == 1 && !widget.login){
+    if (index == 1 && !widget.login) {
       _showLoginDialog();
     }
   }
@@ -137,9 +136,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontWeight: FontWeight.bold,
                               fontFamily: 'LibreBaskerville'),
                         ))
-                      : widget.login
-                          ? MyAccount(additionalString: widget.additionalString)
-                          : const Text('')),
+                  : widget.login
+                      ? MyAccount(additionalString: widget.additionalString)
+                      : const Text('')),
     );
   }
 }

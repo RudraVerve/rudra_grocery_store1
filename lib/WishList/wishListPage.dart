@@ -1,14 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:rudra_grocery_store09/WishList/proceed_buy_page.dart';
+
 import '../task8_helper/task8_db_helper.dart';
 
 class wishListPage extends StatefulWidget {
   final String additionalString;
   bool showProceedMessage;
 
-  wishListPage({Key? key, this.additionalString = '', this.showProceedMessage = true})
+  wishListPage(
+      {Key? key, this.additionalString = '', this.showProceedMessage = true})
       : super(key: key);
 
   @override
@@ -74,25 +77,39 @@ class _wishListPage extends State<wishListPage> {
     return selectedItems.fold(0.0, (sum, item) => sum + item['price']);
   }
 
-  void deleteAlortDialog(item){
-    showDialog(context: context, builder: (BuildContext dialogContext){
-      return AlertDialog(
-        backgroundColor: Colors.lime,
-        title: Text('Alert'),
-        content: Text('Did you want to remove the item from the Wishlist'),
-        actions: [
-          TextButton(onPressed: (){
-            Navigator.of(dialogContext).pop();
-          }, child: Text('Cancel',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
-          TextButton(onPressed: (){
-            _toggleCartItem(item);
-            update();
-            querySpecificUserItems(widget.additionalString);
-            Navigator.of(dialogContext).pop();
-          }, child: Text('Remove',style: TextStyle(color: Colors.redAccent,fontWeight: FontWeight.bold),))
-        ],
-      );
-    });
+  void deleteAlortDialog(item) {
+    showDialog(
+        context: context,
+        builder: (BuildContext dialogContext) {
+          return AlertDialog(
+            backgroundColor: Colors.lime,
+            title: Text('Alert'),
+            content: Text('Did you want to remove the item from the Wishlist'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(dialogContext).pop();
+                  },
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                  )),
+              TextButton(
+                  onPressed: () {
+                    _toggleCartItem(item);
+                    update();
+                    querySpecificUserItems(widget.additionalString);
+                    Navigator.of(dialogContext).pop();
+                  },
+                  child: Text(
+                    'Remove',
+                    style: TextStyle(
+                        color: Colors.redAccent, fontWeight: FontWeight.bold),
+                  ))
+            ],
+          );
+        });
   }
 
   @override
@@ -240,7 +257,8 @@ class _wishListPage extends State<wishListPage> {
                                 width: 120,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     IconButton(
                                       onPressed: () {
@@ -346,8 +364,9 @@ class _wishListPage extends State<wishListPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    BuyPage(items: selectedItems, additionalString: widget.additionalString),
+                                builder: (context) => BuyPage(
+                                    items: selectedItems,
+                                    additionalString: widget.additionalString),
                               ),
                             );
                           },

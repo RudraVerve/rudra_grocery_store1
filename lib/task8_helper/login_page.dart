@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../SellerAcount/SelerLogin.dart';
 import '../main.dart';
 import 'forget_pass.dart';
@@ -85,9 +86,9 @@ class _Login extends State<Login> {
           context,
           MaterialPageRoute(
             builder: (context) => MyHomePage(
-                title: 'Home Page',
-                additionalString: user[0]["Mobile"],
-                login: true,
+              title: 'Home Page',
+              additionalString: user[0]["Mobile"],
+              login: true,
             ),
           ),
         );
@@ -127,14 +128,16 @@ class _Login extends State<Login> {
   }
 
   String authenticationPassword = '6371'; //Authentication Password of Seller
-  TextEditingController sellerPasswordAuthentication =TextEditingController();
+  TextEditingController sellerPasswordAuthentication = TextEditingController();
+
   void dialogPasswordSeller() {
     showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
           backgroundColor: Colors.amber,
-          title: Text('Enter Seller Password', style: TextStyle(color: Colors.redAccent)),
+          title: Text('Enter Seller Password',
+              style: TextStyle(color: Colors.redAccent)),
           content: TextFormField(
             controller: sellerPasswordAuthentication,
             decoration: const InputDecoration(
@@ -156,23 +159,25 @@ class _Login extends State<Login> {
               },
               child: Text('Cancel'),
             ),
-            TextButton(onPressed: (){
-              if(authenticationPassword == sellerPasswordAuthentication.text){
-                Navigator.of(dialogContext).pop();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SellerLogin(),
-                  ),
-                );
-              }
-              else{
-                Navigator.of(dialogContext).pop();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Wrong password')),
-                );
-              }
-            }, child: Text('Login'))
+            TextButton(
+                onPressed: () {
+                  if (authenticationPassword ==
+                      sellerPasswordAuthentication.text) {
+                    Navigator.of(dialogContext).pop();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SellerLogin(),
+                      ),
+                    );
+                  } else {
+                    Navigator.of(dialogContext).pop();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Wrong password')),
+                    );
+                  }
+                },
+                child: Text('Login'))
           ],
         );
       },
@@ -350,7 +355,8 @@ class _Login extends State<Login> {
                             onPressed: () {
                               if (mobile.text.isEmpty &&
                                   passWord.text.isEmpty) {
-                                dialogWarning('You Have To Enter Ueser Id And Password');
+                                dialogWarning(
+                                    'You Have To Enter Ueser Id And Password');
                               } else {
                                 _fachUser(mobile.text);
                               }
@@ -415,7 +421,7 @@ class _Login extends State<Login> {
                             padding: EdgeInsets.all(8.0),
                             child: CircleAvatar(
                               backgroundImage:
-                                  AssetImage('assets/image/tuit.png'),
+                                  AssetImage('assets/image/tut.png'),
                               radius: 20,
                             ),
                           ),
@@ -456,7 +462,7 @@ class _Login extends State<Login> {
                   ),
                 ), //sign up
                 Padding(
-                  padding: EdgeInsets.only(bottom: 16.0,top: 5),
+                  padding: EdgeInsets.only(bottom: 16.0, top: 5),
                   child: RichText(
                     text: TextSpan(
                       style: TextStyle(

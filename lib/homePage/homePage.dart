@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../task8_helper/data.dart';
 import 'category_items.dart';
 
@@ -34,38 +35,38 @@ class _HomePageState extends State<HomePage> {
                   scrollDirection: Axis.horizontal,
                   itemCount: obj.containerData.length,
                   itemBuilder: (context, index) {
-                    final data = obj.containerData[index % obj.containerData.length];
+                    final data =
+                        obj.containerData[index % obj.containerData.length];
                     return InkWell(
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.all(8.0),
-                        child: Image.asset(
-                          data['image'],
-                          fit: BoxFit.cover,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          margin: const EdgeInsets.all(8.0),
+                          child: Image.asset(
+                            data['image'],
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                      onTap: () {
-                        if (index == 0) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Item_category(
-                                    items: obj.groceries,
-                                    additionalString:
-                                    widget.additionalString)),
-                          );
-                        } else if (index == 1) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Item_category(
-                                    items: obj.fruits,
-                                    additionalString:
-                                    widget.additionalString)),
-                          );
-                        }
-                      }
-                    );
+                        onTap: () {
+                          if (index == 0) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Item_category(
+                                      items: obj.groceries,
+                                      additionalString:
+                                          widget.additionalString)),
+                            );
+                          } else if (index == 1) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Item_category(
+                                      items: obj.fruits,
+                                      additionalString:
+                                          widget.additionalString)),
+                            );
+                          }
+                        });
                   },
                 ),
               ),

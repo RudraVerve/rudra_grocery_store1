@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:rudra_grocery_store09/task8_helper/task8_db_helper.dart';
+
 import 'OrderDetails.dart';
 
 class OrderCategory extends StatefulWidget {
   final int index;
+
   const OrderCategory({super.key, required this.index});
 
   @override
@@ -29,7 +31,7 @@ class _OrderCategoryState extends State<OrderCategory> {
         Orders = task8_db.instance.getMostUrgentOrders();
       } else if (widget.index == 6) {
         Orders = task8_db.instance.getCompletedOrder();
-      }else if (widget.index == 7) {
+      } else if (widget.index == 7) {
         Orders = task8_db.instance.getCanceledOrdersByUser();
       }
     });
@@ -62,7 +64,10 @@ class _OrderCategoryState extends State<OrderCategory> {
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Center(child: Text('No data found', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)));
+              return Center(
+                  child: Text('No data found',
+                      style: TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold)));
             } else {
               final orderList = snapshot.data!;
               return ListView.builder(
@@ -90,23 +95,28 @@ class _OrderCategoryState extends State<OrderCategory> {
                       children: [
                         InkWell(
                           child: ListTile(
-                            title: Text('Order ID: ${order['order_id']}', style: const TextStyle(fontWeight: FontWeight.bold)),
-                            subtitle: Text('Total Price: \$${order['total_price']}'),
+                            title: Text('Order ID: ${order['order_id']}',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold)),
+                            subtitle:
+                                Text('Total Price: \$${order['total_price']}'),
                             trailing: Column(
                               children: [
                                 Container(
                                   height: 30,
                                   width: 100,
                                   decoration: BoxDecoration(
-                                    color: order['IsOrder_Cancel'] == 1 || order['IsOrder_Cancel_User'] == 1
+                                    color: order['IsOrder_Cancel'] == 1 ||
+                                            order['IsOrder_Cancel_User'] == 1
                                         ? Colors.red
-                                        : order['Received_ByUser'] == 1 && order['is_completed'] == 1
-                                        ? Colors.black
-                                        :order['is_completed'] == 1
-                                        ? Colors.green
-                                        : order['is_approved'] == 1
-                                        ? Colors.green
-                                        : Colors.orange,
+                                        : order['Received_ByUser'] == 1 &&
+                                                order['is_completed'] == 1
+                                            ? Colors.black
+                                            : order['is_completed'] == 1
+                                                ? Colors.green
+                                                : order['is_approved'] == 1
+                                                    ? Colors.green
+                                                    : Colors.orange,
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: Center(
@@ -114,14 +124,16 @@ class _OrderCategoryState extends State<OrderCategory> {
                                       order['IsOrder_Cancel'] == 1
                                           ? 'SellerCanceled'
                                           : order['IsOrder_Cancel_User'] == 1
-                                          ? 'UserCanceled'
-                                          : order['Received_ByUser'] == 1 && order['is_completed'] == 1
-                                          ? 'Completed'
-                                          :order['is_completed'] == 1
-                                          ? 'Delivered'
-                                          : order['is_approved'] == 1
-                                          ? 'In process...'
-                                          : 'Pending...',
+                                              ? 'UserCanceled'
+                                              : order['Received_ByUser'] == 1 &&
+                                                      order['is_completed'] == 1
+                                                  ? 'Completed'
+                                                  : order['is_completed'] == 1
+                                                      ? 'Delivered'
+                                                      : order['is_approved'] ==
+                                                              1
+                                                          ? 'In process...'
+                                                          : 'Pending...',
                                       style: const TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
@@ -136,7 +148,9 @@ class _OrderCategoryState extends State<OrderCategory> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => OrderDetails(orderId: order['order_id'], userId: order['user_id']),
+                                builder: (context) => OrderDetails(
+                                    orderId: order['order_id'],
+                                    userId: order['user_id']),
                               ),
                             ).then((value) {
                               if (value == true) {

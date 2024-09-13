@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rudra_grocery_store09/task8_helper/task8_db_helper.dart';
+
 import '../../myOrders/OrderDetails.dart';
 import '../../myOrders/orderCategory.dart';
 
@@ -47,7 +48,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
   late Future<List<Map<String, dynamic>>> ordersDate;
 
   void _refreshOrders() {
-    setState((){
+    setState(() {
       ordersDate = task8_db.instance.getOrdersByDate(_formattedDate);
     });
   }
@@ -204,11 +205,11 @@ class _SellerHomePageState extends State<SellerHomePage> {
                 ),
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: (){
+                    onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => OrderCategory(index: index ),
+                          builder: (context) => OrderCategory(index: index),
                         ),
                       ).then((value) {
                         if (value == true) {
@@ -276,7 +277,9 @@ class _SellerHomePageState extends State<SellerHomePage> {
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Center(child: Text('No orders found for date ${_formattedDate}'));
+                  return Center(
+                      child:
+                          Text('No orders found for date ${_formattedDate}'));
                 } else {
                   final orderList = snapshot.data!;
                   return ListView.builder(
@@ -304,38 +307,50 @@ class _SellerHomePageState extends State<SellerHomePage> {
                           children: [
                             InkWell(
                               child: ListTile(
-                                title: Text('Order ID: ${order['order_id']}', style: const TextStyle(fontWeight: FontWeight.bold)),
-                                subtitle: Text('Total Price: \$${order['total_price']}'),
+                                title: Text('Order ID: ${order['order_id']}',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold)),
+                                subtitle: Text(
+                                    'Total Price: \$${order['total_price']}'),
                                 trailing: Column(
                                   children: [
                                     Container(
                                       height: 30,
                                       width: 100,
                                       decoration: BoxDecoration(
-                                        color: order['IsOrder_Cancel'] == 1 || order['IsOrder_Cancel_User'] == 1
+                                        color: order['IsOrder_Cancel'] == 1 ||
+                                                order['IsOrder_Cancel_User'] ==
+                                                    1
                                             ? Colors.red
-                                            : order['Received_ByUser'] == 1 && order['is_completed'] == 1
-                                            ? Colors.black
-                                            :order['is_completed'] == 1
-                                            ? Colors.green
-                                            : order['is_approved'] == 1
-                                            ? Colors.green
-                                            : Colors.orange,
+                                            : order['Received_ByUser'] == 1 &&
+                                                    order['is_completed'] == 1
+                                                ? Colors.black
+                                                : order['is_completed'] == 1
+                                                    ? Colors.green
+                                                    : order['is_approved'] == 1
+                                                        ? Colors.green
+                                                        : Colors.orange,
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: Center(
                                         child: Text(
                                           order['IsOrder_Cancel'] == 1
                                               ? 'SellerCanceled'
-                                              : order['IsOrder_Cancel_User'] == 1
-                                              ? 'UserCanceled'
-                                              : order['Received_ByUser'] == 1 && order['is_completed'] == 1
-                                              ? 'Completed'
-                                              :order['is_completed'] == 1
-                                              ? 'Delivered'
-                                              : order['is_approved'] == 1
-                                              ? 'In process...'
-                                              : 'Pending...',
+                                              : order['IsOrder_Cancel_User'] ==
+                                                      1
+                                                  ? 'UserCanceled'
+                                                  : order['Received_ByUser'] ==
+                                                              1 &&
+                                                          order['is_completed'] ==
+                                                              1
+                                                      ? 'Completed'
+                                                      : order['is_completed'] ==
+                                                              1
+                                                          ? 'Delivered'
+                                                          : order['is_approved'] ==
+                                                                  1
+                                                              ? 'In process...'
+                                                              : 'Pending...',
                                           style: const TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold),
@@ -346,11 +361,13 @@ class _SellerHomePageState extends State<SellerHomePage> {
                                   ],
                                 ),
                               ),
-                              onTap: (){
+                              onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => OrderDetails(orderId:order['order_id'], userId: order['user_id']),
+                                    builder: (context) => OrderDetails(
+                                        orderId: order['order_id'],
+                                        userId: order['user_id']),
                                   ),
                                 ).then((value) {
                                   if (value == true) {
