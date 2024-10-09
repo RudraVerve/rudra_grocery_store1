@@ -78,14 +78,14 @@ class _BuyPageState extends State<BuyPage> {
         builder: (BuildContext contex) {
           return AlertDialog(
             backgroundColor: Colors.deepOrange,
-            title: const Text('\"ERROR\"'),
-            content: const Text('This Payment Method Is Not Avalable Yat...'),
+            title: Text('\"ERROR\"'),
+            content: Text('This Payment Method Is Not Avalable Yat...'),
             actions: [
               TextButton(
                   onPressed: () {
                     Navigator.of(contex).pop();
                   },
-                  child: const Text('Cancel'))
+                  child: Text('Cancel'))
             ],
           );
         });
@@ -113,7 +113,7 @@ class _BuyPageState extends State<BuyPage> {
             }
 
             return AlertDialog(
-              title: const Text('Select Payment Method'),
+              title: Text('Select Payment Method'),
               content: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -324,13 +324,13 @@ class _BuyPageState extends State<BuyPage> {
                       child: GestureDetector(
                         onTap: () => _toggleSelection(9),
                         child: Container(
-                          margin: const EdgeInsets.all(8),
+                          margin: EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             border: _selectedItems[9] == true
                                 ? Border.all(color: Colors.black, width: 2)
                                 : null,
                           ),
-                          child: const Row(
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
@@ -359,13 +359,13 @@ class _BuyPageState extends State<BuyPage> {
                       child: GestureDetector(
                         onTap: () => _toggleSelection(10),
                         child: Container(
-                          margin: const EdgeInsets.all(8),
+                          margin: EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             border: _selectedItems[10] == true
                                 ? Border.all(color: Colors.black, width: 2)
                                 : null,
                           ),
-                          child: const Row(
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
@@ -394,13 +394,13 @@ class _BuyPageState extends State<BuyPage> {
                       child: GestureDetector(
                         onTap: () => _toggleSelection(11),
                         child: Container(
-                          margin: const EdgeInsets.all(8),
+                          margin: EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             border: _selectedItems[11] == true
                                 ? Border.all(color: Colors.black, width: 2)
                                 : null,
                           ),
-                          child: const Row(
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
@@ -431,7 +431,7 @@ class _BuyPageState extends State<BuyPage> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text('Cancel'),
+                  child: Text('Cancel'),
                 ),
                 if (_isAnyItemSelected())
                   ElevatedButton(
@@ -440,7 +440,7 @@ class _BuyPageState extends State<BuyPage> {
                           _selectedItems[11] == true) {
                         _notAvalable();
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
+                          SnackBar(
                               content:
                                   Text('Payment Methord Not Avalable Yat...')),
                         );
@@ -454,7 +454,7 @@ class _BuyPageState extends State<BuyPage> {
                             false, TotalPrice, selectedAddress!, true);
                       }
                     },
-                    child: const Text('Pay'),
+                    child: Text('Pay'),
                   ),
               ],
             );
@@ -475,8 +475,8 @@ class _BuyPageState extends State<BuyPage> {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Container(
-            padding: const EdgeInsets.all(20.0),
-            child: const Column(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 // Initial Circular Progress Indicator
@@ -489,7 +489,7 @@ class _BuyPageState extends State<BuyPage> {
         );
       },
     );
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(Duration(seconds: 3), () {
       Navigator.of(context).pop(); // Close the processing dialog
       showDialog(
         context: context,
@@ -500,25 +500,25 @@ class _BuyPageState extends State<BuyPage> {
               borderRadius: BorderRadius.circular(12),
             ),
             child: Container(
-              padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   // Green Circle with Done Icon
                   TweenAnimationBuilder<double>(
                     tween: Tween<double>(begin: 0, end: 1),
-                    duration: const Duration(seconds: 1),
+                    duration: Duration(seconds: 1),
                     builder: (context, value, child) {
                       return Opacity(
                         opacity: value,
                         child: Container(
                           width: 80,
                           height: 80,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: Colors.green,
                             shape: BoxShape.circle,
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Icon(
                               Icons.check,
                               color: Colors.white,
@@ -540,13 +540,13 @@ class _BuyPageState extends State<BuyPage> {
                   ),
                   Text(
                     '\$${TotalPrice.toStringAsFixed(2)}',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.green,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),
                   ),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
@@ -563,7 +563,7 @@ class _BuyPageState extends State<BuyPage> {
                       )
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pop(); // Close the dialog
@@ -601,8 +601,8 @@ class _BuyPageState extends State<BuyPage> {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Container(
-            padding: const EdgeInsets.all(20.0),
-            child: const Column(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 // Initial Circular Progress Indicator
@@ -615,7 +615,7 @@ class _BuyPageState extends State<BuyPage> {
         );
       },
     );
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(Duration(seconds: 3), () {
       Navigator.of(context).pop(); // Close the processing dialog
       showDialog(
         context: context,
@@ -626,25 +626,25 @@ class _BuyPageState extends State<BuyPage> {
               borderRadius: BorderRadius.circular(12),
             ),
             child: Container(
-              padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(20.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   // Green Circle with Done Icon
                   TweenAnimationBuilder<double>(
                     tween: Tween<double>(begin: 0, end: 1),
-                    duration: const Duration(seconds: 1),
+                    duration: Duration(seconds: 1),
                     builder: (context, value, child) {
                       return Opacity(
                         opacity: value,
                         child: Container(
                           width: 80,
                           height: 80,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: Colors.green,
                             shape: BoxShape.circle,
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Icon(
                               Icons.check,
                               color: Colors.white,
@@ -664,7 +664,7 @@ class _BuyPageState extends State<BuyPage> {
                       fontSize: 20,
                     ),
                   ),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
@@ -681,7 +681,7 @@ class _BuyPageState extends State<BuyPage> {
                       )
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pop(); // Close the dialog
@@ -1032,7 +1032,7 @@ class _BuyPageState extends State<BuyPage> {
               child: ListView.builder(
                 shrinkWrap: true,
                 // This makes the ListView take only the space it needs
-                physics: const NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 // Disables ListView's own scrolling
                 itemCount: processedItems.length,
                 itemBuilder: (context, index) {
@@ -1074,8 +1074,8 @@ class _BuyPageState extends State<BuyPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Price Details',
                         style: TextStyle(
@@ -1090,7 +1090,7 @@ class _BuyPageState extends State<BuyPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
+                          Text(
                             'Total Item Price',
                             style: TextStyle(
                               fontSize: 15,
@@ -1099,7 +1099,7 @@ class _BuyPageState extends State<BuyPage> {
                           ),
                           Text(
                             '\$$totalPrice',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 15,
                               fontFamily: 'LibreBaskerville',
@@ -1113,7 +1113,7 @@ class _BuyPageState extends State<BuyPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
+                          Text(
                             'GST',
                             style: TextStyle(
                               fontSize: 15,
@@ -1122,7 +1122,7 @@ class _BuyPageState extends State<BuyPage> {
                           ),
                           Text(
                             '\$${gstAmount.toStringAsFixed(2)}',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 15,
                               fontFamily: 'LibreBaskerville',
@@ -1131,8 +1131,8 @@ class _BuyPageState extends State<BuyPage> {
                         ],
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -1159,7 +1159,7 @@ class _BuyPageState extends State<BuyPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Expanded(
+                          Expanded(
                             child: Text(
                               'Delevery Charge',
                               style: TextStyle(
@@ -1171,7 +1171,7 @@ class _BuyPageState extends State<BuyPage> {
                           overalPrice >= 100
                               ? Row(
                                   children: [
-                                    const Text(
+                                    Text(
                                       '\$5',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
@@ -1182,7 +1182,7 @@ class _BuyPageState extends State<BuyPage> {
                                         decorationThickness: 2.0,
                                       ),
                                     ),
-                                    const SizedBox(
+                                    SizedBox(
                                       width: 10,
                                     ),
                                     Text(
@@ -1194,7 +1194,7 @@ class _BuyPageState extends State<BuyPage> {
                                     )
                                   ],
                                 )
-                              : const Text(
+                              : Text(
                                   '\$5',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w600,
@@ -1205,10 +1205,10 @@ class _BuyPageState extends State<BuyPage> {
                         ],
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 10,
                     ),
-                    const Row(
+                    Row(
                       children: [
                         Expanded(
                           child: Divider(
@@ -1221,7 +1221,7 @@ class _BuyPageState extends State<BuyPage> {
                         ),
                       ],
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 10,
                     ),
                     Padding(
@@ -1229,7 +1229,7 @@ class _BuyPageState extends State<BuyPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
+                          Text(
                             'Total Price',
                             style: TextStyle(
                               fontSize: 15,
@@ -1238,7 +1238,7 @@ class _BuyPageState extends State<BuyPage> {
                           ),
                           Text(
                             '\$${TotalPrice.toStringAsFixed(2)}',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 15,
                               fontFamily: 'LibreBaskerville',
@@ -1255,7 +1255,7 @@ class _BuyPageState extends State<BuyPage> {
                             onPressed: () {
                               if (selectedAddress == null) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
+                                  SnackBar(
                                       content: Text(
                                           'Address Is Not Selected Scroll Down And Select The Address')),
                                 );
@@ -1263,7 +1263,7 @@ class _BuyPageState extends State<BuyPage> {
                                 _showCustomDialog(context);
                               }
                             },
-                            child: const Text('Continue payment')),
+                            child: Text('Continue payment')),
                       ),
                     )
                   ],

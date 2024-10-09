@@ -98,9 +98,9 @@ class _SellerHomePageState extends State<SellerHomePage> {
                     ),
                   ],
                 ),
-                child: const Column(
+                child: Column(
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
                         'Total Revenue',
@@ -112,8 +112,8 @@ class _SellerHomePageState extends State<SellerHomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
-                    Padding(
+                    const SizedBox(height: 10),
+                    const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
                         '\$ 620,340.30',
@@ -125,13 +125,13 @@ class _SellerHomePageState extends State<SellerHomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 60),
+                    const SizedBox(height: 60),
                     Padding(
-                      padding: EdgeInsets.only(left: 8.0, right: 8.0),
+                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Padding(
+                          const Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Text(
                               'Investment: \$ 32,098.23',
@@ -143,7 +143,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
                               ),
                             ),
                           ),
-                          Icon(
+                          const Icon(
                             Icons.check_circle,
                             color: Colors.orange,
                           ),
@@ -151,11 +151,11 @@ class _SellerHomePageState extends State<SellerHomePage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Padding(
+                          const Padding(
                             padding: EdgeInsets.only(left: 8.0, right: 8.0),
                             child: Text(
                               'Total Profit: \$ 30,340.30',
@@ -167,7 +167,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
                               ),
                             ),
                           ),
-                          Icon(
+                          const Icon(
                             Icons.check_circle,
                             color: Colors.green,
                           ),
@@ -293,8 +293,8 @@ class _SellerHomePageState extends State<SellerHomePage> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8.0),
-                          boxShadow: const [
-                            BoxShadow(
+                          boxShadow: [
+                            const BoxShadow(
                               color: Colors.black26,
                               blurRadius: 4.0,
                               offset: Offset(0, 2),
