@@ -156,15 +156,36 @@ class _Item_categoryState extends State<Item_category> {
                   height: 100,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.0),
-                    image: item['image'].startsWith('http')
-                        ? DecorationImage(
-                            image: NetworkImage(item['image']),
-                            fit: BoxFit.cover,
-                          )
-                        : DecorationImage(
-                            image: AssetImage(item['image']),
-                            fit: BoxFit.cover,
-                          ),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: item['image'].startsWith('http')
+                        ? Image.network(
+                      item['image'],
+                      fit: BoxFit.cover,
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child; // Image has finished loading, show the image
+                        }
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes!
+                                : null,
+                          ), // Show loading spinner
+                        );
+                      },
+                      errorBuilder: (context, error, stackTrace) => Icon(
+                        Icons.error,
+                        color: Colors.red,
+                      ),
+                    )
+                        : Image.asset(
+                      item['image'],
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Expanded(

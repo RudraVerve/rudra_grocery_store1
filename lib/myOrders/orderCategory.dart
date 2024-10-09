@@ -64,7 +64,7 @@ class _OrderCategoryState extends State<OrderCategory> {
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Center(
+              return const Center(
                   child: Text('No data found',
                       style: TextStyle(
                           fontSize: 18, fontWeight: FontWeight.bold)));

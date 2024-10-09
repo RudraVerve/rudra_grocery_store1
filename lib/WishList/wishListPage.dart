@@ -160,16 +160,35 @@ class _wishListPage extends State<wishListPage> {
                           width: 75,
                           height: 75,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(37.5),
-                            image: item['image'].startsWith('http')
-                                ? DecorationImage(
-                                    image: NetworkImage(item['image']),
-                                    fit: BoxFit.cover,
-                                  )
-                                : DecorationImage(
-                                    image: AssetImage(item['image']),
-                                    fit: BoxFit.cover,
+                            borderRadius: BorderRadius.circular(37.5), // Circular shape
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(37.5), // Clip image to a circle
+                            child: item['image'].startsWith('http')
+                                ? Image.network(
+                              item['image'],
+                              fit: BoxFit.cover,
+                              loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                                if (loadingProgress == null) {
+                                  return child; // Image has loaded, show the image
+                                }
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    value: loadingProgress.expectedTotalBytes != null
+                                        ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                                        : null, // Show progress if available
                                   ),
+                                );
+                              },
+                              errorBuilder: (context, error, stackTrace) => Icon(
+                                Icons.error,
+                                color: Colors.red, // Error icon if the image fails to load
+                              ),
+                            )
+                                : Image.asset(
+                              item['image'],
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                         Expanded(

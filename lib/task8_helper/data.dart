@@ -1181,7 +1181,7 @@ class data {
     },
     {
       'image': 'assets/image/dressWomen.jpeg',
-      'title': 'Dress For Wom..',
+      'title': 'Dress For Woman',
     },
     {
       'image': 'assets/image/electronics.jpeg',

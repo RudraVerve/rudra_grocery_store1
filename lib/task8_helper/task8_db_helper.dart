@@ -1,13 +1,10 @@
 // ignore_for_file: camel_case_types
-
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-
 import '../Address/address_data.dart';
 
 class task8_db {
@@ -262,8 +259,7 @@ class task8_db {
     }
   }
 
-  Future<int> updateSpecificUserItems(
-      String userId, List<Map<String, dynamic>> items) async {
+  Future<int> updateSpecificUserItems(String userId, List<Map<String, dynamic>> items) async {
     final db = await database;
     try {
       return await db.update(
@@ -280,8 +276,7 @@ class task8_db {
     }
   }
 
-  Future<int> updateSpecificUserAddress(
-      String userId, AddressData obj, int no) async {
+  Future<int> updateSpecificUserAddress(String userId, AddressData obj, int no) async {
     Database db = await instance.database;
     if (t_name_user.isNotEmpty) {
       var update = await db.update(

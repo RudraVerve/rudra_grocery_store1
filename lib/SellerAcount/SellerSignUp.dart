@@ -170,10 +170,11 @@ class _SellerSignUp extends State<SellerSignUp> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    // Calculate text size based on screen width or height
+    double responsiveFontSize = screenWidth * 0.05; // 5% of screen width
     return Scaffold(
-        body: ListView(
-      children: [
-        Container(
+        body: Container(
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -190,344 +191,347 @@ class _SellerSignUp extends State<SellerSignUp> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Create Account To NextGen Seller',
                     style: TextStyle(
-                        fontSize: 20,
+                        fontSize: responsiveFontSize,
                         fontFamily: 'LibreBaskerville',
                         fontWeight: FontWeight.bold,
                         color: Colors.yellow),
                   ),
                 ),
-                const SizedBox(height: 10),
-                Container(
-                  width: 350,
-                  child: Column(
-                    children: [
-                      Form(
-                        key: _key2,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: sellerMailSignup,
-                                validator: validateEmail,
-                                keyboardType: TextInputType.emailAddress,
-                                decoration: const InputDecoration(
-                                  hintText: 'Enter Email Id',
-                                  suffixIcon: Icon(Icons.email),
-                                  hintStyle: TextStyle(
-                                    color: Colors
-                                        .black, // Set the hint text color to green
+                Column(
+                  children: [
+                    Form(
+                      key: _key2,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              controller: sellerMailSignup,
+                              validator: validateEmail,
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: const InputDecoration(
+                                hintText: 'Enter Email Id',
+                                suffixIcon: Icon(Icons.email),
+                                hintStyle: TextStyle(
+                                  color: Colors
+                                      .black, // Set the hint text color to green
+                                ),
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 2,
                                   ),
-                                  border: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                      width: 2,
-                                    ),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 2,
                                   ),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.green, width: 2),
-                                  ),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.green, width: 2),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: sellerNameSignup,
-                                keyboardType: TextInputType.name,
-                                decoration: const InputDecoration(
-                                  hintText: 'Enter Your Name',
-                                  suffixIcon: Icon(Icons.person),
-                                  hintStyle: TextStyle(
-                                    color: Colors
-                                        .black, // Set the hint text color to green
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              controller: sellerNameSignup,
+                              keyboardType: TextInputType.name,
+                              decoration: const InputDecoration(
+                                hintText: 'Enter Your Name',
+                                suffixIcon: Icon(Icons.person),
+                                hintStyle: TextStyle(
+                                  color: Colors
+                                      .black, // Set the hint text color to green
+                                ),
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 2,
                                   ),
-                                  border: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                      width: 2,
-                                    ),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 2,
                                   ),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.green, width: 2),
-                                  ),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.green, width: 2),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: sellerStoreNameSignup,
-                                keyboardType: TextInputType.name,
-                                decoration: const InputDecoration(
-                                  hintText: 'Enter Store Name',
-                                  suffixIcon: Icon(Icons.store),
-                                  hintStyle: TextStyle(
-                                    color: Colors
-                                        .black, // Set the hint text color to green
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              controller: sellerStoreNameSignup,
+                              keyboardType: TextInputType.name,
+                              decoration: const InputDecoration(
+                                hintText: 'Enter Store Name',
+                                suffixIcon: Icon(Icons.store),
+                                hintStyle: TextStyle(
+                                  color: Colors
+                                      .black, // Set the hint text color to green
+                                ),
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 2,
                                   ),
-                                  border: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                      width: 2,
-                                    ),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 2,
                                   ),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.green, width: 2),
-                                  ),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.green, width: 2),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: sellerMobileSignup,
-                                keyboardType: TextInputType.text,
-                                decoration: const InputDecoration(
-                                  hintText: 'Enter Mobil number.',
-                                  suffixIcon: Icon(Icons.phone),
-                                  hintStyle: TextStyle(
-                                    color: Colors
-                                        .black, // Set the hint text color to green
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              controller: sellerMobileSignup,
+                              keyboardType: TextInputType.text,
+                              decoration: const InputDecoration(
+                                hintText: 'Enter Mobil number.',
+                                suffixIcon: Icon(Icons.phone),
+                                hintStyle: TextStyle(
+                                  color: Colors
+                                      .black, // Set the hint text color to green
+                                ),
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 2,
                                   ),
-                                  border: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                      width: 2,
-                                    ),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 2,
                                   ),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.green, width: 2),
-                                  ),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.green, width: 2),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: sellerPassWordSignup,
-                                validator: validatePassword,
-                                keyboardType: TextInputType.text,
-                                obscureText: !show,
-                                decoration: InputDecoration(
-                                  hintText: 'Enter user Password',
-                                  suffixIcon: IconButton(
-                                    icon: Icon(show
-                                        ? Icons.visibility
-                                        : Icons.visibility_off),
-                                    onPressed: () {
-                                      togleShow1();
-                                    },
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              controller: sellerPassWordSignup,
+                              validator: validatePassword,
+                              keyboardType: TextInputType.text,
+                              obscureText: !show,
+                              decoration: InputDecoration(
+                                hintText: 'Enter user Password',
+                                suffixIcon: IconButton(
+                                  icon: Icon(show
+                                      ? Icons.visibility
+                                      : Icons.visibility_off),
+                                  onPressed: () {
+                                    togleShow1();
+                                  },
+                                ),
+                                hintStyle: const TextStyle(
+                                  color: Colors
+                                      .black, // Set the hint text color to green
+                                ),
+                                border: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 2,
                                   ),
-                                  hintStyle: const TextStyle(
-                                    color: Colors
-                                        .black, // Set the hint text color to green
+                                ),
+                                enabledBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 2,
                                   ),
-                                  border: const UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  enabledBorder: const UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  focusedBorder: const UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.green, width: 2),
-                                  ),
+                                ),
+                                focusedBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.green, width: 2),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: sellerRePassWordSignup,
-                                keyboardType: TextInputType.text,
-                                obscureText: !show2,
-                                decoration: InputDecoration(
-                                  hintText: 'Conform Password',
-                                  suffixIcon: IconButton(
-                                    icon: Icon(show2
-                                        ? Icons.visibility
-                                        : Icons.visibility_off),
-                                    onPressed: () {
-                                      togleShow2();
-                                    },
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              controller: sellerRePassWordSignup,
+                              keyboardType: TextInputType.text,
+                              obscureText: !show2,
+                              decoration: InputDecoration(
+                                hintText: 'Conform Password',
+                                suffixIcon: IconButton(
+                                  icon: Icon(show2
+                                      ? Icons.visibility
+                                      : Icons.visibility_off),
+                                  onPressed: () {
+                                    togleShow2();
+                                  },
+                                ),
+                                hintStyle: const TextStyle(
+                                  color: Colors
+                                      .black, // Set the hint text color to green
+                                ),
+                                border: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 2,
                                   ),
-                                  hintStyle: const TextStyle(
-                                    color: Colors
-                                        .black, // Set the hint text color to green
+                                ),
+                                enabledBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 2,
                                   ),
-                                  border: const UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  enabledBorder: const UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  focusedBorder: const UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.green, width: 2),
-                                  ),
+                                ),
+                                focusedBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.green, width: 2),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: sellerQuestainSignup,
-                                keyboardType: TextInputType.text,
-                                decoration: const InputDecoration(
-                                  hintText: 'Your pet name',
-                                  suffixIcon: Icon(Icons.pets),
-                                  hintStyle: TextStyle(
-                                    color: Colors
-                                        .black, // Set the hint text color to green
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              controller: sellerQuestainSignup,
+                              keyboardType: TextInputType.text,
+                              decoration: const InputDecoration(
+                                hintText: 'Your pet name',
+                                suffixIcon: Icon(Icons.pets),
+                                hintStyle: TextStyle(
+                                  color: Colors
+                                      .black, // Set the hint text color to green
+                                ),
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 2,
                                   ),
-                                  border: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                      width: 2,
-                                    ),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 2,
                                   ),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.green, width: 2),
-                                  ),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.green, width: 2),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: sellerQuestainSignup2,
-                                keyboardType: TextInputType.text,
-                                decoration: const InputDecoration(
-                                  hintText: 'Your favorite Subject',
-                                  suffixIcon: Icon(Icons.add_chart_outlined),
-                                  hintStyle: TextStyle(
-                                    color: Colors
-                                        .black, // Set the hint text color to green
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              controller: sellerQuestainSignup2,
+                              keyboardType: TextInputType.text,
+                              decoration: const InputDecoration(
+                                hintText: 'Your favorite Subject',
+                                suffixIcon: Icon(Icons.add_chart_outlined),
+                                hintStyle: TextStyle(
+                                  color: Colors
+                                      .black, // Set the hint text color to green
+                                ),
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 2,
                                   ),
-                                  border: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                      width: 2,
-                                    ),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 2,
                                   ),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                      width: 2,
-                                    ),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.green, width: 2),
-                                  ),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.green, width: 2),
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: ElevatedButton(
-                            onPressed: () async {
-                              handleSignUp();
-                            },
-                            child: const Text('Create Acount')),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: ElevatedButton(
+                          onPressed: () async {
+                            handleSignUp();
+                          },
+                          child: const Text('Create Account')),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.all(7.0),
+                          child: RichText(
+                            text: TextSpan(
+                              style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                              children: <TextSpan>[
+                                const TextSpan(
+                                    text: 'Already A Seller?  ',
+                                    style: TextStyle(fontSize: 16)),
+                                TextSpan(
+                                  text: 'Login',
+                                  style: const TextStyle(
+                                    color: Colors.pinkAccent,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => SellerLogin(),
+                                        ),
+                                      );
+                                    },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                     ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(7.0),
-                  child: RichText(
-                    text: TextSpan(
-                      style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                      children: <TextSpan>[
-                        const TextSpan(
-                            text: 'Alrady A Seller?  ',
-                            style: TextStyle(fontSize: 16)),
-                        TextSpan(
-                          text: 'Login',
-                          style: const TextStyle(
-                            color: Colors.pinkAccent,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SellerLogin(),
-                                ),
-                              );
-                            },
-                        ),
-                      ],
-                    ),
                   ),
                 ),
               ],
             ),
           ),
-        ),
-      ],
-    ));
+        ));
   }
 }

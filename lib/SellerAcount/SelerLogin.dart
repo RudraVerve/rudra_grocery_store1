@@ -71,19 +71,19 @@ class _SellerLogin extends State<SellerLogin> {
       _validUser();
       setState(() {});
     } catch (e) {
-      print('error to fatch');
+      print('error to fetch');
     }
   }
 
   void _validUser() {
     if (seller.length == 0) {
-      _Dialog('User Is Not Exist');
+      _dialog('User Is Not Exist');
     } else {
       if (seller[0]["seller_Password"] == passWord.text) {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => SellerMainPage(login: true),
+            builder: (context) => const SellerMainPage(login: true),
           ),
         );
         mobile.clear();
@@ -100,20 +100,20 @@ class _SellerLogin extends State<SellerLogin> {
     }
   }
 
-  void _Dialog(String worning) {
+  void _dialog(String warning) {
     showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
           backgroundColor: Colors.amber,
-          title: Text('Worning', style: TextStyle(color: Colors.redAccent)),
-          content: Text('${worning}'),
+          title: const Text('Warning', style: TextStyle(color: Colors.redAccent)),
+          content: Text(warning),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(dialogContext).pop();
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );
@@ -148,9 +148,9 @@ class _SellerLogin extends State<SellerLogin> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
                 Padding(
-                  padding: EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 10),
                   child: CircleAvatar(
                     backgroundImage: AssetImage(
                       show
@@ -160,8 +160,8 @@ class _SellerLogin extends State<SellerLogin> {
                     radius: 40,
                   ),
                 ),
-                SizedBox(height: 5),
-                Text(
+                const SizedBox(height: 5),
+                const Text(
                   'Login To NextGen',
                   style: TextStyle(
                       fontSize: 35,
@@ -169,8 +169,8 @@ class _SellerLogin extends State<SellerLogin> {
                       color: Colors.black,
                       fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 5),
-                Text(
+                const SizedBox(height: 5),
+                const Text(
                   'Seller',
                   style: TextStyle(
                       fontSize: 35,
@@ -187,28 +187,28 @@ class _SellerLogin extends State<SellerLogin> {
                         child: Column(
                           children: [
                             Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: TextFormField(
                                 controller: mobile,
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
                                     hintText: 'Enter Mobile Number',
-                                    suffixIcon: Icon(Icons.account_circle),
+                                    suffixIcon: const Icon(Icons.account_circle),
                                     filled: true,
                                     fillColor: Colors.white.withOpacity(0.8),
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(20),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                             color: Colors.black, width: 2)),
                                     focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(20),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           color: Colors.green,
                                         ))),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: TextFormField(
                                 controller: passWord,
                                 validator: validationPass,
@@ -228,11 +228,11 @@ class _SellerLogin extends State<SellerLogin> {
                                     fillColor: Colors.white.withOpacity(0.8),
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(20),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                             color: Colors.black, width: 2)),
                                     focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(20),
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           color: Colors.green,
                                         ))),
                               ),
@@ -258,11 +258,11 @@ class _SellerLogin extends State<SellerLogin> {
                                 checkColor: Colors.white,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(4.0),
-                                  side: BorderSide(
+                                  side: const BorderSide(
                                       color: Colors.white, width: 2.0),
                                 ),
                               ),
-                              Text(
+                              const Text(
                                 'Remind me',
                                 style: TextStyle(
                                     color: Colors.white,
@@ -272,7 +272,7 @@ class _SellerLogin extends State<SellerLogin> {
                             ],
                           ),
                           TextButton(
-                            child: Text(
+                            child: const Text(
                               'Forget Password',
                               style: TextStyle(
                                   fontSize: 17, fontWeight: FontWeight.w600),
@@ -289,25 +289,25 @@ class _SellerLogin extends State<SellerLogin> {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: ElevatedButton(
                             onPressed: () {
                               if (mobile.text.isEmpty &&
                                   passWord.text.isEmpty) {
-                                _Dialog(
+                                _dialog(
                                     'You Have To Enter Ueser Id And Password');
                               } else {
                                 _fachUser(mobile.text);
                               }
                             },
-                            child: Text('Login To Seller')),
+                            child: const Text('Login To Seller')),
                       ),
                     ],
                   ),
                 ), //form container
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 Row(
-                  children: [
+                  children: const [
                     Expanded(
                       child: Divider(
                         color: Colors.black,
@@ -335,11 +335,11 @@ class _SellerLogin extends State<SellerLogin> {
                   child: Container(
                     color: Colors.transparent,
                     child: Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
+                        children: const [
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: CircleAvatar(
@@ -372,19 +372,19 @@ class _SellerLogin extends State<SellerLogin> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
-                    padding: EdgeInsets.only(top: 16.0),
+                    padding: const EdgeInsets.only(top: 16.0),
                     child: RichText(
                       text: TextSpan(
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
                         children: <TextSpan>[
-                          TextSpan(text: 'Not A Seller Yet? '),
+                          const TextSpan(text: 'Not A Seller Yet? '),
                           TextSpan(
                             text: 'Create Seller Account',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.purple,
                               fontWeight: FontWeight.bold,
                             ),
@@ -406,19 +406,19 @@ class _SellerLogin extends State<SellerLogin> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
-                    padding: EdgeInsets.all(7.0),
+                    padding: const EdgeInsets.all(7.0),
                     child: RichText(
                       text: TextSpan(
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
                         children: <TextSpan>[
-                          TextSpan(text: 'User Login? '),
+                          const TextSpan(text: 'User Login? '),
                           TextSpan(
                             text: 'Login',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.purple,
                               fontWeight: FontWeight.bold,
                             ),

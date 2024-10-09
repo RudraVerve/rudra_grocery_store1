@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         SizedBox(
-                          height: 120, // Adjust as needed based on your design
+                          height: 120,
                           child: Image.asset(
                             data['image'],
                             fit: BoxFit.fill,
@@ -236,6 +236,8 @@ class _HomePageState extends State<HomePage> {
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
                         ),
                       ),
                     ),

@@ -109,7 +109,7 @@ class _forget_pass extends State<forgetPass> {
         children: [
           Container(
             height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage('assets/image/forger_background.jpg'),
                   fit: BoxFit.cover,
@@ -118,25 +118,25 @@ class _forget_pass extends State<forgetPass> {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Center(
                       child: Text(
                     'Well Come $name',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 23,
                       color: Colors.cyan,
                     ),
                   )),
                 ),
-                SizedBox(height: 100),
+                const SizedBox(height: 100),
                 SizedBox(
                   height: 450,
                   child: Column(
                     children: [
                       if (showUser) ...[
                         Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
                             controller: mobile,
                             keyboardType: TextInputType.text,
@@ -146,7 +146,7 @@ class _forget_pass extends State<forgetPass> {
                                     onPressed: () {
                                       _fachUser(mobile.text);
                                     },
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.search,
                                       color: Colors.deepPurple,
                                       size: 30,
@@ -155,18 +155,18 @@ class _forget_pass extends State<forgetPass> {
                                 fillColor: Colors.white.withOpacity(0.8),
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                         color: Colors.black, width: 2)),
                                 focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.green,
                                     ))),
                           ),
                         ),
                       ],
                       if (showQuestain) ...[
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.all(9.0),
                           child: Align(
                               alignment: Alignment.topLeft,
@@ -180,7 +180,7 @@ class _forget_pass extends State<forgetPass> {
                         ),
                         Padding(
                           padding:
-                              EdgeInsets.only(left: 08, right: 8, bottom: 10),
+                              const EdgeInsets.only(left: 08, right: 8, bottom: 10),
                           child: TextFormField(
                             keyboardType: TextInputType.text,
                             controller: questian1,
@@ -190,21 +190,21 @@ class _forget_pass extends State<forgetPass> {
                               fillColor: Colors.white.withOpacity(0.8),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.black,
                                   width: 2,
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.green,
                                 ),
                               ),
                             ),
                           ),
                         ),
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.all(9.0),
                           child: Align(
                               alignment: Alignment.topLeft,
@@ -217,7 +217,7 @@ class _forget_pass extends State<forgetPass> {
                               )),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 08, right: 8),
+                          padding: const EdgeInsets.only(left: 08, right: 8),
                           child: TextFormField(
                             keyboardType: TextInputType.text,
                             controller: questian2,
@@ -227,14 +227,14 @@ class _forget_pass extends State<forgetPass> {
                               fillColor: Colors.white.withOpacity(0.8),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.black,
                                   width: 2,
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.green,
                                 ),
                               ),
@@ -245,10 +245,10 @@ class _forget_pass extends State<forgetPass> {
                             onPressed: () {
                               chackAns();
                             },
-                            child: Text('Submit'))
+                            child: const Text('Submit'))
                       ],
                       if (showpass) ...[
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.all(9.0),
                           child: Align(
                               alignment: Alignment.topLeft,
@@ -262,7 +262,7 @@ class _forget_pass extends State<forgetPass> {
                         ),
                         Padding(
                           padding:
-                              EdgeInsets.only(left: 08, right: 8, bottom: 10),
+                              const EdgeInsets.only(left: 08, right: 8, bottom: 10),
                           child: Form(
                             key: _newkey,
                             child: TextFormField(
@@ -275,14 +275,14 @@ class _forget_pass extends State<forgetPass> {
                                 fillColor: Colors.white.withOpacity(0.8),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Colors.black,
                                     width: 2,
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Colors.green,
                                   ),
                                 ),
@@ -290,7 +290,7 @@ class _forget_pass extends State<forgetPass> {
                             ),
                           ),
                         ),
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.all(9.0),
                           child: Align(
                               alignment: Alignment.topLeft,
@@ -303,7 +303,7 @@ class _forget_pass extends State<forgetPass> {
                               )),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 08, right: 8),
+                          padding: const EdgeInsets.only(left: 08, right: 8),
                           child: TextFormField(
                             keyboardType: TextInputType.text,
                             controller: renewpass,
@@ -313,14 +313,14 @@ class _forget_pass extends State<forgetPass> {
                               fillColor: Colors.white.withOpacity(0.8),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.black,
                                   width: 2,
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.green,
                                 ),
                               ),
@@ -328,7 +328,7 @@ class _forget_pass extends State<forgetPass> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: ElevatedButton(
                               onPressed: () async {
                                 if (newpass.text == renewpass.text) {
@@ -337,7 +337,7 @@ class _forget_pass extends State<forgetPass> {
                                     await dbhelper.updateSpacific(
                                         mobile.text, newpass.text);
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
+                                      const SnackBar(
                                           content: Text(
                                               'Password Update successfully!')),
                                     );
@@ -357,47 +357,53 @@ class _forget_pass extends State<forgetPass> {
                                       'Provieded Password is Not Matching to New Password');
                                 }
                               },
-                              child: Text('Change password')),
+                              child: const Text('Change password')),
                         )
                       ],
                     ],
                   ),
                 ),
-                SizedBox(height: 50),
-                Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: RichText(
-                    text: TextSpan(
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: 'Now I Want To?  ',
-                            style: TextStyle(
-                                fontSize: 18, color: Colors.pinkAccent)),
-                        TextSpan(
-                          text: 'Login',
-                          style: TextStyle(
-                            color: Colors.yellow,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Login(),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: RichText(
+                          text: TextSpan(
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                            children: <TextSpan>[
+                              const TextSpan(
+                                  text: 'Now I Want To?  ',
+                                  style: TextStyle(
+                                      fontSize: 18, color: Colors.pinkAccent)),
+                              TextSpan(
+                                text: 'Login',
+                                style: const TextStyle(
+                                  color: Colors.yellow,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                              );
-                            },
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Login(),
+                                      ),
+                                    );
+                                  },
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
+                const SizedBox(height: 20,)
               ],
             ),
           ),

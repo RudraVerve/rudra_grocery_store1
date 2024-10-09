@@ -16,9 +16,9 @@ class _HelpCenterpageState extends State<HelpCenterpage>
     'Contact us on Insta...',
     'Contact us On Twitter...',
     'Contact us On Mail...',
-    'Contact us On WhatsApp',
+    'Contact us On WhatsApp...',
     'Contact us On Call...',
-    'Contact us On Message',
+    'Contact us On Message...',
   ];
 
   final List<Color> _colors = [
@@ -93,59 +93,19 @@ class _HelpCenterpageState extends State<HelpCenterpage>
   }
 
   // Helper method to build a circular image
-  Widget _buildCircularImage(String imagePath, int imgId) {
+  Widget _buildCircularImage(String imagePath, String url) {
     return ClipOval(
       child: SizedBox(
         width: 45,
         height: 45,
         child: InkWell(
           onTap: () async {
-            //all the link are domy so use I have to ues the proper url link
-            if (imgId == 1) {
-              dynamic uri = Uri.parse("https://x.com/?lang=en");
-              if (await canLaunchUrl(uri)) {
-                await launchUrl(uri);
-              } else {
-                print('erroe to open the link');
-              }
-            } else if (imgId == 2) {
-              dynamic uri = Uri.parse(
-                  "https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox");
-              if (await canLaunchUrl(uri)) {
-                await launchUrl(uri);
-              } else {
-                print('erroe to open the link');
-              }
-            } else if (imgId == 3) {
-              dynamic uri = Uri.parse("https://www.facebook.com/");
-              if (await canLaunchUrl(uri)) {
-                await launchUrl(uri);
-              } else {
-                print('erroe to open the link');
-              }
-            } else if (imgId == 4) {
-              dynamic uri = Uri.parse("https://flutter.dev");
-              if (await canLaunchUrl(uri)) {
-                await launchUrl(uri);
-              } else {
-                print('erroe to open the link');
-              }
-            } //not add the url yet
-            else if (imgId == 5) {
-              dynamic uri = Uri.parse("https://web.whatsapp.com/");
-              if (await canLaunchUrl(uri)) {
-                await launchUrl(uri);
-              } else {
-                print('erroe to open the link');
-              }
-            } else if (imgId == 6) {
-              dynamic uri = Uri.parse("https://flutter.dev");
-              if (await canLaunchUrl(uri)) {
-                await launchUrl(uri);
-              } else {
-                print('erroe to open the link');
-              }
-            } //not add the url yet
+            dynamic uri = Uri.parse(url);
+            if (await canLaunchUrl(uri)) {
+              await launchUrl(uri);
+            } else {
+              return;
+            }
           },
           child: Image.asset(
             imagePath,
@@ -231,12 +191,12 @@ class _HelpCenterpageState extends State<HelpCenterpage>
                       TextEditingController mob = TextEditingController();
                       showDialog(
                           context: context,
-                          builder: (BuildContext buildContex) {
+                          builder: (BuildContext buildContext) {
                             return AlertDialog(
-                              title: Text('Send Contact Number'),
+                              title: const Text('Send Contact Number'),
                               content: TextField(
                                 controller: mob,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     hintText: 'Enter mobile number',
                                     focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
@@ -245,14 +205,14 @@ class _HelpCenterpageState extends State<HelpCenterpage>
                               actions: [
                                 TextButton(
                                     onPressed: () {
-                                      Navigator.of(buildContex).pop();
+                                      Navigator.of(buildContext).pop();
                                     },
-                                    child: Text('Cancel')),
+                                    child: const Text('Cancel')),
                                 TextButton(
                                   onPressed: () {
                                     if (mob.text.isNotEmpty &&
                                         mob.text.length == 10) {
-                                      Navigator.of(buildContex).pop();
+                                      Navigator.of(buildContext).pop();
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         const SnackBar(
@@ -266,19 +226,19 @@ class _HelpCenterpageState extends State<HelpCenterpage>
                                                   'Please Enter your correct mobile number')));
                                     }
                                   },
-                                  child: Text('Send Request'),
+                                  child: const Text('Send Request'),
                                 ),
                               ],
                             );
                           });
                     },
-                    child: const Text(
-                      'Request a Call',
-                      style: TextStyle(color: Colors.black),
-                    ),
                     style: TextButton.styleFrom(
                       backgroundColor:
                           Colors.orange, // Set the background color
+                    ),
+                    child: const Text(
+                      'Request a Call',
+                      style: TextStyle(color: Colors.black),
                     ),
                   ),
                   ElevatedButton(
@@ -304,12 +264,12 @@ class _HelpCenterpageState extends State<HelpCenterpage>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _buildCircularImage('assets/image/tut.png', 1),
-                    _buildCircularImage('assets/image/mail.jpg', 2),
-                    _buildCircularImage('assets/image/facebook.png', 3),
-                    _buildCircularImage('assets/image/call.jpeg', 4),
-                    _buildCircularImage('assets/image/whatsapp.jpeg', 5),
-                    _buildCircularImage('assets/image/message.png', 6),
+                    _buildCircularImage('assets/image/tut.png', "https://x.com/?lang=en"),
+                    _buildCircularImage('assets/image/mail.jpg', "https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox"),
+                    _buildCircularImage('assets/image/facebook.png', "https://www.facebook.com/"),
+                    _buildCircularImage('assets/image/call.jpeg', "https://flutter.dev"),
+                    _buildCircularImage('assets/image/whatsapp.jpeg', "https://web.whatsapp.com/"),
+                    _buildCircularImage('assets/image/message.png', "https://flutter.dev"),
                   ],
                 ),
               ),
