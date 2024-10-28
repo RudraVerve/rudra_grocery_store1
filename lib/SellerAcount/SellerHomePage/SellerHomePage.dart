@@ -130,8 +130,8 @@ class _SellerHomePageState extends State<SellerHomePage> {
                       padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Padding(
+                        children: const[
+                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Text(
                               'Investment: \$ 32,098.23',
@@ -143,7 +143,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
                               ),
                             ),
                           ),
-                          const Icon(
+                          Icon(
                             Icons.check_circle,
                             color: Colors.orange,
                           ),
@@ -154,8 +154,8 @@ class _SellerHomePageState extends State<SellerHomePage> {
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Padding(
+                        children: const[
+                           Padding(
                             padding: EdgeInsets.only(left: 8.0, right: 8.0),
                             child: Text(
                               'Total Profit: \$ 30,340.30',
@@ -167,7 +167,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
                               ),
                             ),
                           ),
-                          const Icon(
+                          Icon(
                             Icons.check_circle,
                             color: Colors.green,
                           ),
@@ -278,7 +278,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return Center(
                       child:
-                          Text('No orders found for date ${_formattedDate}'));
+                          Text('No orders found for date $_formattedDate'));
                 } else {
                   final orderList = snapshot.data!;
                   return ListView.builder(
@@ -293,8 +293,8 @@ class _SellerHomePageState extends State<SellerHomePage> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8.0),
-                          boxShadow: [
-                            const BoxShadow(
+                          boxShadow: const[
+                             BoxShadow(
                               color: Colors.black26,
                               blurRadius: 4.0,
                               offset: Offset(0, 2),
